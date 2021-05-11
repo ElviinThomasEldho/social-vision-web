@@ -1,0 +1,139 @@
+{% extends 'main/main.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/tainee.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <h1 class="hero-heading">Trainee</h1>
+    </section>
+
+    <section>
+        <h2 class="section-heading">Trainee Documents</h2>
+        <hr class="hr-short">
+
+        <div class="row">
+            <div class="col-6">
+                <a class="btn btn-success" href="{% url 'printTrainee' %}"><img class="icon" src="{% static 'images/icons/google-forms.svg' %}" alt="" height="20px">  Download PDF</a>
+            </div>
+            <div class="col-6">
+                <a class="btn btn-success" href="{% url 'printTraineeID' %}"><img class="icon" src="{% static 'images/icons/driver-license.svg' %}" alt="" height="20px"> Download ID Card</a>
+            </div>
+        </div>
+        <hr class="hr-dark">
+        <h2 class="section-heading">Trainee Details</h2>
+        <hr class="hr-short">
+        <br>
+        {% if cd %}
+        <h3><img class="icon" src="{% static 'images/icons/user.svg' %}" alt="" height="20px"> Personal Details</h3>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="title">First Name</td>
+                    <td class="text">{{ cd.firstName }}</td>
+                    <td class="title">Date of Birth</td>
+                    <td class="text">{{ cd.dateOfBirth }}</td>
+                </tr>
+                <tr>
+                    <td class="title">Last Name</td>
+                    <td class="text">{{ cd.lastName }}</td>
+                    <td class="title">Age</td>
+                    <td class="text">{{ cd.Age }}</td>
+                </tr>
+                <tr>
+                    <td class="title">Father's Name</td>
+                    <td class="text">{{ cd.fatherName }}</td>
+                    <td class="title">Occupation</td>
+                    <td class="text">{{ cd.occupation }}</td>
+                </tr>
+                <tr>
+                    <td class="title">Mother's Name</td>
+                    <td class="text">{{ cd.motherName }}</td>
+                    <td class="title">Education</td>
+                    <td class="text">{{ cd.education }}</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td class="title">Gender</td>
+                    <td class="text">{{ cd.gender }}</td>
+                    <td class="title">Category</td>
+                    <td class="text">{{ cd.category }}</td>
+                </tr>
+                <tr>
+                    <td class="title">Martial Status</td>
+                    <td class="text">{{ cd.martialStatus }}</td>
+                    <td class="title">Religion</td>
+                    <td class="text">{{ cd.religion }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr class="hr-short">
+        <h3><img class="icon" src="{% static 'images/icons/phone-call.svg' %}" alt="" height="20px"> Contact Details</h3>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="title">Contact Number</td>
+                    <td class="text">{{ cd.mobileNumber }}</td>
+                    <td class="title">Email Address</td>
+                    <td class="text">{{ cd.emailID }}</td>
+                </tr>
+                <tr>
+                    <td class="title">Emergency Contact Number</td>
+                    <td class="text">{{ cd.emergencyContact }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr class="hr-short">
+        <h3><img class="icon" src="{% static 'images/icons/home.svg' %}" alt="" height="20px"> Residence Details</h3>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="title">Address</td>
+                    <td class="text">{{ cd.address }}</td>
+                    <td class="title">Locality</td>
+                    <td class="text">{{ cd.locality }}</td>
+                </tr>
+                <tr>
+                    <td class="title">District</td>
+                    <td class="text">{{ cd.district }}</td>
+                    <td class="title">State</td>
+                    <td class="text">{{ cd.state }}</td>
+                </tr>
+                <tr>
+                    <td class="title">Pincode</td>
+                    <td class="text">{{ cd.pincode }}</td>
+                    <td class="title">Area</td>
+                    <td class="text">{{ cd.area }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <hr class="hr-short">
+        <table class="footer">
+            <tbody>
+                <tr>
+                    <td class="title">Trainee Signature</td>
+                    <td class="title">Director Signature</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="{{ cd.signature.url }}" alt="Trainee Signature" class="sign-image" width="200px">
+                    </td>
+                    <td>
+                        <img src="{% static 'images/signature.jpeg' %}" alt="Founder Signature" class="sign-image"
+                            width="200px">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% else %}
+        <p class="section-text">Register as Trainee to view Trainee Details</p>
+        <a href="{% url 'regTrainee' %}" class="btn btn-outline-red">Register as Trainee</a>
+        {% endif %}
+    </section>
+{% endblock %}

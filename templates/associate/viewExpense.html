@@ -1,0 +1,60 @@
+{% extends 'associate/main.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+    <style>
+        td {
+            padding: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <h1 class="hero-heading">Expense Tracker</h1>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col-6">
+                <a href="{% url 'addExpense' %}" class="btn"><img class="icon" src="{% static 'images/icons/expenses.svg' %}" alt="" height="20px"> Add Expense</a>
+            </div>
+            <div class="col-6">
+                <a href="{% url 'printExpense' %}" class="btn"><img class="icon" src="{% static 'images/icons/business-report.svg' %}" alt="" height="20px"> Print Expense Report</a>
+            </div>
+        </div>
+
+        {% if expenses %}
+        <table>
+            <thead>
+                <th>Date Created</th>
+                <th>Budget Head</th>
+                <th>Payee Name</th>
+                <th>Mobile Number</th>
+                <th>Mode of Payment</th>
+                <th>Amount</th>
+                <th>Reciept</th>
+                <th>Certificate</th>
+            </thead>
+            <tbody>
+                {% for exp in expenses %}
+                <tr>
+                    <td>{{ exp.dateCreated }}</td>
+                    <td>{{ exp.budgetHead }}</td>
+                    <td>{{ exp.payeeName }}</td>
+                    <td>{{ exp.mobileNumber }}</td>
+                    <td>{{ exp.mode }}</td>
+                    <td>{{ exp.amount }}</td>
+                    <td><a href="{% url 'printExpReceipt' exp.uniqueID %}" style="color: green;">Download</a></td>
+                    <td><a href="{% url 'printExpCertif' exp.uniqueID %}" style="color: green;">Download</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>There are No Expenses to display</p>
+        {% endif %}
+    </section>
+{% endblock %}

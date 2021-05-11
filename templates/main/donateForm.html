@@ -1,0 +1,40 @@
+{% extends 'main/main.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <h1 class="hero-heading">Donate</h1>
+    </section>
+
+    <section>
+        <form action="" method="POST">
+            {% csrf_token %}
+                <div class="row">
+                    <div class="col">
+                        <label>{{form.user.label}}</label><br>
+                        {{form.user}}<br>
+                        <label>{{form.amount.label}}</label><br>
+                        {{form.amount}}<br>
+                        <label>{{form.PANNo.label}}</label><br>
+                        {{form.PANNo}}<br>
+                        <label>{{form.RefNo.label}}</label><br>
+                        {{form.RefNo}}<br>
+                        <label>{{form.purpose.label}}</label><br>
+                        {{form.purpose}}<br>
+                    </div>
+                    <div class="col">
+                        <label>{{form.mode.label}}</label><br>
+                        {{form.mode}}<br>
+                    </div>
+                </div>
+            {{form.errors}}
+            <br>
+            <button class="btn btn-success" type="submit" name="Donate">Donate</button>
+        </form>
+    </section>
+{% endblock %}

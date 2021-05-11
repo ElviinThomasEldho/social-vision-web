@@ -1,0 +1,133 @@
+{% extends 'associate/main.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/candidate.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <h1 class="hero-heading">Associate Profile</h1>
+    </section>
+
+    <section>
+        <h2 class="section-heading">Trackers</h2>
+        <div class="row">
+            <div class="col-6">
+                <a class="btn" href="{% url 'viewRevenue' %}"><img class="icon" src="{% static 'images/icons/revenue.svg' %}" alt="" height="20px"> Revenue Tracker</a>
+            </div>
+            <div class="col-6">
+                <a class="btn" href="{% url 'viewExpense' %}"><img class="icon" src="{% static 'images/icons/expenses.svg' %}" alt="" height="20px"> Expense Tracker</a>
+            </div>
+        </div>
+        <hr class="hr-dark">
+        <h2 class="section-heading">Associate Details</h2>
+        <hr class="hr-short">
+        <h3><img class="icon" src="{% static 'images/icons/user.svg' %}" alt="" height="30px"> Personal Details</h3>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="title">First Name</td>
+                    <td class="text">{{ associate.firstName }}</td>
+                    <td class="title">Date of Birth</td>
+                    <td class="text">{{ associate.dateOfBirth }}</td>
+                </tr>
+                <tr>
+                    <td class="title">Last Name</td>
+                    <td class="text">{{ associate.lastName }}</td>
+                    <td class="title">Age</td>
+                    <td class="text">{{ associate.Age }}</td>
+                </tr>
+                <tr>
+                    <td class="title">Father's Name</td>
+                    <td class="text">{{ associate.fatherName }}</td>
+                    <td class="title">Occupation</td>
+                    <td class="text">{{ associate.occupation }}</td>
+                </tr>
+                <tr>
+                    <td class="title">Mother's Name</td>
+                    <td class="text">{{ associate.motherName }}</td>
+                    <td class="title">Education</td>
+                    <td class="text">{{ associate.education }}</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td class="title">Gender</td>
+                    <td class="text">{{ associate.gender }}</td>
+                    <td class="title">Category</td>
+                    <td class="text">{{ associate.category }}</td>
+                </tr>
+                <tr>
+                    <td class="title">Martial Status</td>
+                    <td class="text">{{ associate.martialStatus }}</td>
+                    <td class="title">Religion</td>
+                    <td class="text">{{ associate.religion }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr class="hr-short">
+
+        <h3><img class="icon" src="{% static 'images/icons/phone-call.svg' %}" alt="" height="30px"> Contact Details</h3>
+        <hr>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="title">Contact Number</td>
+                    <td class="text">{{ associate.mobileNumber }}</td>
+                    <td class="title">Email Address</td>
+                    <td class="text">{{ associate.emailID }}</td>
+                </tr>
+                <tr>
+                    <td class="title">Emergency Contact Number</td>
+                    <td class="text">{{ associate.emergencyContact }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr class="hr-short">
+
+        <h3><img class="icon" src="{% static 'images/icons/home.svg' %}" alt="" height="30px"> Residence Details</h3>
+        <hr>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="title">Address</td>
+                    <td class="text">{{ associate.address }}</td>
+                    <td class="title">Locality</td>
+                    <td class="text">{{ associate.locality }}</td>
+                </tr>
+                <tr>
+                    <td class="title">District</td>
+                    <td class="text">{{ associate.district }}</td>
+                    <td class="title">State</td>
+                    <td class="text">{{ associate.state }}</td>
+                </tr>
+                <tr>
+                    <td class="title">Pincode</td>
+                    <td class="text">{{ associate.pincode }}</td>
+                    <td class="title">Area</td>
+                    <td class="text">{{ associate.area }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr class="hr-short">
+        <table class="footer">
+            <tbody>
+                <tr>
+                    <td class="title">Associate Signature</td>
+                    <td class="title">Director Signature</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="{{ associate.signature.path }}" alt="Associate Signature" class="sign-image"
+                            width="200px">
+                    </td>
+                    <td>
+                        <img src="{% static 'images/signature.jpeg' %}" alt="Founder Signature" class="sign-image"
+                            width="200px">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

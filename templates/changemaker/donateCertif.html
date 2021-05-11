@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+    <title>Committed for a Social Change</title>
+</head>
+
+<body>
+
+    <section class="hero">
+        <h1 class="hero-heading">Donation Certificate {{dn.uniqueID}}</h1>
+    </section>
+
+    <section>
+        <h2>Donations</h2>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Username</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <th>Email Address</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Donation ID</th>
+                    <td>{{ dn.uniqueID }}</td>
+                </tr>
+                <tr>
+                    <th>Donation Amount</th>
+                    <td>{{ dn.amount }}</td>
+                </tr>
+                <tr>
+                    <th>Purpose</th>
+                    <td>{{ dn.purpose }}</td>
+                </tr>
+                <tr>
+                    <th>Date of Donation</th>
+                    <td>{{ dn.dateCreated }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+</body>
+
+</html>

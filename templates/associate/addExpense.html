@@ -1,0 +1,62 @@
+{% extends 'associate/main.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1 class="hero-heading">Expense Form</h1>
+</section>
+
+<section>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <h3><img class="icon" src="{% static 'images/icons/user.svg' %}" alt="" height="20px"> Personal Details</h3>
+
+        {{ form.user }}
+
+        <div class="row">
+            <div class="col">
+                <label for="payeeName">{{ form.payeeName.label }}</label><br>
+                {{ form.payeeName }}<br>
+                <label for="mobileNumber">{{ form.mobileNumber.label }}</label><br>
+                {{ form.mobileNumber }}<br>
+            </div>
+            <div class="col">
+                <label for="project">{{ form.project.label }}</label><br>
+                {{ form.project }}<br>    
+                <label for="budgetHead">{{ form.budgetHead.label }}</label><br>
+                {{ form.budgetHead }}<br>
+            </div>
+        </div>
+
+            <h3><img class="icon" src="{% static 'images/icons/expenses.svg' %}" alt="" height="20px"> Expense Details
+            </h3>
+
+        <div class="row">
+            <div class="col">
+                <label for="mode">{{ form.mode.label }}</label><br>
+                {{ form.mode }}<br>    
+                <label for="amount">{{ form.amount.label }}</label><br>
+                {{ form.amount }}<br>
+            </div>
+            <div class="col">
+                <label for="PANNo">{{ form.PANNo.label }}</label><br>
+                {{ form.PANNo }}<br>
+                <label for="AadhaarNo">{{ form.AadhaarNo.label }}</label><br>
+                {{ form.AadhaarNo }}<br>
+            </div>
+        </div>
+        <label for="receipt1">{{ form.receipt1.label }}</label><br>
+        {{ form.receipt1 }}<br>
+        <label for="receipt2">{{ form.receipt2.label }}</label><br>
+        {{ form.receipt2 }}<br>
+        {{ form.errors }}
+        <button type="submit" class="btn">Add Expense</button>
+    </form>
+</section>
+{% endblock %}

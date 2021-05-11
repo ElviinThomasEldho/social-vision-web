@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+
+    <style>
+        
+        @page {
+            size: a4 landscape;
+            margin: 2cm;
+        }
+        * {
+            font-size: 18px;
+        }
+
+        body {
+            padding: 0px;
+            margin: 0;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-around;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #dd1118;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        h3 {
+            font-size: 18px;
+            color: #dd1118
+        }
+
+        th {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        td {
+            font-size: 12px;
+            overflow: visible;
+            max-width: 100px;
+            padding: 5px;
+        }
+
+        .footer {
+            float: bottom;
+        }
+    </style>
+
+    <title>Committed for a Social Change</title>
+</head>
+
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <img src="media/logo.png" alt="Logo" class="logo">
+                </td>
+                <td>
+                    <h2>Expense Report</h2>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <table>
+        <thead>
+            <th>Date Created</th>
+            <th>Revenue ID</th>
+            <th>Project | Budget Head</th>
+            <th>Payee Name</th>
+            <th>Mobile Number</th>
+            <th>Payment</th>
+            <th>PAN Number</th>
+            <th>Aadhaar Number</th>
+        </thead>
+        <tbody>
+            {% for exp in expense %}
+            <tr>
+                <td class="text">{{ exp.dateCreated }}</td>
+                <td class="text">{{ exp.uniqueID }}</td>
+                <td class="text">{{ exp.project.name }} | {{ exp.budgetHead }}</td>
+                <td class="text">{{ exp.payeeName }}</td>
+                <td class="text">{{ exp.mobileNumber }}</td>
+                <td class="text">{{ exp.amount }} by {{ exp.mode }}</td>
+                <td class="text">{{ exp.PANNo }}</td>
+                <td class="text">{{ exp.AadhaarNo }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <table class="footer">
+        <tbody>
+            <tr>
+                <th class="title">Director Signature</th>
+                <td><img src="media/signature.jpeg" alt="Founder Signature" class="sign-image" width="200px"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    </div>
+
+
+</body>
+
+</html>

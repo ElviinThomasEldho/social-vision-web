@@ -1,0 +1,40 @@
+{% extends 'main/main.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1 class="hero-heading">Login</h1>
+</section>
+
+<section>
+    <form method="POST" action="" class="col">
+        {% csrf_token %}
+        <h2 class="section-heading">Welcome Back!</h2>
+        <p>Enter your username and password below to login</p>
+        <hr class="hr-short">
+        <table>
+            <tbody>
+                <tr>
+                    <td><label for="username">Username</label></td>
+                    <td><input type="text" name="username"></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password</label></td>
+                    <td><input type="password" name="password"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% for message in messages %}
+        <p>{{message}}</p><br>
+        {% endfor %}
+
+        <button class="btn btn-success" type="submit" name="Submit"><img class="icon"
+                src="{% static 'images/icons/login.svg' %}" alt="" height="20px"> Login</button>
+    </form>
+</section>
+{% endblock %}

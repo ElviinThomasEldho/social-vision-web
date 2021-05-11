@@ -1,0 +1,1 @@
+web: gunicorn SocialVision_Project.wsgi --log-file -

@@ -1,0 +1,102 @@
+{% extends 'associate/main.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+    <style>
+        td {
+            padding: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <h1 class="hero-heading">Revenue Tracker</h1>
+    </section>
+
+    <section>
+        <h2 class="section-heading">Update Tracker</h2>
+        <hr class="hr-short">
+        <div class="row">
+            <div class="col-6">
+                <a href="{% url 'addRevenue' %}" class="btn"><img class="icon" src="{% static 'images/icons/revenue.svg' %}" alt="" height="20px"> Add Revenue</a>
+            </div>
+            <div class="col-6">
+                <a href="{% url 'addService' %}" class="btn"><img class="icon" src="{% static 'images/icons/technical-support.svg' %}" alt="" height="20px"> Add Service Fee</a>
+            </div>
+            <div class="col-6">
+                <a href="{% url 'printRevenue' %}" class="btn"><img class="icon" src="{% static 'images/icons/business-report.svg' %}" alt="" height="20px"> Print Revenue Report</a>
+            </div>
+        </div>
+        <hr class="hr-dark">
+        <h2><img class="icon" src="{% static 'images/icons/revenue.svg' %}" alt="" height="40px"> Revenue</h2>
+        <hr class="hr-short">
+
+        {% if revenue %}
+        <table>
+            <thead>
+                <th>Date Created</th>
+                <th>Purpose</th>
+                <th>Full Name</th>
+                <th>Mobile Number</th>
+                <th>Mode of Payment</th>
+                <th>Amount</th>
+                <th>Print Receipt</th>
+                <th>Print Certificate</th>
+            </thead>
+            <tbody>
+                {% for rev in revenue %}
+                <tr>
+                    <td>{{ rev.dateCreated }}</td>
+                    <td>{{ rev.purpose }}</td>
+                    <td>{{ rev.firstName }} {{ rev.lastName }}</td>
+                    <td>{{ rev.mobileNumber }}</td>
+                    <td>{{ rev.mode }}</td>
+                    <td>{{ rev.amount }}</td>
+                    <td><a href="{% url 'printRevReceipt' rev.uniqueID %}" style="color: green;">Download</a></td>
+                    <td><a href="{% url 'printRevCertif' rev.uniqueID %}" style="color: green;">Download</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>There is No Revenue to display</p>
+        {% endif %}
+        <hr class="hr-dark">
+        <h2><img class="icon" src="{% static 'images/icons/technical-support.svg' %}" alt="" height="40px"> Service Fees</h2>
+        <hr class="hr-short">
+        {% if services %}
+        <table>
+            <thead>
+                <th>Date Created</th>
+                <th>Service</th>
+                <th>Full Name</th>
+                <th>Mobile Number</th>
+                <th>Mode of Payment</th>
+                <th>Amount</th>
+                <th>Reciept</th>
+                <th>Certificate</th>
+            </thead>
+            <tbody>
+                {% for serv in services %}
+                <tr>
+                    <td>{{ serv.dateCreated }}</td>
+                    <td>{{ serv.service }}</td>
+                    <td>{{ serv.firstName }} {{ serv.lastName }}</td>
+                    <td>{{ serv.mobileNumber }}</td>
+                    <td>{{ serv.mode }}</td>
+                    <td>{{ serv.amount }}</td>
+                    <td><a href="{% url 'printServReceipt' serv.uniqueID %}" style="color: green;">Download</a></td>
+                    <td><a href="{% url 'printServCertif' serv.uniqueID %}" style="color: green;">Download</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>There are No Service Fees to display</p>
+        {% endif %}
+
+    </section>
+{% endblock %}

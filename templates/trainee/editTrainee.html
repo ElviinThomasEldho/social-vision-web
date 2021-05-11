@@ -1,0 +1,145 @@
+{% extends 'main/main.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <h1 class="hero-heading">Candidate Form</h1>
+        <p>Confirm Registration Details</p>
+    </section>
+
+    <section>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+
+
+            <h2><img class="icon" src="{% static 'images/icons/user.svg' %}" alt="" height="40px"> Personal Information</h2>
+
+            <label>{{form.purpose.label}}</label>
+            {{form.purpose}}<br>
+
+            <div class="row">
+                <div class="col">
+                    {{form.user}}<br>
+                    <label>{{form.firstName.label}}</label>
+                    {{form.firstName}}<br>
+                    <label>{{form.lastName.label}}</label>
+                    {{form.lastName}}<br>
+                    <label>{{form.age.label}}</label>
+                    {{form.age}}<br>
+                </div>
+                <div class="col">
+                    <label>{{form.fatherName.label}}</label>
+                    {{form.fatherName}}<br>
+                    <label>{{form.motherName.label}}</label>
+                    {{form.motherName}}<br>
+                    <label>{{form.dateOfBirth.label}}</label>
+                    {{form.dateOfBirth}}<br>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col">
+                    <label>{{form.martialStatus.label}}</label>
+                    {{form.martialStatus}}<br>
+                    <label>{{form.category.label}}</label>
+                    {{form.category}}<br>
+                    <label>{{form.gender.label}}</label>
+                    {{form.gender}}<br>
+                </div>
+                <div class="col">
+                    <label>{{form.religion.label}}</label>
+                    {{form.religion}}<br>
+                    <label>{{form.occupation.label}}</label>
+                    {{form.occupation}}<br>
+                    <label>{{form.education.label}}</label>
+                    {{form.education}}<br>
+                </div>
+            </div>
+    
+            <hr class="hr-dark">
+    
+            <h2><img class="icon" src="{% static 'images/icons/phone-call.svg' %}" alt="" height="40px"> Contact</h2>
+    
+            <div class="row">
+                <div class="col">
+                    <label>{{form.mobileNumber.label}}</label>
+                    {{form.mobileNumber}}<br>
+                    <label>{{form.emailID.label}}</label>
+                    {{form.emailID}}<br>
+                </div>
+                <div class="col">
+                    <label>{{form.emergencyContact.label}}</label>
+                    {{form.emergencyContact}}<br>
+                </div>
+            </div>
+            
+            <hr class="hr-dark">
+    
+            <h2><img class="icon" src="{% static 'images/icons/home.svg' %}" alt="" height="40px"> Address</h2>
+    
+            <div class="row">
+                <div class="col">
+                    <label>{{form.address.label}}</label><br>
+                    {{form.address}}<br>
+                </div>
+                <div class="col">
+                    <label>{{form.area.label}}</label>
+                    {{form.area}}<br>
+                    <label>{{form.locality.label}}</label>
+                    {{form.locality}}<br>
+                    <label>{{form.district.label}}</label>
+                    {{form.district}}<br>
+                    <label>{{form.state.label}}</label>
+                    {{form.state}}<br>
+                    <label>{{form.pincode.label}}</label>
+                    {{form.pincode}}<br>
+                </div>
+            </div>
+            
+            <hr class="hr-dark">
+    
+            <h2>Images</h2>
+    
+            <div class="row">
+                <div class="col">
+                    <label>{{form.profilePicture.label}}</label>
+                    {{form.profilePicture}}<br>
+                </div>
+    
+                <div class="col">
+                    <label>{{form.signature.label}}</label>
+                    {{form.signature}}<br>
+                </div>
+            </div>
+    
+            <hr class="hr-dark">
+    
+            <h2>Documents</h2>
+            <div class="row">
+                <div class="col">
+                    <label>{{form.documentType.label}}</label>
+                    {{form.documentType}}<br>
+                </div>
+                <div class="col">
+                    <label>{{form.documentNumber.label}}</label>
+                    {{form.documentNumber}}<br>
+                </div>
+            </div>
+    
+            <hr class="hr-dark">
+    
+            <div class="row">
+                {{form.declaration}}
+                <label>{{form.declaration.label}}</label>
+            </div>
+    
+            {{form.errors}}
+            <br>
+            <button class="btn btn-success" type="submit" name="Register">Register</button>
+        </form>
+    </section>
+{% endblock %}

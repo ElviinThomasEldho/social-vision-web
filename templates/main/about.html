@@ -1,0 +1,164 @@
+{% extends 'main/main.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1 class="hero-heading">About Us</h1>
+</section>
+
+<section class="about-us">
+    <div class="row">
+        <div class="col">
+            <h1 class="section-heading"><img class="icon" src="{% static 'images/icons/help.svg' %}" alt=""
+                    height="50px"> About Social Vision</h1>
+            <p class="section-text" style="text-align: center;">Social Vision is a Registered Social Development
+                Organization (SDG) “committed for
+                asocial change”. Here is a platform where social visionaries come together and give hands and hearts
+                together for social transformation. We do believe in our cause as supreme and work towards perfection.
+            </p>
+        </div>
+        <div class="col">
+            <h1 class="section-heading"><img class="icon" src="{% static 'images/icons/philosophy.svg' %}" alt=""
+                    height="50px"> Philosophy</h1>
+            <div class="row">
+                <div class="col">
+                    <li class="li">Art of Serving</li>
+                    <li class="li">Love is our Faith</li>
+                    <li class="li">Peace is our Weapon</li>
+                    <li class="li">Let’s Serve and let’s train to Serve</li>
+                </div>
+                <div class="col">
+                    <li class="li">Universe is our Temple</li>
+                    <li class="li">Service is our Religion</li>
+                    <li class="li">Our Community is Humanity</li>
+                    <li class="li">Great words are our Scripture</li>
+                </div>
+            </div>
+        </div>
+</section>
+
+<section class="patrons section-dark">
+    <h1 class="section-heading"><img class="icon" src="{% static 'images/icons/leadership.svg' %}" alt="" height="50px">
+        Patrons</h1>
+    <div class="row center">
+        <div class="col patron-card">
+            <img src="{% static 'images/patron1.png' %}" alt="Patron 1" class="patron-image">
+            <h3 class="patron-name">Shri. Anil Girotra</h3>
+            <p class="patron-desc">Executive Director Retd., Andhra Bank</p>
+        </div>
+        <div class="col patron-card">
+            <img src="{% static 'images/patron2.png' %}" alt="Patron 1" class="patron-image">
+            <h3 class="patron-name">Shri. Rajesh Sharma</h3>
+            <p class="patron-desc">Founder , Prakrithi Bhakth Foundation</p>
+        </div>
+        <div class="col patron-card">
+            <img src="{% static 'images/patron3.png' %}" alt="Patron 1" class="patron-image">
+            <h3 class="patron-name">Smt. Mamta Agarwal</h3>
+            <p class="patron-desc">Past District President, Lioness Club</p>
+        </div>
+    </div>
+</section>
+
+<section class="board">
+    <h1 class="section-heading"><img class="icon" src="{% static 'images/icons/conference.svg' %}" alt="" height="50px">
+        Board</h1>
+    <div class="row center">
+        <div class="col text-center">
+            <h2>Executive Board</h2>
+            <div class="row">
+                <div class="col title">Chairperson</div>
+                <div class="col text">Mrs. Sonia C T</div>
+            </div>
+            <div class="row">
+                <div class="col title">Vice President</div>
+                <div class="col text">Mr. Manish Kumar Ray</div>
+            </div>
+            <div class="row">
+                <div class="col title">Secretary</div>
+                <div class="col text">Mr. Kunal Pippal</div>
+            </div>
+            <div class="row">
+                <div class="col title">Joint Secretary</div>
+                <div class="col text">Mr. Raju C Treasurer</div>
+            </div>
+            <div class="row">
+                <div class="col title">Member</div>
+                <div class="col text">Mr. Sijo Mathai Mukulel Ex-Officio Member, Director</div>
+            </div>
+        </div>
+        <div class="col text-center">
+            <h2>Members</h2>
+            <div class="row">
+                <div class="col text">Mr. Rijin Reynold</div>
+                <div class="col text">Fr. Jose</div>
+            </div>
+            <div class="row">
+                <div class="col text">Mrs. Daisy</div>
+                <div class="col text">Mr. San Mattel</div>
+            </div>
+            <div class="row">
+                <div class="col text">Mr. Ashish</div>
+                <div class="col text">Mr. Ashish Mittal</div>
+            </div>
+            <div class="row">
+                <div class="col text">Mr. Nitin</div>
+                <div class="col text">Mr. Mahendra Singh</div>
+            </div>
+            <div class="row">
+                <div class="col text">Mr. Sanoj</div>
+                <div class="col text">Mrs. Manju</div>
+            </div>
+        </div>
+    </div>
+    <div class="row center">
+        <div class="col text-center">
+            <h2>Advisory Board</h2>
+            <p><strong>Mr. NC Kaushik</strong><br>(Deputy Director, Education Department, Delhi, Retd)</p>
+            <p><strong>Dr. Sangita Basu</strong><br>(Retd. Superindent, RTRM Hospital, New Delhi.)</p>
+        </div>
+        <div class="col text-center">
+            <h2>Supporting Members</h2>
+            <p>Mr. Ravi</p>
+            <p>Mrs. Jinsy</p>
+            <p>Mrs. Viji</p>
+        </div>
+    </div>
+</section>
+
+<section class="message section-dark">
+    <h1 class="section-heading"><img class="icon" src="{% static 'images/icons/conversation.svg' %}" alt=""
+            height="50px"> Our Message</h1>
+    <p class="section-text" style="text-align: center;">
+        Beauty of life has to be reunited in society and human life. Should not allow busy lifestyle and so called
+        development to destroy the beauty of life. The unlimited and unmet needs or greed doesn’t allow society to think
+        about our fellow beings and own future generation which ignore sustainable development. A perfect Social Vision
+        is the need of time for a better future in our planet.<br><br>
+
+        Indian scenario is in need of committed visionaries for a social change. Weaker sections of the community are
+        becoming weaker and weaker everyday where the need for a social transformation is needed for the well-being of
+        the underprivileged. There is a close give and take between the classes of society. Neglecting the poor is as
+        equal to neglecting the self and our generation.<br><br>
+
+        Serve what others deserving is something that we serve for our sustainable future. Our fellow beings like human
+        beings, animals, plants, and all that is in the universe is yourself from where you are and to where you are.
+        The only GOD which qualifies the perfection of all history, religion and God thoughts is the Universe.<br><br>
+
+        Love each other is not the love towards the other but the unselfish love towards the self. Social vision is the
+        love towards the other which is the sustainable love towards the self.<br><br>
+
+        Social vision is a platform where social visionaries can share their thoughts and ideas for a social change and
+        a platform where resources are served in a complete transparent way.<br><br>
+
+        Art of serving is soul of social life. Let us serve and train others to serve. Let us build a nation with people
+        who care others.<br><br>
+
+        We welcome you to be part of initiative for a social transformation.
+    </p>
+</section>
+
+{% include 'main/contact.html' %}
+{% endblock %}

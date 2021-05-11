@@ -1,0 +1,216 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+
+    <style>
+        * {
+            font-size: 18px;
+        }
+
+        body {
+            padding: 0px;
+            margin: 0;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-around;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #dd1118;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        h3 {
+            font-size: 18px;
+            color: #dd1118
+        }
+
+        .col {
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: space-between;
+            align-content: space-around;
+            text-align: right;
+            width: 100%;
+        }
+
+        .row {
+            /* width: 100%; */
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            height: 100%;
+        }
+
+        .title {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .text {
+            font-size: 12px;
+        }
+
+        .footer {
+            float: bottom;
+        }
+    </style>
+
+    <title>Committed for a Social Change</title>
+</head>
+
+<body>
+    <img src="media/logo.png" alt="Logo" class="logo">
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <img src="media/{{ cd.profilePicture }}" alt="Profile Picture" class="profile-picture"
+                        height="300px">
+                </td>
+                <td>
+                    <h2>Trainee Form</h2>
+                    <h3>{{ cd.uniqueID }}</h3>
+                    <h3>{{ cd.dateCreated }}</h3>
+                    <h4>Purpose : {{ cd.purpose }}</h4>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h3>Personal Details</h3>
+    <table>
+        <tbody>
+            <tr>
+                <td class="title">First Name</td>
+                <td class="text">{{ cd.firstName }}</td>
+                <td class="title">Date of Birth</td>
+                <td class="text">{{ cd.dateOfBirth }}</td>
+            </tr>
+            <tr>
+                <td class="title">Last Name</td>
+                <td class="text">{{ cd.lastName }}</td>
+                <td class="title">Age</td>
+                <td class="text">{{ cd.age }}</td>
+            </tr>
+            <tr>
+                <td class="title">Father's Name</td>
+                <td class="text">{{ cd.fatherName }}</td>
+                <td class="title">Occupation</td>
+                <td class="text">{{ cd.occupation }}</td>
+            </tr>
+            <tr>
+                <td class="title">Mother's Name</td>
+                <td class="text">{{ cd.motherName }}</td>
+                <td class="title">Education</td>
+                <td class="text">{{ cd.education }}</td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td class="title">Gender</td>
+                <td class="text">{{ cd.gender }}</td>
+                <td class="title">Category</td>
+                <td class="text">{{ cd.category }}</td>
+            </tr>
+            <tr>
+                <td class="title">Martial Status</td>
+                <td class="text">{{ cd.martialStatus }}</td>
+                <td class="title">Religion</td>
+                <td class="text">{{ cd.religion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h3>Contact Details</h3>
+    <table>
+        <tbody>
+            <tr>
+                <td class="title">Contact Number</td>
+                <td class="text">{{ cd.mobileNumber }}</td>
+                <td class="title">Email Address</td>
+                <td class="text">{{ cd.emailID }}</td>
+            </tr>
+            <tr>
+                <td class="title">Emergency Contact Number</td>
+                <td class="text">{{ cd.emergencyContact }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+
+    <h3>Residence Details</h3>
+    <table>
+        <tbody>
+            <tr>
+                <td class="title">Address</td>
+                <td class="text">{{ cd.address }}</td>
+                <td class="title">Locality</td>
+                <td class="text">{{ cd.locality }}</td>
+            </tr>
+            <tr>
+                <td class="title">District</td>
+                <td class="text">{{ cd.district }}</td>
+                <td class="title">State</td>
+                <td class="text">{{ cd.state }}</td>
+            </tr>
+            <tr>
+                <td class="title">Pincode</td>
+                <td class="text">{{ cd.pincode }}</td>
+                <td class="title">Area</td>
+                <td class="text">{{ cd.area }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <br>
+
+    <table class="footer">
+        <tbody>
+            <tr>
+                <td class="title">Trainee Signature</td>
+                <td class="title">Director Signature</td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="media/{{ cd.signature }}" alt="Trainee Signature" class="sign-image" width="200px">
+                </td>
+                <td><img src="media/signature.jpeg" alt="Founder Signature" class="sign-image" width="200px">
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    </div>
+
+
+</body>
+
+</html>

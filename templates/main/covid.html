@@ -1,0 +1,89 @@
+{% extends 'main/main.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/covid.css' %}">
+{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <h1 class="hero-heading">COVID-19 Help</h1>
+  </section>
+
+  <section class="whoWeAre">
+
+    <div class="row">
+      <div class="col">
+        <h1 class="section-heading"><img class="icon" src="{% static 'images/icons/help.svg' %}" alt="" height="50px"> How do we HELP?</h1>
+        <p class="section-text">
+          Social Vision Covid-19 mission is providing Ration and Mask to the daily wagers and Divyang families.Our presence are in Delhi NCR.Yes, this is the time you can serve the Society by sitting at home. Please arrange Ration kits.. Social Vision volunteers will deliver it to the daily wage workers.Wake up…this is the time society needs your humanity. Please join us in our drive.. you can contribute for one or more kit as per your wish and possibility… <br><br>
+          <i>Thanks for your support and encouragement</i><br>
+          <i><strong>Social Vision Family</strong></i>
+        </p>
+      </div>
+      <div class="col">
+        <img class="section-image" src="{% static 'images/whoweare-image.jpg' %}" alt="Who We Are Image"
+          class="whoWeAre-img">
+      </div>
+    </div>
+
+    </section>
+
+    <section class="section-dark account">
+      <h1 class="section-heading"><img class="icon" src="{% static 'images/icons/user.svg' %}" alt="" height="50px"> Account Details</h1>
+      <div class="row center">
+        <div class="col title">Account Name</div>
+        <div class="col text">SOCIAL VISION EDUCATIONAL AND CHARITABLE SOCIETY</div>
+      </div>
+      <div class="row center">
+        <div class="col title">Account Number</div>
+        <div class="col text">0554053000008290</div>
+      </div>
+      <div class="row center">
+        <div class="col title">IFSC Code</div>
+        <div class="col text">SIBL0000554</div>
+      </div>
+      <div class="row center">
+        <div class="col title">Account Type</div>
+        <div class="col text">Savings</div>
+      </div>
+      <div class="row center">
+        <div class="col title">Bank</div>
+        <div class="col text">South Indian Bank,Branch: Najafgarh</div>
+      </div>
+      <div class="row center">
+        <div class="col title">Google Pay Number</div>
+        <div class="col text">7838619595</div>
+      </div>
+      <div class="row center">
+        <div class="col title">Phone Pe Number</div>
+        <div class="col text">7838619595</div>
+      </div>
+      <div class="row center">
+        <div class="col title">PayTM Number</div>
+        <div class="col text">9643366443</div>
+      </div>
+    </section>
+
+    <section class="partners">
+      <h1 class="section-heading"><img class="icon" src="{% static 'images/icons/interaction.svg' %}" alt="" height="50px"> Our Partners In COVID-19 Help Desk</h1>
+      <div class="partner-grid">
+        <img src="{% static 'images/covid-1.jpg' %}" alt="Partners Photos" class="covid-image">
+        <img src="{% static 'images/covid-2.jpg' %}" alt="Partners Photos" class="covid-image">
+        <img src="{% static 'images/covid-3.jpg' %}" alt="Partners Photos" class="covid-image">
+        <img src="{% static 'images/covid-4.jpg' %}" alt="Partners Photos" class="covid-image">
+        <img src="{% static 'images/covid-5.jpg' %}" alt="Partners Photos" class="covid-image">
+        <img src="{% static 'images/covid-6.jpg' %}" alt="Partners Photos" class="covid-image">
+        <img src="{% static 'images/covid-7.jpg' %}" alt="Partners Photos" class="covid-image">
+        <img src="{% static 'images/covid-8.jpg' %}" alt="Partners Photos" class="covid-image">
+        <img src="{% static 'images/covid-9.jpg' %}" alt="Partners Photos" class="covid-image">
+        <img src="{% static 'images/covid-10.jpg' %}" alt="Partners Photos" class="covid-image">
+        <img src="{% static 'images/covid-11.jpg' %}" alt="Partners Photos" class="covid-image">
+        <img src="{% static 'images/covid-12.jpg' %}" alt="Partners Photos" class="covid-image">
+        <img src="{% static 'images/covid-13.jpg' %}" alt="Partners Photos" class="covid-image">
+        <img src="{% static 'images/covid-14.jpg' %}" alt="Partners Photos" class="covid-image">
+      </div>
+    </section>
+
+    {% include 'main/contact.html' %}
+{% endblock %}

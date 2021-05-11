@@ -1,0 +1,96 @@
+{% extends 'associate/main.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1 class="hero-heading">Revenue Form</h1>
+</section>
+
+<section>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <h3><img class="icon" src="{% static 'images/icons/user.svg' %}" alt="" height="20px"> Personal Details</h3>
+        <hr class="hr-short">
+
+        {{ form.user }}  
+        <label for="purpose">{{ form.purpose.label }}</label>
+        {{ form.purpose }}  
+
+        <div class="row">
+            <div class="col">
+                <label for="firstName">{{ form.firstName.label }}</label>
+                {{ form.firstName }}<br>
+                <label for="lastName">{{ form.lastName.label }}</label>
+                {{ form.lastName }}
+            </div>
+            <div class="col">  
+                <label for="mobileNumber">{{ form.mobileNumber.label }}</label>
+                {{ form.mobileNumber }}<br>
+                <label for="emailID">{{ form.emailID.label }}</label>
+                {{ form.emailID }}
+            </div>
+        </div>
+
+        <hr class="hr-dark">
+        <h3><img class="icon" src="{% static 'images/icons/home.svg' %}" alt="" height="20px"> Residential Details</h3>
+        <hr class="hr-short">
+        <div class="row">
+            <div class="col">
+                <label>{{form.address.label}}</label><br>
+                {{form.address}}<br>
+            </div>
+            <div class="col">
+                <label>{{form.area.label}}</label>
+                {{form.area}}<br>
+                <label>{{form.locality.label}}</label>
+                {{form.locality}}<br>
+                <label>{{form.district.label}}</label>
+                {{form.district}}<br>
+                <label>{{form.state.label}}</label>
+                {{form.state}}<br>
+                <label>{{form.pincode.label}}</label>
+                {{form.pincode}}<br>
+            </div>
+        </div>
+
+        <hr class="hr-dark">
+        <h3><img class="icon" src="{% static 'images/icons/revenue.svg' %}" alt="" height="20px"> Revenue Details
+        </h3>
+        <hr class="hr-short">
+
+        <div class="row">
+			<div class="col">
+				<label for="amount">{{ form.amount.label }}</label>
+				{{ form.amount }}<br>
+				<label for="mode">{{ form.mode.label }}</label>
+				{{ form.mode }}
+			</div>
+			<div class="col">
+				<label for="PANNo">{{ form.PANNo.label }}</label>
+				{{ form.PANNo }}<br>
+				<label for="AadhaarNo">{{ form.AadhaarNo.label }}</label>
+				{{ form.AadhaarNo }}
+			</div>
+		</div>
+
+        <div class="row">
+			<div class="col">
+				<label for="receipt1">{{ form.receipt1.label }}</label>
+				{{ form.receipt1 }}<br>
+				<label for="receipt2">{{ form.receipt2.label }}</label>
+				{{ form.receipt2 }}
+			</div>
+		</div>
+
+        {{ form.errors }}
+        
+        <button type="submit" class="btn">Add Revenue</button>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+
+    <style>
+        
+        @page {
+            size: a4 landscape;
+            margin: 2cm;
+        }
+        * {
+            font-size: 18px;
+        }
+
+        body {
+            padding: 0px;
+            margin: 0;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-around;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #dd1118;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        h3 {
+            font-size: 18px;
+            color: #dd1118
+        }
+
+        th {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        td {
+            font-size: 12px;
+            overflow: visible;
+            max-width: 100px;
+            padding: 5px;
+        }
+
+        .footer {
+            float: bottom;
+        }
+    </style>
+
+    <title>Committed for a Social Change</title>
+</head>
+
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <img src="media/logo.png" alt="Logo" class="logo">
+                </td>
+                <td>
+                    <h2>Revenue Report</h2>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Revenue</h3>
+    <hr>
+    <table>
+        <thead>
+            <th>Revenue ID | Purpose</th>
+            <th>Date Created</th>
+            <th>Full Name</th>
+            <th>Contact</th>
+            <th>Payment</th>
+            <th>PAN Number</th>
+            <th>Aadhaar Number</th>
+        </thead>
+        <tbody>
+            {% for rev in rev_list %}
+            <tr>
+                <td class="text">{{ rev.uniqueID }} | {{ rev.purpose }}</td>
+                <td class="text">{{ rev.dateCreated }}</td>
+                <td class="text">{{ rev.firstName }} {{ rev.lastName }}</td>
+                <td class="text">Mobile : {{ rev.mobileNumber }}<br>
+                    Email : {{ rev.emailID }}<br>
+                    Address : {{ rev.address }}, {{ rev.area }}, {{ rev.locality }}, {{ rev.district }}, {{ rev.state }}, {{ rev.pincode }}
+                </td>
+                <td class="text">{{ rev.amount }} by {{ rev.mode }}</td>
+                <td class="text">{{ rev.PANNo }}</td>
+                <td class="text">{{ rev.AadhaarNo }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <h3>Service</h3>
+    <hr>
+    <table>
+        <thead>
+            <th>Service ID | Service</th>
+            <th>Date Created</th>
+            <th>Full Name</th>
+            <th>Contact</th>
+            <th>Payment</th>
+            <th>PAN Number</th>
+            <th>Aadhaar Number</th>
+        </thead>
+        <tbody>
+            {% for serv in serv_list %}
+            <tr>
+                <td class="text">{{ serv.uniqueID }} | {{ serv.service }}</td>
+                <td class="text">{{ serv.dateCreated }}</td>
+                <td class="text">{{ serv.firstName }} {{ serv.lastName }}</td>
+                <td class="text">Mobile : {{ serv.mobileNumber }}<br>
+                    Email : {{ serv.emailID }}<br>
+                    Address : {{ serv.address }}, {{ serv.area }}, {{ serv.locality }}, {{ serv.district }}, {{ serv.state }}, {{ serv.pincode }}
+                </td>
+                <td class="text">{{ serv.amount }} by {{ serv.mode }}</td>
+                <td class="text">{{ serv.PANNo }}</td>
+                <td class="text">{{ serv.AadhaarNo }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table class="footer">
+        <tbody>
+            <tr>
+                <th class="title">Director Signature</th>
+                <td><img src="media/signature.jpeg" alt="Founder Signature" class="sign-image" width="200px"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    </div>
+
+
+</body>
+
+</html>

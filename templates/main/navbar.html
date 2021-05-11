@@ -1,0 +1,23 @@
+{% load static %}
+<header>
+    <img src="{% static 'images/logo.png' %}" alt="Social Vision Logo" class="logo">
+
+    <nav>
+        <ul class="nav-links">
+            <li class="nav-link"><a href="{% url 'home' %}">Home</a></li>
+            <li class="nav-link"><a href="{% url 'about' %}">About</a></li>
+            <li class="nav-link"><a href="{% url 'covid' %}">COVID-19 Help</a></li>
+            {% if user.is_authenticated %}
+            <li class="nav-link"><a href="{% url 'donate' %}">Donate</a></li>
+            <li class="nav-link"><a href="{% url 'trainee' %}">Trainee</a></li>
+            
+            <li class="nav-link"><a href="{% url 'profile' %}">Hi {{ user.username }}</a></li>
+            <li class="nav-link"><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li class="nav-link"><a href="{% url 'donate-1' %}">Donate</a></li>
+            <li class="nav-link"><a href="{% url 'login' %}">Login</a></li>
+            <li class="nav-link"><a href="{% url 'register' %}">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
