@@ -1,1 +1,1 @@
-web: gunicorn SocialVision_Project.wsgi --log-file -
+web: gunicorn Social-Vision-Web.wsgi --log-file -
