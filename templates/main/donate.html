@@ -2,52 +2,62 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
 {% endblock %}
 
 {% block content %}
-    <section class="hero">
-        <h1 class="hero-heading">Donate</h1>
-    </section>
+<section class="hero">
+    <h1 class="hero-heading">Donate</h1>
+</section>
 
-    <section>
-        <form action="" method="POST" class="col">
-            <img class="icon" src="{% static 'images/icons/help.svg' %}" alt="" height="50px"> 
-            <h2 class="section-heading">Instant Donation</h2>
-            <p>If you want to donate now, enter the donation amount and pay</p>
-            <label for="donation">Donation Amount</label>
-            <input type="number" id="donation">
-            <br>
-            <div id="paypal-button-container"></div>
+<section>
+    <form action="" method="POST" class="col">
+        <img class="icon" src="{% static 'images/icons/help.svg' %}" alt="" height="50px">
+        <h2 class="section-heading">Instant Donation</h2>
+        <p>If you want to donate now, enter the donation amount and pay</p>
+        <label for="donation">Donation Amount</label>
+        <input type="number" id="donation">
+        <br>
 
-            <script
-                src="https://www.paypal.com/sdk/js?client-id=AbtIrR_eyGpZLotNiUPr31L5eCD7DBxwyEWXJjoYo7XhxGqVvIwGCI0o7IL4UsDfvk4ygg7rKkEzMQsA&currency=USD"></script>
-            <script>
-
-                // Render the PayPal button into #paypal-button-container
+        <div id="smart-button-container">
+            <div style="text-align: center;">
+                <div id="paypal-button-container"></div>
+            </div>
+        </div>
+        <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"
+            data-sdk-integration-source="button-factory"></script>
+        <script>
+            function initPayPalButton() {
                 paypal.Buttons({
-                    // Set up the transaction
+                    style: {
+                        shape: 'pill',
+                        color: 'black',
+                        layout: 'vertical',
+                        label: 'pay',
+
+                    },
+
                     createOrder: function (data, actions) {
+                        donation = document.getElementById('donation').value * 0.014
                         return actions.order.create({
-                            purchase_units: [{
-                                amount: {
-                                    value: document.getElementById('donation').value
-                                }
-                            }]
+                            purchase_units: [{ "amount": { "currency_code": "USD", "value": donation.toFixed(2) } }]
                         });
                     },
 
-                    // Finalize the transaction
                     onApprove: function (data, actions) {
                         return actions.order.capture().then(function (details) {
                             alert("Thank you for donating Rs." + document.getElementById('donation').value)
                         });
+                    },
+
+                    onError: function (err) {
+                        console.log(err);
                     }
                 }).render('#paypal-button-container');
-            </script>
-        </form>
-    </section>
-    
-    {% include 'main/contact.html' %}
-{% endblock %}
+            }
+            initPayPalButton();
+        </script>
+</section>
+        {% include 'main/contact.html' %}
+        {% endblock %}
