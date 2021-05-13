@@ -148,6 +148,9 @@ def profileUser(request):
     user = request.user
 
     groups = None
+    isChangeMaker = False
+    isTrainee = False
+    
     if request.user.groups.exists():
         groups = set(group.name for group in request.user.groups.all())
         for group in groups:
