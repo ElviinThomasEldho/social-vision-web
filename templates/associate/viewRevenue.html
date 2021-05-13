@@ -13,7 +13,7 @@
 
 {% block content %}
     <section class="hero">
-        <h1 class="hero-heading">Revenue Tracker</h1>
+        <h1 class="hero-heading">Donation Tracker</h1>
     </section>
 
     <section>
@@ -21,17 +21,17 @@
         <hr class="hr-short">
         <div class="row">
             <div class="col-6">
-                <a href="{% url 'addRevenue' %}" class="btn"><img class="icon" src="{% static 'images/icons/revenue.svg' %}" alt="" height="20px"> Add Revenue</a>
+                <a href="{% url 'addRevenue' %}" class="btn"><img class="icon" src="{% static 'images/icons/revenue.svg' %}" alt="" height="20px"> Add Donation</a>
             </div>
             <div class="col-6">
                 <a href="{% url 'addService' %}" class="btn"><img class="icon" src="{% static 'images/icons/technical-support.svg' %}" alt="" height="20px"> Add Service Fee</a>
             </div>
             <div class="col-6">
-                <a href="{% url 'printRevenue' %}" class="btn"><img class="icon" src="{% static 'images/icons/business-report.svg' %}" alt="" height="20px"> Print Revenue Report</a>
+                <a href="{% url 'printRevenue' %}" class="btn"><img class="icon" src="{% static 'images/icons/business-report.svg' %}" alt="" height="20px"> Print Donations Report</a>
             </div>
         </div>
         <hr class="hr-dark">
-        <h2><img class="icon" src="{% static 'images/icons/revenue.svg' %}" alt="" height="40px"> Revenue</h2>
+        <h2><img class="icon" src="{% static 'images/icons/revenue.svg' %}" alt="" height="40px"> Donation</h2>
         <hr class="hr-short">
 
         {% if revenue %}
@@ -62,7 +62,7 @@
             </tbody>
         </table>
         {% else %}
-        <p>There is No Revenue to display</p>
+        <p>There is No Donations to display</p>
         {% endif %}
         <hr class="hr-dark">
         <h2><img class="icon" src="{% static 'images/icons/technical-support.svg' %}" alt="" height="40px"> Service Fees</h2>
