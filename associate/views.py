@@ -147,30 +147,6 @@ def printExpense(request):
 
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
-def printExpCertif(request, id):
-    user = request.user
-    exp = Expense.objects.get(uniqueID=id)
-
-    context = {
-        'exp': exp,
-        'user':user,
-    }
-
-    # return render(request, 'benefactor/donateCertif.html', context)
-
-    template_path = 'associate/expCertif.html'
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'filename="Expense-Certificate.pdf'
-    template = get_template(template_path)
-    html = template.render(context)
-    pisa_status = pisa.CreatePDF(
-       html, dest=response, link_callback=link_callback)
-    if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
-    return response
-
-@authenticated_user
-@allowed_users(allowed_roles=['associate'])
 def printExpReceipt(request, id):
     user = request.user
     exp = Expense.objects.get(uniqueID=id)
@@ -209,30 +185,6 @@ def addService(request):
     }
 
     return render(request, 'associate/addService.html', context)
-
-@authenticated_user
-@allowed_users(allowed_roles=['associate'])
-def printServCertif(request, id):
-    user = request.user
-    serv = Service.objects.get(uniqueID=id)
-
-    context = {
-        'serv': serv,
-        'user':user,
-    }
-
-    # return render(request, 'benefactor/donateCertif.html', context)
-
-    template_path = 'associate/servCertif.html'
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'filename="Service-Fee-Certificate.pdf'
-    template = get_template(template_path)
-    html = template.render(context)
-    pisa_status = pisa.CreatePDF(
-       html, dest=response, link_callback=link_callback)
-    if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
-    return response
 
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
@@ -317,30 +269,6 @@ def printRevenue(request):
     template_path = 'associate/revReport.html'
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="Revenue-Report.pdf'
-    template = get_template(template_path)
-    html = template.render(context)
-    pisa_status = pisa.CreatePDF(
-       html, dest=response, link_callback=link_callback)
-    if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
-    return response
-
-@authenticated_user
-@allowed_users(allowed_roles=['associate'])
-def printRevCertif(request, id):
-    user = request.user
-    rev = Revenue.objects.get(uniqueID=id)
-
-    context = {
-        'rev': rev,
-        'user':user,
-    }
-
-    # return render(request, 'benefactor/donateCertif.html', context)
-
-    template_path = 'associate/revCertif.html'
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'filename="Revenue-Certificate.pdf'
     template = get_template(template_path)
     html = template.render(context)
     pisa_status = pisa.CreatePDF(

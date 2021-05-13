@@ -36,7 +36,6 @@
                 <th>Mode of Payment</th>
                 <th>Amount</th>
                 <th>Reciept</th>
-                <th>Certificate</th>
             </thead>
             <tbody>
                 {% for exp in expenses %}
@@ -48,7 +47,6 @@
                     <td>{{ exp.mode }}</td>
                     <td>{{ exp.amount }}</td>
                     <td><a href="{% url 'printExpReceipt' exp.uniqueID %}" style="color: green;">Download</a></td>
-                    <td><a href="{% url 'printExpCertif' exp.uniqueID %}" style="color: green;">Download</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
