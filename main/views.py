@@ -1,3 +1,4 @@
+from changemaker.models import ChangeMaker
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse, HttpRequest
 from django.core.mail import send_mail
@@ -134,7 +135,7 @@ def registerUser(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect('profile')
 
     context = {
         'form': form,
@@ -146,8 +147,28 @@ def registerUser(request):
 def profileUser(request):
     user = request.user
 
+    groups = None
+    if request.user.groups.exists():
+        groups = set(group.name for group in request.user.groups.all())
+        for group in groups:
+            if group == "changemaker":
+                isChangeMaker = True
+                break
+            else:
+                isChangeMaker = False
+
+        for group in groups:
+            if group == "trainee":
+                isTrainee = True
+                break
+            else:
+                isTrainee = False
+
+
     context = {
         'user': user,
+        'isChangeMaker' : isChangeMaker,
+        'isTrainee' : isTrainee,
     }
 
     return render(request, 'main/profile.html', context)

@@ -45,8 +45,29 @@ def link_callback(uri, rel):
             )
     return path
 
+@authenticated_user
+def regChangeMaker(request):
+    user = request.user
+    form = ChangeMakerForm(initial={'user': request.user})
+
+    if request.method == 'POST':
+        form = ChangeMakerForm(request.POST, request.FILES)
+        if form.is_valid():
+            candidate = form.save()
+            add_group = Group.objects.get(name='changemaker') 
+            user = form.cleaned_data['user']
+            add_group.user_set.add(user)
+            return redirect('/change-maker/view/')
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'changemaker/registerForm.html', context)
+
 
 @authenticated_user
+@allowed_users(allowed_roles=['changemaker'])
 def donateView(request):
     user = request.user
     try:
@@ -65,6 +86,7 @@ def donateView(request):
 
 
 @authenticated_user
+@allowed_users(allowed_roles=['changemaker'])
 def donateForm(request):
     user = request.user
     form = DonationForm(initial={'user': request.user})
@@ -83,6 +105,7 @@ def donateForm(request):
     return render(request, 'changemaker/donateForm.html', context)
 
 @authenticated_user
+@allowed_users(allowed_roles=['changemaker'])
 def donatePay(request, id):
     donation = Donation.objects.get(uniqueID=id).amount
     uniqueID = Donation.objects.get(uniqueID=id).uniqueID
@@ -95,6 +118,7 @@ def donatePay(request, id):
     return render(request, 'changemaker/donatePay.html',context)
 
 @authenticated_user
+@allowed_users(allowed_roles=['changemaker'])
 def donateSuccess(request, id):
     donation = Donation.objects.get(uniqueID=id)
     donation.status = "Completed"
@@ -106,6 +130,7 @@ def donateSuccess(request, id):
     return redirect('/change-maker/view/')
 
 @authenticated_user
+@allowed_users(allowed_roles=['changemaker'])
 def printDonationCertif(request, id):
     user = request.user
     dn = Donation.objects.get(uniqueID=id)
@@ -129,6 +154,7 @@ def printDonationCertif(request, id):
     return response
 
 @authenticated_user
+@allowed_users(allowed_roles=['changemaker'])
 def printDonationReceipt(request, id):
     user = request.user
     dn = Donation.objects.get(uniqueID=id)
