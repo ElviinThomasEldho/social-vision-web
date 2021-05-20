@@ -12,6 +12,9 @@ from .models import *
 from .forms import *
 from .decorators import *
 
+from trainee import views as trainee
+from changemaker import views as changemaker
+from associate import views as associate
 
 def home(request):
     if request.method == "POST":
@@ -33,7 +36,6 @@ def home(request):
 
     return render(request, 'main/home.html', context)
 
-
 def about(request):
     if request.method == "POST":
         name = request.POST['name']
@@ -54,7 +56,6 @@ def about(request):
 
     return render(request, 'main/about.html')
 
-
 def covid(request):
     if request.method == "POST":
         name = request.POST['name']
@@ -74,6 +75,26 @@ def covid(request):
         context = {}
 
     return render(request, 'main/covid.html')
+
+def impact(request):
+
+    impacts = Impact.objects.all()
+
+    context = {
+        'impacts' : impacts,
+    }
+
+    return render(request, 'main/impact.html', context)
+
+def gallery(request):
+
+    events = Event.objects.all()
+
+    context = {
+        'events' : events,
+    }
+
+    return render(request, 'main/gallery.html', context)
 
 
 def donate(request):
@@ -96,7 +117,6 @@ def donate(request):
 
     return render(request, 'main/donate.html', context)
 
-
 @unauthenticated_user
 def loginUser(request):
     if request.method == 'POST':
@@ -114,11 +134,9 @@ def loginUser(request):
 
     return render(request, 'main/login.html')
 
-
 def logoutUser(request):
     logout(request)
     return redirect('home')
-
 
 @unauthenticated_user
 def registerUser(request):
@@ -143,8 +161,7 @@ def registerUser(request):
 
     return render(request, 'main/register.html', context)
 
-
-def profileUser(request):
+def profile(request):
     user = request.user
 
     groups = None
@@ -175,3 +192,60 @@ def profileUser(request):
     }
 
     return render(request, 'main/profile.html', context)
+
+def finance(request):
+    user = request.user
+
+    # instantDonations = instantDonations()
+    cmDonations = changemaker.getDonation()
+    asDonations = associate.getDonations()
+    asExpenses = associate.getExpenses()
+    asFees = associate.getServiceFees()
+
+    cmDonationSum = 0
+    asDonationSum = 0
+    asExpenseSum = 0
+    asFeeSum = 0
+
+    for don in cmDonations:
+        cmDonationSum += don.amount
+        
+    for don in asDonations:
+        asDonationSum += don.amount
+        
+    for don in asExpenses:
+        asExpenseSum += don.amount
+        
+    for don in asFees:
+        asFeeSum += don.amount
+
+    context = {
+        'user': user,
+        'changemakerDonations' : cmDonations,
+        'associateDonations' : asDonations,
+        'associateExpenses' : asExpenses,
+        'associateFees' : asFees,
+        'cmDonationSum' : cmDonationSum,
+        'asDonationSum' : asDonationSum,
+        'asExpenseSum' : asExpenseSum,
+        'asFeeSum' : asFeeSum,
+    }
+
+    return render(request, 'main/finance.html', context)
+
+@allowed_users(allowed_roles=['admin'])
+def panel(request):
+
+    users = User.objects.all()
+    trainees = trainee.getTrainees()
+    changemakers = changemaker.getChangeMakers()
+    associates = associate.getAssociates()
+
+    context = {
+        'users' : users,
+        'trainees' : trainees,
+        'changemakers' : changemakers,
+        'associates' : associates,
+    }
+
+    return render(request, 'main/panel.html', context)

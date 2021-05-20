@@ -1,0 +1,33 @@
+{% extends 'main/main.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/covid.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1 class="hero-heading">Gallery</h1>
+</section>
+
+    {% for event in events %}
+    <section>
+        <h2 class="section-heading">{{ event.name }}</h2>
+      <div class="event-grid center">
+        <img src="{{ event.image1.url }}" alt="Event Photo 1" class="event-photo">
+        <img src="{{ event.image2.url }}" alt="Event Photo 2" class="event-photo">
+        <img src="{{ event.image3.url }}" alt="Event Photo 3" class="event-photo">
+        <img src="{{ event.image4.url }}" alt="Event Photo 4" class="event-photo">
+        <img src="{{ event.image5.url }}" alt="Event Photo 5" class="event-photo">
+        <img src="{{ event.image6.url }}" alt="Event Photo 6" class="event-photo">
+        <img src="{{ event.image7.url }}" alt="Event Photo 7" class="event-photo">
+        <img src="{{ event.image8.url }}" alt="Event Photo 8" class="event-photo">
+        <img src="{{ event.image9.url }}" alt="Event Photo 9" class="event-photo">
+      </div>
+    </section>
+    {% endfor %}
+  </div>
+
+
+{% include 'main/contact.html' %}
+{% endblock %}

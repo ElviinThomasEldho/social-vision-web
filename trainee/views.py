@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import *
 from .forms import *
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail
 
 import datetime
 
@@ -50,24 +51,30 @@ def link_callback(uri, rel):
 
 @authenticated_user
 @allowed_users(allowed_roles=['trainee'])
-def traineeProfile(request):
+def profile(request):
     user = request.user
-    try:
-        cd = Trainee.objects.get(user=user)
-        context = {
-            'user':user,
-            'cd':cd,
-        }
-    except ObjectDoesNotExist as o:
-        context = {
-            'user':user,
-        }
 
+    cd = Trainee.objects.get(user=user)
+    courses = Course.objects.all()
+    enrolled = cd.course.all()
+    courses = set(courses).difference(enrolled)
+    if (datetime.date.today() - cd.validUpto.date()) > datetime.timedelta(seconds=0):
+        canEnroll = True
+    else:
+        canEnroll = False
 
-    return render(request, 'trainee/traineeUser.html', context)
+    context = {
+        'user':user,
+        'courses':courses,
+        'enrolled':enrolled,
+        'canEnroll':canEnroll,
+        'cd':cd,
+    }
+
+    return render(request, 'trainee/profile.html', context)
 
 @authenticated_user
-def regTrainee(request):
+def register(request):
     user = request.user
     form = TraineeForm(initial={'user': request.user.id})
 
@@ -83,11 +90,11 @@ def regTrainee(request):
         'form': form,
     }
 
-    return render(request, 'trainee/regTrainee.html', context)
+    return render(request, 'trainee/register.html', context)
 
 @authenticated_user
 @allowed_users(allowed_roles=['trainee'])
-def editTrainee(request):
+def edit(request):
     user = request.user
 
     cd = Trainee.objects.get(user=user)
@@ -104,11 +111,11 @@ def editTrainee(request):
         'form': form,
     }
 
-    return render(request, 'trainee/editTrainee.html', context)
+    return render(request, 'trainee/edit.html', context)
 
 @authenticated_user
 @allowed_users(allowed_roles=['trainee'])
-def printTraineeForm(request):
+def printForm(request):
 
     user = request.user
     cd = Trainee.objects.get(user=user)
@@ -118,7 +125,7 @@ def printTraineeForm(request):
         'cd': cd,
     }
 
-    template_path = 'trainee/traineeForm.html'
+    template_path = 'trainee/printForm.html'
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="Trainee-Form.pdf'
     template = get_template(template_path)
@@ -131,17 +138,18 @@ def printTraineeForm(request):
 
 @authenticated_user
 @allowed_users(allowed_roles=['trainee'])
-def printTraineeID(request):
+def printID(request):
 
     user = request.user
     cd = Trainee.objects.get(user=user)
-    form = TraineeForm(instance=cd)
+    course = Course.objects.get(id=cd.currentCourse).name
 
     context = {
         'cd': cd,
+        'course': course,
     }
 
-    template_path = 'trainee/traineeID.html'
+    template_path = 'trainee/printID.html'
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="Trainee-ID.pdf'
     template = get_template(template_path)
@@ -152,3 +160,56 @@ def printTraineeID(request):
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
 
+def getTrainees():
+    users = Trainee.objects.all()
+    return users
+
+def activate(request,id):
+    trainee = Trainee.objects.get(uniqueID=id)
+    trainee.status = True
+    trainee.save()
+    
+    name = trainee.firstName + ' ' + trainee.lastName
+    email =trainee.emailID
+    query = "Hi " + name + ", We are happy to inform you that your Trainee Account has been activated. You can now download you ID Card from the Trainee Profile Page"
+
+    subject = 'Query from ' + name
+    message = 'Hi Social Vision, ' + query
+    # send an email
+
+    send_mail(subject, message, 'contact.socialvision@gmail.com', [email])
+
+    context = {
+        'name': name,
+    }
+
+    return redirect('/admin-panel/')
+    
+def deactivate(request,id):
+    trainee = Trainee.objects.get(uniqueID=id)
+    trainee.status = False
+    trainee.save()
+
+    return redirect('/admin-panel/')
+
+def enroll(request, id):
+    user = request.user
+    trainee = Trainee.objects.get(user=user)
+    course = Course.objects.get(id=id)
+    
+    trainee.course.add(course)
+
+    validUpto = datetime.date.today()
+    duration = course.duration
+    if (validUpto.month + duration) > 12:
+        trainee.validUpto = validUpto.replace(month = validUpto.month + duration - 12, year = validUpto.year + 1)
+    else: 
+        trainee.validUpto = validUpto.replace(month = validUpto.month + duration)
+
+    trainee.currentCourse = course.id
+
+    trainee.save()
+
+    print(trainee.validUpto)
+
+    return redirect('/trainee/view/')

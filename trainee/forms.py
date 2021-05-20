@@ -1,11 +1,15 @@
 from django.forms import ModelForm, Textarea
+from django.forms.widgets import Widget
 from .models import *
 from django import forms
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class TraineeForm(ModelForm):
     class Meta:
         model = Trainee
-        exclude = ['uniqueID','dateCreated']
+        exclude = ['uniqueID','dateCreated','status', 'courses', 'validUpto','currentCourse']
 
         widgets = {
             'user' : forms.HiddenInput(),
@@ -15,10 +19,11 @@ class TraineeForm(ModelForm):
             'fatherName' : forms.TextInput(),
             'motherName' : forms.TextInput(),
             
-            'dateOfBirth' : forms.DateInput(),
+            'dateOfBirth' : DateInput(),
             'age' : forms.NumberInput(),
+            'bloodGroup' : forms.Select(),
             
-            'martialStatus' : forms.Select(attrs={'width':'100px'}),
+            'martialStatus' : forms.Select(),
             'category' : forms.Select(),
             'gender' : forms.Select(),
             'religion' : forms.Select(),
@@ -35,6 +40,7 @@ class TraineeForm(ModelForm):
             'district' : forms.TextInput(),
             'state' : forms.TextInput(),
             'pincode' : forms.TextInput(),
+            
             'documentType' : forms.Select(),
             'documentNumber' : forms.TextInput(),
             

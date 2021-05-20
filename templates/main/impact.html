@@ -1,0 +1,33 @@
+{% extends 'main/main.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1 class="hero-heading">Creating Impact</h1>
+</section>
+
+<section>
+
+  <div class="impacts">
+    {% for impact in impacts %}
+    <div class="impact center">
+        <h2 class="section-heading">{{ impact.name }}</h2>
+        <hr class="hr-short">
+        <p>{{ impact.desc }}</p>
+      <div class="row">
+        <img src="{{ impact.image1.url }}" alt="Impact Photo 1" class="impact-photo">
+        <img src="{{ impact.image2.url }}" alt="Impact Photo 2" class="impact-photo">
+        <img src="{{ impact.image3.url }}" alt="Impact Photo 3" class="impact-photo">
+        <img src="{{ impact.image4.url }}" alt="Impact Photo 4" class="impact-photo">
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+  </div>
+
+
+{% include 'main/contact.html' %}
+{% endblock %}

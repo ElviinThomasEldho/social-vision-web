@@ -1,0 +1,114 @@
+{% extends 'main/main.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1 class="hero-heading">Admin Panel</h1>
+</section>
+
+<section>
+    <h2 class="section-heading">Users</h2>
+    <table>
+        <thead>
+            <th>Unique ID</th>
+            <th>Username</th>
+            <th>Email Address</th>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h2 class="section-heading">Trainees</h2>
+    <table>
+        <thead>
+            <th>Unique ID</th>
+            <th>Trainee</th>
+            <th>Email Address</th>
+            <th>Mobile Number</th>
+            <th>Status</th>
+            <th>Change Status</th>
+        </thead>
+        <tbody>
+            {% for trainee in trainees %}
+            <tr>
+                <td>{{ trainee.uniqueID }}</td>
+                <td>{{ trainee.user.username }} | {{ trainee.firstName }} {{ trainee.lastName }}</td>
+                <td>{{ trainee.emailID }}</td>
+                <td>{{ trainee.mobileNumber }}</td>
+                <td>
+                    {% if trainee.status %}
+                    Active
+                    {% else %}
+                    Inactive
+                    {% endif %}
+                </td>
+                <td>
+                    {% if trainee.status %}
+                    <a href="{% url 'deactivateTrainee' trainee.uniqueID %}" class="btn">Deactivate</a>
+                    {% else %}
+                    <a href="{% url 'activateTrainee' trainee.uniqueID %}" class="btn">Activate</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h2 class="section-heading">Associates</h2>
+    <table>
+        <thead>
+            <th>Unique ID</th>
+            <th>Associate</th>
+            <th>Email Address</th>
+            <th>Mobile Number</th>
+        </thead>
+        <tbody>
+            {% for associate in associates %}
+            <tr>
+                <td>{{ associate.uniqueID }}</td>
+                <td>{{ associate.user.username }} | {{ associate.firstName }} {{ associate.lastName }}</td>
+                <td>{{ associate.emailID }}</td>
+                <td>{{ associate.mobileNumber }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h2 class="section-heading">Change Maker</h2>
+    <table>
+        <thead>
+            <th>Unique ID</th>
+            <th>Trainee</th>
+            <th>Email Address</th>
+            <th>Mobile Number</th>
+        </thead>
+        <tbody>
+            {% for changemaker in changemakers %}
+            <tr>
+                <td>{{ changemaker.uniqueID }}</td>
+                <td>{{ changemaker.user.username }} | {{ changemaker.firstName }} {{ changemaker.lastName }}</td>
+                <td>{{ changemaker.emailID }}</td>
+                <td>{{ changemaker.mobileNumber }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

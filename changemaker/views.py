@@ -46,7 +46,7 @@ def link_callback(uri, rel):
     return path
 
 @authenticated_user
-def regChangeMaker(request):
+def register(request):
     user = request.user
     form = ChangeMakerForm(initial={'user': request.user})
 
@@ -68,7 +68,7 @@ def regChangeMaker(request):
 
 @authenticated_user
 @allowed_users(allowed_roles=['changemaker'])
-def donateView(request):
+def profile(request):
     user = request.user
     try:
         donations = user.donation_set.all()
@@ -82,12 +82,12 @@ def donateView(request):
         }
 
 
-    return render(request, 'changemaker/donateUser.html', context)
+    return render(request, 'changemaker/profile.html', context)
 
 
 @authenticated_user
 @allowed_users(allowed_roles=['changemaker'])
-def donateForm(request):
+def donationForm(request):
     user = request.user
     form = DonationForm(initial={'user': request.user})
 
@@ -102,11 +102,11 @@ def donateForm(request):
         'form': form,
     }
 
-    return render(request, 'changemaker/donateForm.html', context)
+    return render(request, 'changemaker/form.html', context)
 
 @authenticated_user
 @allowed_users(allowed_roles=['changemaker'])
-def donatePay(request, id):
+def payment(request, id):
     donation = Donation.objects.get(uniqueID=id).amount
     uniqueID = Donation.objects.get(uniqueID=id).uniqueID
 
@@ -115,23 +115,20 @@ def donatePay(request, id):
         'id':uniqueID,
     }
 
-    return render(request, 'changemaker/donatePay.html',context)
+    return render(request, 'changemaker/payment.html',context)
 
 @authenticated_user
 @allowed_users(allowed_roles=['changemaker'])
-def donateSuccess(request, id):
+def paymentSuccess(request, id):
     donation = Donation.objects.get(uniqueID=id)
     donation.status = "Completed"
     donation.save()
-    context = {
-
-    }
 
     return redirect('/change-maker/view/')
 
 @authenticated_user
 @allowed_users(allowed_roles=['changemaker'])
-def printDonationCertif(request, id):
+def printCertificate(request, id):
     user = request.user
     dn = Donation.objects.get(uniqueID=id)
 
@@ -140,9 +137,7 @@ def printDonationCertif(request, id):
         'user':user,
     }
 
-    # return render(request, 'changemaker/donateCertif.html', context)
-
-    template_path = 'changemaker/donateCertif.html'
+    template_path = 'changemaker/certificate.html'
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="Donation-Certificate.pdf'
     template = get_template(template_path)
@@ -155,7 +150,7 @@ def printDonationCertif(request, id):
 
 @authenticated_user
 @allowed_users(allowed_roles=['changemaker'])
-def printDonationReceipt(request, id):
+def printReceipt(request, id):
     user = request.user
     dn = Donation.objects.get(uniqueID=id)
 
@@ -164,7 +159,7 @@ def printDonationReceipt(request, id):
         'user':user,
     }
 
-    template_path = 'changemaker/donateReceipt.html'
+    template_path = 'changemaker/receipt.html'
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="Donation-Receipt.pdf'
     template = get_template(template_path)
@@ -174,3 +169,11 @@ def printDonationReceipt(request, id):
     if pisa_status.err:
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
+def getChangeMakers():
+    changemakers = ChangeMaker.objects.all()
+    return changemakers
+
+def getDonation():
+    donations = Donation.objects.all()
+    return donations

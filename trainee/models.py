@@ -4,17 +4,15 @@ from django.contrib.auth.models import User
 from datetime import date
 # Create your models here.
 
+class Course(models.Model):
+
+    name = models.CharField(max_length=255, null=True)
+    duration = models.IntegerField('Duration (in months)', null=True)
+
+    def __str__(self):
+        return self.name
 
 class Trainee(models.Model):
-
-    PURPOSE = (
-        ('Computer', 'Computer'),
-        ('Volunteer', 'Volunteer'),
-        ('Academic', 'Academic'),
-        ('Member', 'Member'),
-        ('Tailoring', 'Tailoring'),
-        ('English Speaking', 'English Speaking'),
-    )
 
     MARTIAL_STATUS = (
         ('Married', 'Married'),
@@ -76,11 +74,21 @@ class Trainee(models.Model):
         ('Passport', 'Passport'),
         ('Driving License', 'Driving License'),
     )
+    
+    BLOOD_GROUP = (
+        ('A+','A+'),
+        ('A-','A-'),
+        ('B+','B+'),
+        ('B-','B-'),
+        ('O+','O+'),
+        ('O-','O-'),
+        ('AB+','AB+'),
+        ('AB-','AB-'),
+    )
 
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     uniqueID = models.CharField('Unique ID', primary_key=True, default=uuid.uuid4().hex[:5].upper(), max_length=50, editable=False)
-    purpose = models.CharField('Purpose', max_length=255, choices=PURPOSE, null=True)
     profilePicture = models.ImageField('Profile Picture',null=True)
     firstName = models.CharField('First Name', max_length=255, null=True)
     lastName = models.CharField('Last Name', max_length=255, null=True)
@@ -89,6 +97,7 @@ class Trainee(models.Model):
 
     dateOfBirth = models.DateField("Date of Birth", null=True)
     age = models.IntegerField("Age of Trainee", null=True)
+    bloodGroup = models.CharField('Blood Group', max_length=255, choices=BLOOD_GROUP, null=True)
 
     martialStatus = models.CharField('Martial Status', max_length=255, choices=MARTIAL_STATUS, null=True)
     category = models.CharField('Category', max_length=255, choices=CATEGORY, null=True)
@@ -110,18 +119,20 @@ class Trainee(models.Model):
 
     documentType = models.CharField('Document Type', max_length=255, choices=DOCUMENT_TYPE, null=True)
     documentNumber = models.CharField('Document Number', max_length=255, null=True)
-    
+    documentImage = models.ImageField('Document Image',null=True)
+
     signature = models.ImageField('Signature',null=True)
 
     dateCreated = models.DateTimeField(null=True, auto_now_add=True)
-
-    # trainee photo
-    # trainee signature
+    validUpto = models.DateTimeField(null=True,  auto_now_add=True)
 
     declaration = models.BooleanField(
         'I hereby declare that the above particulars of facts and information stated are true, correct and complete to the best of my belief and knowledge', null=True)
 
-    # captcha
+    status = models.BooleanField('Status', null=True, default=False)
+
+    currentCourse = models.IntegerField(null=True)
+    course = models.ManyToManyField(Course)
 
     def __str__(self):
-        return (self.uniqueID + " | " + self.firstName + ' ' + self.lastName)
+        return (self.uniqueID + " | " + self.firstName + ' ' + self.lastName + ' | ' + str(self.validUpto))

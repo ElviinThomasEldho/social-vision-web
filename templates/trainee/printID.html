@@ -79,9 +79,8 @@
                     <td>
                         <img src="media/logo.png" alt="Logo" class="logo">
                     </td>
-                    <td></td>
                     <td>
-                        <h2>Trainee ID</h2>
+                        <h4>Trainee ID : {{ cd.uniqueID }}</h4>
                     </td>
                 </tr>
                 <tr>
@@ -94,14 +93,16 @@
                         <p class="text">{{ cd.firstName }} {{cd.lastName}}</p>
                         <p class="title">Mobile Number : </p>
                         <p class="text">{{ cd.mobileNumber }}</p>
-                        <p class="title">Valid Upto : </p>
+                        <p class="title">Enrolled Course : </p>
+                        <p class="text">{{ course }}</p>
                     </td>
                     <td>
                         <p class="title">Father's Name : </p>
                         <p class="text">{{ cd.fatherName }}</p>
                         <p class="title">Address : </p>
                         <p class="text">{{ cd.address }}, {{ cd.area }}, {{ cd.locality }}, {{ cd.district }}, {{ cd.state }}, {{ cd.pincode }}</p>
-    
+                        <p class="title">Valid Upto : </p>
+                        <p class="text">{{ cd.validUpto.date }}</p>
                     </td>
                 </tr>
                 <tr>

@@ -2,6 +2,9 @@ from django.forms import ModelForm, Textarea
 from .models import *
 from django import forms
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class ChangeMakerForm(ModelForm):
     class Meta:
         model = ChangeMaker
@@ -14,7 +17,7 @@ class ChangeMakerForm(ModelForm):
             'fatherName' : forms.TextInput(),
             'motherName' : forms.TextInput(),
             
-            'dateOfBirth' : forms.DateInput(),
+            'dateOfBirth' : DateInput(),
             'age' : forms.NumberInput(),
             
             'martialStatus' : forms.Select(attrs={'width':'100px'}),

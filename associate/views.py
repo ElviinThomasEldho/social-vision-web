@@ -1,3 +1,4 @@
+import associate
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
@@ -50,7 +51,7 @@ def link_callback(uri, rel):
 
 @authenticated_user
 @allowed_users(allowed_roles=['admin'])
-def regAssociate(request):
+def register(request):
     user = request.user
     form = AssociateForm(initial={'user': request.user})
 
@@ -67,11 +68,11 @@ def regAssociate(request):
         'form': form,
     }
 
-    return render(request, 'associate/regAssociate.html', context)
+    return render(request, 'associate/register.html', context)
 
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
-def profAssociate(request):
+def profile(request):
     user = request.user
     associate = Associate.objects.get(user=user)
 
@@ -79,7 +80,7 @@ def profAssociate(request):
         'associate':associate
     }
 
-    return render(request, 'associate/profAssociate.html', context)
+    return render(request, 'associate/profile.html', context)
 
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
@@ -155,8 +156,6 @@ def printExpReceipt(request, id):
         'user':user,
     }
 
-    # return render(request, 'benefactor/donateCertif.html', context)
-
     template_path = 'associate/expReceipt.html'
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="Expense-Receipt.pdf'
@@ -196,8 +195,6 @@ def printServReceipt(request, id):
         'serv': serv,
         'user':user,
     }
-
-    # return render(request, 'benefactor/donateCertif.html', context)
 
     template_path = 'associate/servReceipt.html'
     response = HttpResponse(content_type='application/pdf')
@@ -298,4 +295,21 @@ def printRevReceipt(request, id):
     if pisa_status.err:
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
+
+def getAssociates():
+    associates = Associate.objects.all()
+    return associates
+
+def getDonations():
+    donations = Revenue.objects.all()
+    return donations
+
+def getServiceFees():
+    fees = Service.objects.all()
+    return fees
+
+def getExpenses():
+    donations = Expense.objects.all()
+    return donations
 

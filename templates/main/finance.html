@@ -1,0 +1,103 @@
+{% extends 'main/main.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1 class="hero-heading">Finance</h1>
+</section>
+
+<section>
+    <h2 class="section-heading">Change Maker Contributions</h2>
+    <hr class="hr-short">
+    <table>
+        <thead>
+            <th>Donation ID</th>
+            <th>Date of Donation</th>
+            <th>Amount</th>
+            <th>Purpose</th>
+        </thead>
+        <tbody>
+            {% for donation in changemakerDonations %}
+            <tr>
+                <td>{{ donation.uniqueID }}</td>
+                <td>{{ donation.dateCreated }}</td>
+                <td>{{ donation.amount }}</td>
+                <td>{{ donation.purpose }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><strong>Total Donations from Change Makers</strong> : {{ cmDonationSum }}</p>
+</section>
+
+<section class="section-dark">
+    <h2 class="section-heading">Associate Collections</h2>
+    <hr class="hr-short">
+    <table>
+        <thead>
+            <th>Donation ID</th>
+            <th>Date of Donation</th>
+            <th>Amount</th>
+            <th>Purpose</th>
+        </thead>
+        <tbody>
+            {% for donation in associateDonations %}
+            <tr>
+                <td>{{ donation.uniqueID }}</td>
+                <td>{{ donation.dateCreated }}</td>
+                <td>{{ donation.amount }}</td>
+                <td>{{ donation.purpose }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><strong>Total Donations collected by Associates</strong> : {{ asDonationSum }}</p>
+</section>
+<section>
+    <h2 class="section-heading">Service Fees</h2>
+    <hr class="hr-short-light">
+    <table>
+        <thead>
+            <th>Donation ID</th>
+            <th>Date of Donation</th>
+            <th>Amount</th>
+        </thead>
+        <tbody>
+            {% for donation in associateFees %}
+            <tr>
+                <td>{{ donation.uniqueID }}</td>
+                <td>{{ donation.dateCreated }}</td>
+                <td>{{ donation.amount }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><strong>Total Service Fees collected by Associates</strong> : {{ asFeeSum }}</p>
+</section>
+<section class="section-dark">
+    <h2 class="section-heading">Expenses</h2>
+    <hr class="hr-short-light">
+    <table>
+        <thead>
+            <th>Donation ID</th>
+            <th>Date of Donation</th>
+            <th>Amount</th>
+        </thead>
+        <tbody>
+            {% for donation in associateExpenses %}
+            <tr>
+                <td>{{ donation.uniqueID }}</td>
+                <td>{{ donation.dateCreated }}</td>
+                <td>{{ donation.amount }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><strong>Total Expenses</strong> : {{ asExpenseSum }}</p>
+</section>
+{% include 'main/contact.html' %}
+{% endblock %}

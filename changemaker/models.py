@@ -69,7 +69,6 @@ class ChangeMaker(models.Model):
     )
 
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-
     uniqueID = models.CharField('Unique ID', primary_key=True, default=uuid.uuid4().hex[:5].upper(), max_length=50, editable=False)
     profilePicture = models.ImageField(null=True)
     firstName = models.CharField('First Name', max_length=255, null=True)

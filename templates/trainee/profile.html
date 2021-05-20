@@ -11,19 +11,10 @@
     </section>
 
     <section>
-        <h2 class="section-heading">Trainee Documents</h2>
-        <hr class="hr-short">
-
-        <div class="row">
-            <div class="col-6">
-                <a class="btn btn-success" href="{% url 'printTrainee' %}"><img class="icon" src="{% static 'images/icons/google-forms.svg' %}" alt="" height="20px">  Download PDF</a>
-            </div>
-            <div class="col-6">
-                <a class="btn btn-success" href="{% url 'printTraineeID' %}"><img class="icon" src="{% static 'images/icons/driver-license.svg' %}" alt="" height="20px"> Download ID Card</a>
-            </div>
-        </div>
-        <hr class="hr-dark">
         <h2 class="section-heading">Trainee Details</h2>
+        {% if not cd.status %}
+        <a href="{% url 'editTrainee' %}" class="btn">Edit Details</a>
+        {% endif %}
         <hr class="hr-short">
         <br>
         {% if cd %}
@@ -112,28 +103,57 @@
             </tbody>
         </table>
         <br>
-        <hr class="hr-short">
-        <table class="footer">
-            <tbody>
-                <tr>
-                    <td class="title">Trainee Signature</td>
-                    <td class="title">Director Signature</td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="{{ cd.signature.url }}" alt="Trainee Signature" class="sign-image" width="200px">
-                    </td>
-                    <td>
-                        <img src="{% static 'images/signature.jpeg' %}" alt="Founder Signature" class="sign-image"
-                            width="200px">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+
 
         {% else %}
         <p class="section-text">Register as Trainee to view Trainee Details</p>
         <a href="{% url 'regTrainee' %}" class="btn btn-outline-red">Register as Trainee</a>
         {% endif %}
+
+        <hr class="hr-dark">
+        <h2 class="section-heading">Courses</h2>
+        <hr class="hr-short">
+        <p>You can apply for new courses only after current course ends</p>
+        <div class="courses">
+            <div style="text-align: center;">
+                <h3>Enrolled Courses</h3>
+                <div class="enrolled-courses">
+                    {% for course in enrolled %}
+                    <div class="course-card">
+                        <h4 class="card-title">{{ course.name }}</h4>
+                    </div>
+                    {% endfor %}    
+                </div>    
+
+            </div>         
+            <div style="text-align: center;">
+                <h3>Available Courses</h3>
+                <div class="available-courses">   
+                    {% for course in courses %}
+                    <div class="course-card">
+                        <h4 class="card-title">{{ course.name }} | {{ course.duration }} Months</h4>
+                        {% if canEnroll %}
+                        <a class="enroll-btn" href="{% url 'enroll' course.id %}">Enroll</a>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <hr class="hr-dark">
+        
+        <h2 class="section-heading">Trainee Documents</h2>
+        <hr class="hr-short">
+
+        <a class="btn btn-success" href="{% url 'printTrainee' %}"><img class="icon" src="{% static 'images/icons/google-forms.svg' %}" alt="" height="20px">  Download PDF</a>
+
+        {% if cd.status %}
+        <a class="btn btn-success" href="{% url 'printTraineeID' %}"><img class="icon" src="{% static 'images/icons/driver-license.svg' %}" alt="" height="20px"> Download ID Card</a>
+        {% else %}
+        <p>You can download your ID Card after your account has been activated</p>
+        {% endif %}
+
+
     </section>
 {% endblock %}

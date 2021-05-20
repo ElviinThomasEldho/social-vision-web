@@ -2,6 +2,9 @@ from django.forms import ModelForm, Textarea
 from .models import *
 from django import forms
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class AssociateForm(ModelForm):
     class Meta:
         model = Associate
@@ -14,7 +17,7 @@ class AssociateForm(ModelForm):
             'fatherName' : forms.TextInput(),
             'motherName' : forms.TextInput(),
             
-            'dateOfBirth' : forms.DateInput(),
+            'dateOfBirth' : DateInput(),
             'age' : forms.NumberInput(),
             
             'martialStatus' : forms.Select(attrs={'width':'100px'}),

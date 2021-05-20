@@ -16,28 +16,40 @@
         <form method="POST" action="" class="col text-center">
             {% csrf_token %}
             <h2 class="section-heading">Register</h2>
-            <p>Want to help our cause!<br>Register below</p>
+            <p>Want to help our cause! Register below</p>
             <hr class="hr-short">
-            <table>
-                <tbody>
-                    <tr>
-                        <td><label>{{form.username.label}}</label></td>
-                        <td>{{form.username}}</td>
-                    </tr>
-                    <tr>
-                        <td><label>{{form.email.label}}</label></td>
-                        <td>{{form.email}}</td>
-                    </tr>
-                    <tr>
-                        <td><label>{{form.password1.label}}</label></td>
-                        <td>{{form.password1}}</td>
-                    </tr>
-                    <tr>
-                        <td><label>{{form.password2.label}}</label></td>
-                        <td>{{form.password2}}</td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <div class="row">
+                <div class="col">
+                    <label>{{form.username.label}}</label><br>
+                    {{form.username}}
+                </div>
+                <div class="col">   
+                    <label>{{form.email.label}}</label><br>
+                    {{form.email}}        
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">         
+                    <label>{{form.first_name.label}}</label><br>
+                    {{form.first_name}}
+                </div>
+                <div class="col">
+                    <label>{{form.last_name.label}}</label><br>
+                    {{form.last_name}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>{{form.password1.label}}</label><br>
+                    {{form.password1}}
+                </div>
+                <div class="col">
+                    <label>Confirm Password</label><br>
+                    {{form.password2}}
+                </div>
+            </div>
             
             {{ form.errors }}
 
