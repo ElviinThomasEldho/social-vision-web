@@ -80,29 +80,29 @@
                         <img src="media/logo.png" alt="Logo" class="logo">
                     </td>
                     <td>
-                        <h4>Trainee ID : {{ cd.uniqueID }}</h4>
+                        <h4>Trainee ID : {{ tr.uniqueID }}</h4>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <img src="media/{{ cd.profilePicture }}" alt="Profile Picture" class="profile-picture"
+                        <img src="media/{{ tr.profilePicture }}" alt="Profile Picture" class="profile-picture"
                             height="300px">
                     </td>
                     <td>
                         <p class="title">Trainee Name : </p>
-                        <p class="text">{{ cd.firstName }} {{cd.lastName}}</p>
+                        <p class="text">{{ tr.firstName }} {{tr.lastName}}</p>
                         <p class="title">Mobile Number : </p>
-                        <p class="text">{{ cd.mobileNumber }}</p>
+                        <p class="text">{{ tr.mobileNumber }}</p>
                         <p class="title">Enrolled Course : </p>
                         <p class="text">{{ course }}</p>
                     </td>
                     <td>
                         <p class="title">Father's Name : </p>
-                        <p class="text">{{ cd.fatherName }}</p>
+                        <p class="text">{{ tr.fatherName }}</p>
                         <p class="title">Address : </p>
-                        <p class="text">{{ cd.address }}, {{ cd.area }}, {{ cd.locality }}, {{ cd.district }}, {{ cd.state }}, {{ cd.pincode }}</p>
+                        <p class="text">{{ tr.address }}, {{ tr.area }}, {{ tr.locality }}, {{ tr.district }}, {{ tr.state }}, {{ tr.pincode }}</p>
                         <p class="title">Valid Upto : </p>
-                        <p class="text">{{ cd.validUpto.date }}</p>
+                        <p class="text">{{ tr.validUpto.date }}</p>
                     </td>
                 </tr>
                 <tr>
@@ -113,7 +113,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <img src="media/{{ cd.signature }}" alt="Trainee Signature" class="sign-image" width="200px">
+                        <img src="media/{{ tr.signature }}" alt="Trainee Signature" class="sign-image" width="200px">
                     </td>
                     <td>
                         <img src="media/signature.jpeg" alt="Founder Signature" class="sign-image" width="200px">

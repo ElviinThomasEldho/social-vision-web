@@ -89,9 +89,13 @@ def impact(request):
 def gallery(request):
 
     events = Event.objects.all()
+    trainees = trainee.getTrainees()
+    changemakers = changemaker.getChangeMakers()
 
     context = {
         'events' : events,
+        'trainees' : trainees,
+        'changemakers' : changemakers,
     }
 
     return render(request, 'main/gallery.html', context)
@@ -193,6 +197,7 @@ def profile(request):
 
     return render(request, 'main/profile.html', context)
 
+@allowed_users(allowed_roles=['changemaker'])
 def finance(request):
     user = request.user
 

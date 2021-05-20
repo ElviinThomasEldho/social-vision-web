@@ -54,11 +54,13 @@ def link_callback(uri, rel):
 def profile(request):
     user = request.user
 
-    cd = Trainee.objects.get(user=user)
+    tr = Trainee.objects.get(user=user)
     courses = Course.objects.all()
-    enrolled = cd.course.all()
+    enrolled = tr.course.all()
     courses = set(courses).difference(enrolled)
-    if (datetime.date.today() - cd.validUpto.date()) > datetime.timedelta(seconds=0):
+    currentCourse = Course.objects.get(id=tr.currentCourse)
+
+    if (datetime.date.today() - tr.validUpto.date()) > datetime.timedelta(seconds=0):
         canEnroll = True
     else:
         canEnroll = False
@@ -68,7 +70,8 @@ def profile(request):
         'courses':courses,
         'enrolled':enrolled,
         'canEnroll':canEnroll,
-        'cd':cd,
+        'currentCourse':currentCourse,
+        'tr':tr,
     }
 
     return render(request, 'trainee/profile.html', context)
@@ -97,17 +100,17 @@ def register(request):
 def edit(request):
     user = request.user
 
-    cd = Trainee.objects.get(user=user)
-    form = TraineeForm(instance=cd)
+    tr = Trainee.objects.get(user=user)
+    form = TraineeForm(instance=tr)
 
     if request.method == 'POST':
-        form = TraineeForm(request.POST, request.FILES, instance=cd)
+        form = TraineeForm(request.POST, request.FILES, instance=tr)
         if form.is_valid():
             form.save()
             return redirect('home')
 
     context = {
-        'cd': cd,
+        'tr': tr,
         'form': form,
     }
 
@@ -118,11 +121,11 @@ def edit(request):
 def printForm(request):
 
     user = request.user
-    cd = Trainee.objects.get(user=user)
-    form = TraineeForm(instance=cd)
+    tr = Trainee.objects.get(user=user)
+    form = TraineeForm(instance=tr)
 
     context = {
-        'cd': cd,
+        'tr': tr,
     }
 
     template_path = 'trainee/printForm.html'
@@ -141,11 +144,11 @@ def printForm(request):
 def printID(request):
 
     user = request.user
-    cd = Trainee.objects.get(user=user)
-    course = Course.objects.get(id=cd.currentCourse).name
+    tr = Trainee.objects.get(user=user)
+    course = Course.objects.get(id=tr.currentCourse).name
 
     context = {
-        'cd': cd,
+        'tr': tr,
         'course': course,
     }
 

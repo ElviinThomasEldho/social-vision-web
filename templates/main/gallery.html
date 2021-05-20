@@ -10,24 +10,46 @@
   <h1 class="hero-heading">Gallery</h1>
 </section>
 
-    {% for event in events %}
-    <section>
-        <h2 class="section-heading">{{ event.name }}</h2>
-      <div class="event-grid center">
-        <img src="{{ event.image1.url }}" alt="Event Photo 1" class="event-photo">
-        <img src="{{ event.image2.url }}" alt="Event Photo 2" class="event-photo">
-        <img src="{{ event.image3.url }}" alt="Event Photo 3" class="event-photo">
-        <img src="{{ event.image4.url }}" alt="Event Photo 4" class="event-photo">
-        <img src="{{ event.image5.url }}" alt="Event Photo 5" class="event-photo">
-        <img src="{{ event.image6.url }}" alt="Event Photo 6" class="event-photo">
-        <img src="{{ event.image7.url }}" alt="Event Photo 7" class="event-photo">
-        <img src="{{ event.image8.url }}" alt="Event Photo 8" class="event-photo">
-        <img src="{{ event.image9.url }}" alt="Event Photo 9" class="event-photo">
-      </div>
-    </section>
+{% for event in events %}
+<section>
+  <h2 class="section-heading">{{ event.name }}</h2>
+  <div class="event-grid center">
+    <img src="{{ event.image1.url }}" alt="Event Photo 1" class="event-photo">
+    <img src="{{ event.image2.url }}" alt="Event Photo 2" class="event-photo">
+    <img src="{{ event.image3.url }}" alt="Event Photo 3" class="event-photo">
+    <img src="{{ event.image4.url }}" alt="Event Photo 4" class="event-photo">
+    <img src="{{ event.image5.url }}" alt="Event Photo 5" class="event-photo">
+    <img src="{{ event.image6.url }}" alt="Event Photo 6" class="event-photo">
+    <img src="{{ event.image7.url }}" alt="Event Photo 7" class="event-photo">
+    <img src="{{ event.image8.url }}" alt="Event Photo 8" class="event-photo">
+    <img src="{{ event.image9.url }}" alt="Event Photo 9" class="event-photo">
+  </div>
+</section>
+{% endfor %}
+
+<hr class="hr-dark">
+
+<section>
+  <h2 class="section-heading">Trainees</h2>
+  <hr class="hr-short">
+  <div class="row">
+    {% for trainee in trainees %}
+    <img src="{{ trainee.profilePicture.url }}" alt="Trainee Picture" class="trainee-pic">
     {% endfor %}
   </div>
+</section>
 
+<hr class="hr-dark">
+
+<section>
+  <h2 class="section-heading">Change Makers</h2>
+  <hr class="hr-short">
+  <div class="row">
+    {% for changemaker in changemakers %}
+    <img src="{{ changemaker.profilePicture.url }}" alt="Change Maker Picture" class="trainee-pic">
+    {% endfor %}
+  </div>
+</section>
 
 {% include 'main/contact.html' %}
 {% endblock %}

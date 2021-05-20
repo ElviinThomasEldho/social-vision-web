@@ -135,4 +135,4 @@ class Trainee(models.Model):
     course = models.ManyToManyField(Course)
 
     def __str__(self):
-        return (self.uniqueID + " | " + self.firstName + ' ' + self.lastName + ' | ' + str(self.validUpto))
+        return (self.uniqueID + " | " + self.firstName + ' ' + self.lastName + ' | ' + str(self.validUpto.date()))

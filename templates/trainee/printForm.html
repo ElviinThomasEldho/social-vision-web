@@ -88,14 +88,14 @@
         <tbody>
             <tr>
                 <td>
-                    <img src="media/{{ cd.profilePicture }}" alt="Profile Picture" class="profile-picture"
+                    <img src="media/{{ tr.profilePicture }}" alt="Profile Picture" class="profile-picture"
                         height="300px">
                 </td>
                 <td>
                     <h2>Trainee Form</h2>
-                    <h3>{{ cd.uniqueID }}</h3>
-                    <h3>{{ cd.dateCreated }}</h3>
-                    <h4>Purpose : {{ cd.purpose }}</h4>
+                    <h3>{{ tr.uniqueID }}</h3>
+                    <h3>{{ tr.dateCreated }}</h3>
+                    <h4>Purpose : {{ tr.purpose }}</h4>
                 </td>
             </tr>
         </tbody>
@@ -108,40 +108,40 @@
         <tbody>
             <tr>
                 <td class="title">First Name</td>
-                <td class="text">{{ cd.firstName }}</td>
+                <td class="text">{{ tr.firstName }}</td>
                 <td class="title">Date of Birth</td>
-                <td class="text">{{ cd.dateOfBirth }}</td>
+                <td class="text">{{ tr.dateOfBirth }}</td>
             </tr>
             <tr>
                 <td class="title">Last Name</td>
-                <td class="text">{{ cd.lastName }}</td>
+                <td class="text">{{ tr.lastName }}</td>
                 <td class="title">Age</td>
-                <td class="text">{{ cd.age }}</td>
+                <td class="text">{{ tr.age }}</td>
             </tr>
             <tr>
                 <td class="title">Father's Name</td>
-                <td class="text">{{ cd.fatherName }}</td>
+                <td class="text">{{ tr.fatherName }}</td>
                 <td class="title">Occupation</td>
-                <td class="text">{{ cd.occupation }}</td>
+                <td class="text">{{ tr.occupation }}</td>
             </tr>
             <tr>
                 <td class="title">Mother's Name</td>
-                <td class="text">{{ cd.motherName }}</td>
+                <td class="text">{{ tr.motherName }}</td>
                 <td class="title">Education</td>
-                <td class="text">{{ cd.education }}</td>
+                <td class="text">{{ tr.education }}</td>
             </tr>
             <tr></tr>
             <tr>
                 <td class="title">Gender</td>
-                <td class="text">{{ cd.gender }}</td>
+                <td class="text">{{ tr.gender }}</td>
                 <td class="title">Category</td>
-                <td class="text">{{ cd.category }}</td>
+                <td class="text">{{ tr.category }}</td>
             </tr>
             <tr>
                 <td class="title">Martial Status</td>
-                <td class="text">{{ cd.martialStatus }}</td>
+                <td class="text">{{ tr.martialStatus }}</td>
                 <td class="title">Religion</td>
-                <td class="text">{{ cd.religion }}</td>
+                <td class="text">{{ tr.religion }}</td>
             </tr>
         </tbody>
     </table>
@@ -153,13 +153,13 @@
         <tbody>
             <tr>
                 <td class="title">Contact Number</td>
-                <td class="text">{{ cd.mobileNumber }}</td>
+                <td class="text">{{ tr.mobileNumber }}</td>
                 <td class="title">Email Address</td>
-                <td class="text">{{ cd.emailID }}</td>
+                <td class="text">{{ tr.emailID }}</td>
             </tr>
             <tr>
                 <td class="title">Emergency Contact Number</td>
-                <td class="text">{{ cd.emergencyContact }}</td>
+                <td class="text">{{ tr.emergencyContact }}</td>
             </tr>
         </tbody>
     </table>
@@ -170,21 +170,21 @@
         <tbody>
             <tr>
                 <td class="title">Address</td>
-                <td class="text">{{ cd.address }}</td>
+                <td class="text">{{ tr.address }}</td>
                 <td class="title">Locality</td>
-                <td class="text">{{ cd.locality }}</td>
+                <td class="text">{{ tr.locality }}</td>
             </tr>
             <tr>
                 <td class="title">District</td>
-                <td class="text">{{ cd.district }}</td>
+                <td class="text">{{ tr.district }}</td>
                 <td class="title">State</td>
-                <td class="text">{{ cd.state }}</td>
+                <td class="text">{{ tr.state }}</td>
             </tr>
             <tr>
                 <td class="title">Pincode</td>
-                <td class="text">{{ cd.pincode }}</td>
+                <td class="text">{{ tr.pincode }}</td>
                 <td class="title">Area</td>
-                <td class="text">{{ cd.area }}</td>
+                <td class="text">{{ tr.area }}</td>
             </tr>
         </tbody>
     </table>
@@ -199,7 +199,7 @@
             </tr>
             <tr>
                 <td>
-                    <img src="media/{{ cd.signature }}" alt="Trainee Signature" class="sign-image" width="200px">
+                    <img src="media/{{ tr.signature }}" alt="Trainee Signature" class="sign-image" width="200px">
                 </td>
                 <td><img src="media/signature.jpeg" alt="Founder Signature" class="sign-image" width="200px">
 
