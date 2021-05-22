@@ -9,7 +9,7 @@ class DateInput(forms.DateInput):
 class TraineeForm(ModelForm):
     class Meta:
         model = Trainee
-        exclude = ['uniqueID','dateCreated','status', 'courses', 'validUpto','currentCourse']
+        exclude = ['uniqueID','dateCreated','status', 'course', 'validUpto','currentCourse']
 
         widgets = {
             'user' : forms.HiddenInput(),

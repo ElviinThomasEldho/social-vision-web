@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from datetime import date
 # Create your models here.
 
+
 class Course(models.Model):
 
     name = models.CharField(max_length=255, null=True)
@@ -11,6 +12,7 @@ class Course(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Trainee(models.Model):
 
@@ -74,22 +76,23 @@ class Trainee(models.Model):
         ('Passport', 'Passport'),
         ('Driving License', 'Driving License'),
     )
-    
+
     BLOOD_GROUP = (
-        ('A+','A+'),
-        ('A-','A-'),
-        ('B+','B+'),
-        ('B-','B-'),
-        ('O+','O+'),
-        ('O-','O-'),
-        ('AB+','AB+'),
-        ('AB-','AB-'),
+        ('A+', 'A+'),
+        ('A-', 'A-'),
+        ('B+', 'B+'),
+        ('B-', 'B-'),
+        ('O+', 'O+'),
+        ('O-', 'O-'),
+        ('AB+', 'AB+'),
+        ('AB-', 'AB-'),
     )
 
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
-    uniqueID = models.CharField('Unique ID', primary_key=True, default=uuid.uuid4().hex[:5].upper(), max_length=50, editable=False)
-    profilePicture = models.ImageField('Profile Picture',null=True)
+    uniqueID = models.CharField('Unique ID', primary_key=True, default=uuid.uuid4(
+    ).hex[:5].upper(), max_length=50, editable=False)
+    profilePicture = models.ImageField('Profile Picture', null=True)
     firstName = models.CharField('First Name', max_length=255, null=True)
     lastName = models.CharField('Last Name', max_length=255, null=True)
     fatherName = models.CharField("Father's Name", max_length=255, null=True)
@@ -97,19 +100,27 @@ class Trainee(models.Model):
 
     dateOfBirth = models.DateField("Date of Birth", null=True)
     age = models.IntegerField("Age of Trainee", null=True)
-    bloodGroup = models.CharField('Blood Group', max_length=255, choices=BLOOD_GROUP, null=True)
+    bloodGroup = models.CharField(
+        'Blood Group', max_length=255, choices=BLOOD_GROUP, null=True)
 
-    martialStatus = models.CharField('Martial Status', max_length=255, choices=MARTIAL_STATUS, null=True)
-    category = models.CharField('Category', max_length=255, choices=CATEGORY, null=True)
-    gender = models.CharField('Gender', max_length=255,choices=GENDER, null=True)
-    religion = models.CharField('Religion', max_length=255, choices=RELIGION, null=True)
+    martialStatus = models.CharField(
+        'Martial Status', max_length=255, choices=MARTIAL_STATUS, null=True)
+    category = models.CharField(
+        'Category', max_length=255, choices=CATEGORY, null=True)
+    gender = models.CharField('Gender', max_length=255,
+                              choices=GENDER, null=True)
+    religion = models.CharField(
+        'Religion', max_length=255, choices=RELIGION, null=True)
 
     mobileNumber = models.CharField('Mobile Number', max_length=13, null=True)
     emailID = models.EmailField('Email Address', null=True)
-    emergencyContact = models.CharField('Emergency Contact', max_length=13, null=True)
+    emergencyContact = models.CharField(
+        'Emergency Contact', max_length=13, null=True)
 
-    occupation = models.CharField('Occupation', max_length=255, choices=OCCUPATION, null=True)
-    education = models.CharField('Education', max_length=255, choices=EDUCATION, null=True)
+    occupation = models.CharField(
+        'Occupation', max_length=255, choices=OCCUPATION, null=True)
+    education = models.CharField(
+        'Education', max_length=255, choices=EDUCATION, null=True)
     address = models.CharField('Address', max_length=512, null=True)
     area = models.CharField('Area', max_length=255, null=True)
     locality = models.CharField('Locality', max_length=255, null=True)
@@ -117,11 +128,13 @@ class Trainee(models.Model):
     state = models.CharField('State', max_length=255, null=True)
     pincode = models.CharField('Pincode', max_length=255, null=True)
 
-    documentType = models.CharField('Document Type', max_length=255, choices=DOCUMENT_TYPE, null=True)
-    documentNumber = models.CharField('Document Number', max_length=255, null=True)
-    documentImage = models.ImageField('Document Image',null=True)
+    documentType = models.CharField(
+        'Document Type', max_length=255, choices=DOCUMENT_TYPE, null=True)
+    documentNumber = models.CharField(
+        'Document Number', max_length=255, null=True)
+    documentImage = models.ImageField('Document Image', null=True)
 
-    signature = models.ImageField('Signature',null=True)
+    signature = models.ImageField('Signature', null=True)
 
     dateCreated = models.DateTimeField(null=True, auto_now_add=True)
     validUpto = models.DateTimeField(null=True,  auto_now_add=True)
