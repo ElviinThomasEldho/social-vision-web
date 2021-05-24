@@ -20,6 +20,7 @@
 @media screen and (min-width: 650px) {
   .grid {
     flex-flow: row wrap;
+    justify-content: center;
   }
 }
 
