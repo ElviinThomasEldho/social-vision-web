@@ -1,39 +1,38 @@
 .grid {
-    width: 100%;
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: space-between;
-    align-items: center;
+  max-width: 80%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .impact-card {
-    min-width: 30%;
-    max-width: 30%;
-    /* min-height: 200px; */
+  min-width: 30%;
+  max-width: 30%;
+  /* min-height: 200px; */
 
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
 
-    margin: 20px;
+  margin: 20px;
 }
 
 @media screen and (min-width: 650px) {
-    .grid {
-        flex-flow: row wrap;
-    }
+  .grid {
+    flex-flow: row wrap;
+  }
 }
 
 .card-image {
-    width: 20em;
-    /* max-width:33.33%; */
+  width: 20em;
+  /* max-width:33.33%; */
 }
 
 .help-image {
-    width: 25em;
+  width: 25em;
 }
 
 .contact-text {
-    max-width: 20%;
+  max-width: 20%;
 }
-

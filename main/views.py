@@ -16,6 +16,7 @@ from trainee import views as trainee
 from changemaker import views as changemaker
 from associate import views as associate
 
+
 def home(request):
     if request.method == "POST":
         name = request.POST['name']
@@ -28,13 +29,21 @@ def home(request):
 
         send_mail(subject, message, email, ['contact.socialvision@gmail.com'])
 
+        impacts = Impact.objects.all()
+
         context = {
             'name': name,
+            'impacts': impacts,
         }
     else:
-        context = {}
+        impacts = Impact.objects.all()
+
+        context = {
+            'impacts': impacts,
+        }
 
     return render(request, 'main/home.html', context)
+
 
 def about(request):
     if request.method == "POST":
@@ -56,6 +65,7 @@ def about(request):
 
     return render(request, 'main/about.html')
 
+
 def covid(request):
     if request.method == "POST":
         name = request.POST['name']
@@ -76,15 +86,17 @@ def covid(request):
 
     return render(request, 'main/covid.html')
 
+
 def impact(request):
 
     impacts = Impact.objects.all()
 
     context = {
-        'impacts' : impacts,
+        'impacts': impacts,
     }
 
     return render(request, 'main/impact.html', context)
+
 
 def gallery(request):
 
@@ -93,9 +105,9 @@ def gallery(request):
     changemakers = changemaker.getChangeMakers()
 
     context = {
-        'events' : events,
-        'trainees' : trainees,
-        'changemakers' : changemakers,
+        'events': events,
+        'trainees': trainees,
+        'changemakers': changemakers,
     }
 
     return render(request, 'main/gallery.html', context)
@@ -121,6 +133,7 @@ def donate(request):
 
     return render(request, 'main/donate.html', context)
 
+
 @unauthenticated_user
 def loginUser(request):
     if request.method == 'POST':
@@ -138,9 +151,11 @@ def loginUser(request):
 
     return render(request, 'main/login.html')
 
+
 def logoutUser(request):
     logout(request)
     return redirect('home')
+
 
 @unauthenticated_user
 def registerUser(request):
@@ -165,13 +180,14 @@ def registerUser(request):
 
     return render(request, 'main/register.html', context)
 
+
 def profile(request):
     user = request.user
 
     groups = None
     isChangeMaker = False
     isTrainee = False
-    
+
     if request.user.groups.exists():
         groups = set(group.name for group in request.user.groups.all())
         for group in groups:
@@ -188,14 +204,14 @@ def profile(request):
             else:
                 isTrainee = False
 
-
     context = {
         'user': user,
-        'isChangeMaker' : isChangeMaker,
-        'isTrainee' : isTrainee,
+        'isChangeMaker': isChangeMaker,
+        'isTrainee': isTrainee,
     }
 
     return render(request, 'main/profile.html', context)
+
 
 @allowed_users(allowed_roles=['changemaker'])
 def finance(request):
@@ -214,29 +230,30 @@ def finance(request):
 
     for don in cmDonations:
         cmDonationSum += don.amount
-        
+
     for don in asDonations:
         asDonationSum += don.amount
-        
+
     for don in asExpenses:
         asExpenseSum += don.amount
-        
+
     for don in asFees:
         asFeeSum += don.amount
 
     context = {
         'user': user,
-        'changemakerDonations' : cmDonations,
-        'associateDonations' : asDonations,
-        'associateExpenses' : asExpenses,
-        'associateFees' : asFees,
-        'cmDonationSum' : cmDonationSum,
-        'asDonationSum' : asDonationSum,
-        'asExpenseSum' : asExpenseSum,
-        'asFeeSum' : asFeeSum,
+        'changemakerDonations': cmDonations,
+        'associateDonations': asDonations,
+        'associateExpenses': asExpenses,
+        'associateFees': asFees,
+        'cmDonationSum': cmDonationSum,
+        'asDonationSum': asDonationSum,
+        'asExpenseSum': asExpenseSum,
+        'asFeeSum': asFeeSum,
     }
 
     return render(request, 'main/finance.html', context)
+
 
 @allowed_users(allowed_roles=['admin'])
 def panel(request):
@@ -247,10 +264,10 @@ def panel(request):
     associates = associate.getAssociates()
 
     context = {
-        'users' : users,
-        'trainees' : trainees,
-        'changemakers' : changemakers,
-        'associates' : associates,
+        'users': users,
+        'trainees': trainees,
+        'changemakers': changemakers,
+        'associates': associates,
     }
 
     return render(request, 'main/panel.html', context)
