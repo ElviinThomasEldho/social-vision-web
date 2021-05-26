@@ -12,8 +12,36 @@
     </section>
 
     <section>
-        <h2><img class="icon" src="{% static 'images/icons/heart.svg' %}" alt="" height="40px"> Donate Now </h2>
-        <a href="{% url 'donateForm' %}" class="btn">Donate Now</a>
+        <div class="row">
+            <div class="col center">
+                <h2>Personal Details</h2>
+                <hr class="hr-short">
+                <div class="row">
+                    <div class="col" style="text-align: right;">
+                        <p style="font-weight: bold;">Full Name</p>
+                        <p style="font-weight: bold;">Mobile Number</p>
+                        <p style="font-weight: bold;">Age</p>
+                        <p style="font-weight: bold;">Email Address</p>
+                    </div>
+                    <div class="col" style="text-align: left;">
+                        <p>{{ changemaker.firstName }} {{ changemaker.lastName }}</p>
+                        <p>{{ changemaker.mobileNumber }}</p>
+                        <p>{{ changemaker.age }}</p>
+                        <p>{{ changemaker.emailID }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="col center">
+                    <h2><img class="icon" src="{% static 'images/icons/heart.svg' %}" alt="" height="40px"> Donate Now </h2>
+                    <hr class="hr-short">
+                    <p>Giving is an art of Heart. Join us and let us together wipe the tares of the wounded and less privileged</p>
+                    <a href="{% url 'donateForm' %}" class="btn">Donate Now</a>
+                </div>
+            </div>
+        </div>
+
+
         <hr class="hr-dark">
         <h2><img class="icon" src="{% static 'images/icons/heart.svg' %}" alt="" height="40px"> Donation Tracker </h2>
         <hr class="hr-short">

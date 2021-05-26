@@ -48,7 +48,7 @@
     <li class="item"><a href="{% url 'donate' %}">Change Maker</a></li>
     <li class="item"><a href="{% url 'trainee' %}">Trainee</a></li>
     <li class="item"><a href="{% url 'finance' %}">Finance</a></li>
-    <li class="item"><a href="{% url 'profile' %}">Hi {{ user.username }}</a></li>
+    <li class="item"><a href="{% url 'profile' %}">Hi {{ user.first_name }}</a></li>
     <li class="item"><a href="{% url 'logout' %}">Logout</a></li>
     {% else %}
     <li class="item"><a href="{% url 'about' %}">About Us</a></li>
@@ -69,49 +69,3 @@
     </svg></a></li>
   </ul>
 </nav>
-
-<script>
-  //toggle
-  const toggle = document.querySelector('.toggle');
-  const menu = document.querySelector('.menu');
-
-  function toggleMenu() {
-    if (menu.classList.contains("active")) {
-      menu.classList.remove("active");
-    }
-    else {
-      menu.classList.add("active");
-    }
-  }
-
-  toggle.addEventListener('click',toggleMenu, false);
-
-  //sub menu
-  const items = document.querySelectorAll('.item');
-
-  function toggleItem() {
-    if (this.classList.contains("submenu-active")) {
-      this.classList.remove("submenu-active");
-    }
-    else {
-      this.classList.add("submenu-active");
-    }
-  }
-
-  for (let item of items) {
-    if (item.querySelector('.submenu')) {
-      item.addEventListener('click', toggleItem, false);
-      item.addEventListener('keypress', toggleItem, false)
-    }
-  }
-
-  function closeSubMenu(e) {
-    let isClickInside = menu.contains(e.target)
-
-    if (!isClickInside && menu.querySelector('.submenu-active')) {
-      menu.querySelector('.submenu-active').classList.remove('submenu-active')
-    }
-  }
-
-  document.addEventListener('click', closeSubMenu, false)
-</script>

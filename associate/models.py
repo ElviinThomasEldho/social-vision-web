@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from datetime import date
 # Create your models here.
 
+
 class Associate(models.Model):
 
     PURPOSE = (
@@ -78,8 +79,9 @@ class Associate(models.Model):
 
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
-    uniqueID = models.CharField('Unique ID', primary_key=True, default=uuid.uuid4().hex[:5].upper(), max_length=50, editable=False)
-    profilePicture = models.ImageField(null=True)
+    uniqueID = models.CharField('Unique ID', primary_key=True, default=uuid.uuid4(
+    ).hex[:5].upper(), max_length=50, editable=False)
+    profilePicture = models.ImageField('Profile Picture', null=True)
     firstName = models.CharField('First Name', max_length=255, null=True)
     lastName = models.CharField('Last Name', max_length=255, null=True)
     fatherName = models.CharField("Father's Name", max_length=255, null=True)
@@ -88,17 +90,24 @@ class Associate(models.Model):
     dateOfBirth = models.DateField("Date of Birth", null=True)
     age = models.IntegerField("Age of Candidate", null=True)
 
-    martialStatus = models.CharField('Martial Status', max_length=255, choices=MARTIAL_STATUS, null=True)
-    category = models.CharField('Category', max_length=255, choices=CATEGORY, null=True)
-    gender = models.CharField('Gender', max_length=255,choices=GENDER, null=True)
-    religion = models.CharField('Religion', max_length=255, choices=RELIGION, null=True)
+    martialStatus = models.CharField(
+        'Martial Status', max_length=255, choices=MARTIAL_STATUS, null=True)
+    category = models.CharField(
+        'Category', max_length=255, choices=CATEGORY, null=True)
+    gender = models.CharField('Gender', max_length=255,
+                              choices=GENDER, null=True)
+    religion = models.CharField(
+        'Religion', max_length=255, choices=RELIGION, null=True)
 
     mobileNumber = models.CharField('Mobile Number', max_length=13, null=True)
     emailID = models.EmailField('Email Address', null=True)
-    emergencyContact = models.CharField('Emergency Contact Number', max_length=13, null=True)
+    emergencyContact = models.CharField(
+        'Emergency Contact Number', max_length=13, null=True)
 
-    occupation = models.CharField('Occupation', max_length=255, choices=OCCUPATION, null=True)
-    education = models.CharField('Education', max_length=255, choices=EDUCATION, null=True)
+    occupation = models.CharField(
+        'Occupation', max_length=255, choices=OCCUPATION, null=True)
+    education = models.CharField(
+        'Education', max_length=255, choices=EDUCATION, null=True)
     address = models.CharField('Address', max_length=512, null=True)
     area = models.CharField('Area', max_length=255, null=True)
     locality = models.CharField('Locality', max_length=255, null=True)
@@ -106,15 +115,18 @@ class Associate(models.Model):
     state = models.CharField('State', max_length=255, null=True)
     pincode = models.CharField('Pincode', max_length=255, null=True)
 
-    documentType = models.CharField('Document Type', max_length=255, choices=DOCUMENT_TYPE, null=True)
-    documentNumber = models.CharField('Document Number', max_length=255, null=True)
-    
+    documentType = models.CharField(
+        'Document Type', max_length=255, choices=DOCUMENT_TYPE, null=True)
+    documentNumber = models.CharField(
+        'Document Number', max_length=255, null=True)
+
     signature = models.ImageField(null=True)
 
     dateCreated = models.DateTimeField(null=True, auto_now_add=True)
 
     def __str__(self):
         return (self.uniqueID + " | " + self.firstName + ' ' + self.lastName)
+
 
 class Revenue(models.Model):
 
@@ -139,7 +151,8 @@ class Revenue(models.Model):
 
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
-    uniqueID = models.CharField('Unique ID', primary_key=True, default=uuid.uuid4().hex[:5].upper(), max_length=50, editable=False)
+    uniqueID = models.CharField('Unique ID', primary_key=True, default=uuid.uuid4(
+    ).hex[:5].upper(), max_length=50, editable=False)
     firstName = models.CharField('First Name', max_length=255, null=True)
     lastName = models.CharField('Last Name', max_length=255, null=True)
 
@@ -153,31 +166,34 @@ class Revenue(models.Model):
     state = models.CharField('State', max_length=255, null=True)
     pincode = models.CharField('Pincode', max_length=255, null=True)
 
-    mode = models.CharField('Mode of Payment', max_length=255, choices=MODE, null=True)
+    mode = models.CharField(
+        'Mode of Payment', max_length=255, choices=MODE, null=True)
     amount = models.IntegerField('Amount', null=True)
     PANNo = models.CharField('PAN Number', max_length=15, null=True)
     AadhaarNo = models.CharField('Aadhaar Number', max_length=15, null=True)
 
-    purpose = models.CharField('Purpose', max_length=255, choices=PURPOSE, null=True)
+    purpose = models.CharField(
+        'Purpose', max_length=255, choices=PURPOSE, null=True)
 
-    receipt1 = models.ImageField('Receipt Photograph 1',null=True)
-    receipt2 = models.ImageField('Receipt Photograph 2' ,null=True, blank=True)
+    receipt1 = models.ImageField('Receipt Photograph 1', null=True)
+    receipt2 = models.ImageField('Receipt Photograph 2', null=True, blank=True)
 
     dateCreated = models.DateTimeField(null=True, auto_now_add=True)
 
     def __str__(self):
         return (self.uniqueID + " | " + self.firstName + ' ' + self.lastName)
 
+
 class Service(models.Model):
 
     SERVICE = (
-        ('Education','Education'),
-        ('Computer','Computer'),
-        ('Tailoring','Tailoring'),
-        ('Reuse Bank','Reuse Bank'),
-        ('Online Service','Online Service'),
-        ('Scrap','Scrap'),
-        ('Other','Other'),
+        ('Education', 'Education'),
+        ('Computer', 'Computer'),
+        ('Tailoring', 'Tailoring'),
+        ('Reuse Bank', 'Reuse Bank'),
+        ('Online Service', 'Online Service'),
+        ('Scrap', 'Scrap'),
+        ('Other', 'Other'),
     )
 
     PURPOSE = (
@@ -199,11 +215,13 @@ class Service(models.Model):
         ('Phone Pe', 'Phone Pe'),
     )
 
-    service = models.CharField('Service', max_length=255, choices=SERVICE, null=True)
+    service = models.CharField(
+        'Service', max_length=255, choices=SERVICE, null=True)
 
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
-    uniqueID = models.CharField('Unique ID', primary_key=True, default=uuid.uuid4().hex[:5].upper(), max_length=50, editable=False)
+    uniqueID = models.CharField('Unique ID', primary_key=True, default=uuid.uuid4(
+    ).hex[:5].upper(), max_length=50, editable=False)
     firstName = models.CharField('First Name', max_length=255, null=True)
     lastName = models.CharField('Last Name', max_length=255, null=True)
 
@@ -217,18 +235,20 @@ class Service(models.Model):
     state = models.CharField('State', max_length=255, null=True)
     pincode = models.CharField('Pincode', max_length=255, null=True)
 
-    mode = models.CharField('Mode of Payment', max_length=255, choices=MODE, null=True)
+    mode = models.CharField(
+        'Mode of Payment', max_length=255, choices=MODE, null=True)
     amount = models.IntegerField('Amount', null=True)
     PANNo = models.CharField('PAN Number', max_length=15, null=True)
     AadhaarNo = models.CharField('Aadhaar Number', max_length=15, null=True)
 
-    receipt1 = models.ImageField('Receipt Photograph 1',null=True)
-    receipt2 = models.ImageField('Receipt Photograph 2' ,null=True, blank=True)
+    receipt1 = models.ImageField('Receipt Photograph 1', null=True)
+    receipt2 = models.ImageField('Receipt Photograph 2', null=True, blank=True)
 
     dateCreated = models.DateTimeField(null=True, auto_now_add=True)
 
     def __str__(self):
         return (self.uniqueID + " | " + self.firstName + ' ' + self.lastName)
+
 
 class Project(models.Model):
 
@@ -236,6 +256,7 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Expense(models.Model):
 
@@ -264,20 +285,23 @@ class Expense(models.Model):
 
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
-    uniqueID = models.CharField('Unique ID', primary_key=True, default=uuid.uuid4().hex[:5].upper(), max_length=50, editable=False)
+    uniqueID = models.CharField('Unique ID', primary_key=True, default=uuid.uuid4(
+    ).hex[:5].upper(), max_length=50, editable=False)
     payeeName = models.CharField('Payee Name', max_length=255, null=True)
     mobileNumber = models.CharField('Mobile Number', max_length=13, null=True)
 
-    mode = models.CharField('Mode of Payment', max_length=255, choices=MODE, null=True)
+    mode = models.CharField(
+        'Mode of Payment', max_length=255, choices=MODE, null=True)
     amount = models.IntegerField('Amount', null=True)
     PANNo = models.CharField('PAN Number', max_length=15, null=True)
     AadhaarNo = models.CharField('Aadhaar Number', max_length=15, null=True)
 
     project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True)
-    budgetHead = models.CharField('Purpose', max_length=255, choices=BUDGET_HEAD, null=True)
+    budgetHead = models.CharField(
+        'Purpose', max_length=255, choices=BUDGET_HEAD, null=True)
 
-    receipt1 = models.ImageField('Receipt Photograph 1',null=True)
-    receipt2 = models.ImageField('Receipt Photograph 2' ,null=True, blank=True)
+    receipt1 = models.ImageField('Receipt Photograph 1', null=True)
+    receipt2 = models.ImageField('Receipt Photograph 2', null=True, blank=True)
 
     dateCreated = models.DateTimeField(null=True, auto_now_add=True)
 

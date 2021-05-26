@@ -18,6 +18,7 @@ from django.contrib.staticfiles import finders
 from .decorators import *
 from django.contrib.auth.models import Group
 
+
 def link_callback(uri, rel):
     result = finders.find(uri)
     if result:
@@ -40,10 +41,11 @@ def link_callback(uri, rel):
 
     # make sure that file exists
     if not os.path.isfile(path):
-            raise Exception(
-                'media URI must start with %s or %s' % (sUrl, mUrl)
-            )
+        raise Exception(
+            'media URI must start with %s or %s' % (sUrl, mUrl)
+        )
     return path
+
 
 @authenticated_user
 def register(request):
@@ -53,8 +55,20 @@ def register(request):
     if request.method == 'POST':
         form = ChangeMakerForm(request.POST, request.FILES)
         if form.is_valid():
-            candidate = form.save()
-            add_group = Group.objects.get(name='changemaker') 
+            form.save()
+
+            changemaker = ChangeMaker.objects.get(user=request.user)
+            changemaker.firstName = user.first_name
+            changemaker.lastName = user.last_name
+            changemaker.emailID = user.email
+
+            today = date.today()
+            changemaker.age = today.year - changemaker.dateOfBirth.year - \
+                ((today.month, today.day) <
+                 (changemaker.dateOfBirth.month, changemaker.dateOfBirth.day))
+            changemaker.save()
+
+            add_group = Group.objects.get(name='changemaker')
             user = form.cleaned_data['user']
             add_group.user_set.add(user)
             return redirect('/change-maker/view/')
@@ -70,17 +84,19 @@ def register(request):
 @allowed_users(allowed_roles=['changemaker'])
 def profile(request):
     user = request.user
+    changemaker = ChangeMaker.objects.get(user=user)
     try:
         donations = user.donation_set.all()
         context = {
-            'user':user,
-            'donations':donations,
+            'user': user,
+            'changemaker': changemaker,
+            'donations': donations,
         }
     except ObjectDoesNotExist as o:
         context = {
-            'user':user,
+            'user': user,
+            'changemaker': changemaker,
         }
-
 
     return render(request, 'changemaker/profile.html', context)
 
@@ -104,6 +120,7 @@ def donationForm(request):
 
     return render(request, 'changemaker/form.html', context)
 
+
 @authenticated_user
 @allowed_users(allowed_roles=['changemaker'])
 def payment(request, id):
@@ -111,11 +128,12 @@ def payment(request, id):
     uniqueID = Donation.objects.get(uniqueID=id).uniqueID
 
     context = {
-        'donation':donation,
-        'id':uniqueID,
+        'donation': donation,
+        'id': uniqueID,
     }
 
-    return render(request, 'changemaker/payment.html',context)
+    return render(request, 'changemaker/payment.html', context)
+
 
 @authenticated_user
 @allowed_users(allowed_roles=['changemaker'])
@@ -126,6 +144,7 @@ def paymentSuccess(request, id):
 
     return redirect('/change-maker/view/')
 
+
 @authenticated_user
 @allowed_users(allowed_roles=['changemaker'])
 def printCertificate(request, id):
@@ -134,7 +153,7 @@ def printCertificate(request, id):
 
     context = {
         'dn': dn,
-        'user':user,
+        'user': user,
     }
 
     template_path = 'changemaker/certificate.html'
@@ -143,10 +162,11 @@ def printCertificate(request, id):
     template = get_template(template_path)
     html = template.render(context)
     pisa_status = pisa.CreatePDF(
-       html, dest=response, link_callback=link_callback)
+        html, dest=response, link_callback=link_callback)
     if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
 
 @authenticated_user
 @allowed_users(allowed_roles=['changemaker'])
@@ -156,7 +176,7 @@ def printReceipt(request, id):
 
     context = {
         'dn': dn,
-        'user':user,
+        'user': user,
     }
 
     template_path = 'changemaker/receipt.html'
@@ -165,14 +185,16 @@ def printReceipt(request, id):
     template = get_template(template_path)
     html = template.render(context)
     pisa_status = pisa.CreatePDF(
-       html, dest=response, link_callback=link_callback)
+        html, dest=response, link_callback=link_callback)
     if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
 
 def getChangeMakers():
     changemakers = ChangeMaker.objects.all()
     return changemakers
+
 
 def getDonation():
     donations = Donation.objects.all()

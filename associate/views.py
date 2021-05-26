@@ -44,22 +44,34 @@ def link_callback(uri, rel):
 
     # make sure that file exists
     if not os.path.isfile(path):
-            raise Exception(
-                'media URI must start with %s or %s' % (sUrl, mUrl)
-            )
+        raise Exception(
+            'media URI must start with %s or %s' % (sUrl, mUrl)
+        )
     return path
+
 
 @authenticated_user
 @allowed_users(allowed_roles=['admin'])
 def register(request):
     user = request.user
-    form = AssociateForm(initial={'user': request.user})
+    form = AssociateForm()
 
     if request.method == 'POST':
         form = AssociateForm(request.POST, request.FILES)
         if form.is_valid():
-            candidate = form.save()
-            add_group = Group.objects.get(name='associate') 
+            form.save()
+            user = form.cleaned_data['user']
+            associate = Associate.objects.get(user=user)
+            associate.firstName = user.first_name
+            associate.lastName = user.last_name
+            associate.emailID = user.email
+
+            today = date.today()
+            associate.age = today.year - associate.dateOfBirth.year - \
+                ((today.month, today.day) <
+                 (associate.dateOfBirth.month, associate.dateOfBirth.day))
+            associate.save()
+            add_group = Group.objects.get(name='associate')
             user = form.cleaned_data['user']
             add_group.user_set.add(user)
             return redirect('/associate/profile/')
@@ -70,6 +82,7 @@ def register(request):
 
     return render(request, 'associate/register.html', context)
 
+
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
 def profile(request):
@@ -77,10 +90,11 @@ def profile(request):
     associate = Associate.objects.get(user=user)
 
     context = {
-        'associate':associate
+        'associate': associate
     }
 
     return render(request, 'associate/profile.html', context)
+
 
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
@@ -89,16 +103,16 @@ def viewExpense(request):
     try:
         expenses = user.expense_set.all()
         context = {
-            'user':user,
-            'expenses':expenses,
+            'user': user,
+            'expenses': expenses,
         }
     except ObjectDoesNotExist as o:
         context = {
-            'user':user,
+            'user': user,
         }
 
-
     return render(request, 'associate/viewExpense.html', context)
+
 
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
@@ -118,6 +132,7 @@ def addExpense(request):
 
     return render(request, 'associate/addExpense.html', context)
 
+
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
 def printExpense(request):
@@ -125,12 +140,12 @@ def printExpense(request):
     try:
         expense = user.expense_set.all()
         context = {
-            'user':user,
-            'expense':expense,
+            'user': user,
+            'expense': expense,
         }
     except ObjectDoesNotExist as o:
         context = {
-            'user':user,
+            'user': user,
         }
 
     # return render(request, 'benefactor/donateCertif.html', context)
@@ -141,10 +156,11 @@ def printExpense(request):
     template = get_template(template_path)
     html = template.render(context)
     pisa_status = pisa.CreatePDF(
-       html, dest=response, link_callback=link_callback)
+        html, dest=response, link_callback=link_callback)
     if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
 
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
@@ -153,7 +169,7 @@ def printExpReceipt(request, id):
     exp = Expense.objects.get(uniqueID=id)
     context = {
         'exp': exp,
-        'user':user,
+        'user': user,
     }
 
     template_path = 'associate/expReceipt.html'
@@ -162,10 +178,11 @@ def printExpReceipt(request, id):
     template = get_template(template_path)
     html = template.render(context)
     pisa_status = pisa.CreatePDF(
-       html, dest=response, link_callback=link_callback)
+        html, dest=response, link_callback=link_callback)
     if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
 
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
@@ -185,6 +202,7 @@ def addService(request):
 
     return render(request, 'associate/addService.html', context)
 
+
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
 def printServReceipt(request, id):
@@ -193,7 +211,7 @@ def printServReceipt(request, id):
 
     context = {
         'serv': serv,
-        'user':user,
+        'user': user,
     }
 
     template_path = 'associate/servReceipt.html'
@@ -202,10 +220,11 @@ def printServReceipt(request, id):
     template = get_template(template_path)
     html = template.render(context)
     pisa_status = pisa.CreatePDF(
-       html, dest=response, link_callback=link_callback)
+        html, dest=response, link_callback=link_callback)
     if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
 
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
@@ -223,12 +242,13 @@ def viewRevenue(request):
         services = "false"
 
     context = {
-        'user':user,
-        'revenue':revenue,
-        'services':services,
+        'user': user,
+        'revenue': revenue,
+        'services': services,
     }
 
     return render(request, 'associate/viewRevenue.html', context)
+
 
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
@@ -248,6 +268,7 @@ def addRevenue(request):
 
     return render(request, 'associate/addRevenue.html', context)
 
+
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
 def printRevenue(request):
@@ -258,7 +279,7 @@ def printRevenue(request):
     context = {
         'rev_list': rev_list,
         'serv_list': serv_list,
-        'user':user,
+        'user': user,
     }
 
     # return render(request, 'benefactor/donateCertif.html', context)
@@ -269,10 +290,11 @@ def printRevenue(request):
     template = get_template(template_path)
     html = template.render(context)
     pisa_status = pisa.CreatePDF(
-       html, dest=response, link_callback=link_callback)
+        html, dest=response, link_callback=link_callback)
     if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
 
 @authenticated_user
 @allowed_users(allowed_roles=['associate'])
@@ -282,7 +304,7 @@ def printRevReceipt(request, id):
 
     context = {
         'rev': rev,
-        'user':user,
+        'user': user,
     }
 
     template_path = 'associate/revReceipt.html'
@@ -291,9 +313,9 @@ def printRevReceipt(request, id):
     template = get_template(template_path)
     html = template.render(context)
     pisa_status = pisa.CreatePDF(
-       html, dest=response, link_callback=link_callback)
+        html, dest=response, link_callback=link_callback)
     if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
 
 
@@ -301,15 +323,17 @@ def getAssociates():
     associates = Associate.objects.all()
     return associates
 
+
 def getDonations():
     donations = Revenue.objects.all()
     return donations
+
 
 def getServiceFees():
     fees = Service.objects.all()
     return fees
 
+
 def getExpenses():
     donations = Expense.objects.all()
     return donations
-

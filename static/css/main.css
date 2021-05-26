@@ -94,6 +94,7 @@ section {
 
   /* max-width: 250px; */
   text-align: center;
+  text-transform: uppercase;
 
   font-weight: 600;
 
@@ -106,7 +107,6 @@ section {
 
   cursor: pointer;
   transition: all 0.3s ease 0s;
-  display: flex;
 }
 
 .btn:hover {
@@ -295,6 +295,10 @@ nav a {
      display: block;
     }
 
+    .item.button.secondary {
+      border-bottom: none;
+     }
+
     .toggle {
       flex: 1;
       text-align: right;
@@ -372,6 +376,7 @@ header {
 .hero-heading {
   font-size: 90px;
   font-weight: bold;
+  text-align: center;
   margin-bottom: 0px;
   text-shadow: black 0px 10px 12px;
 }
@@ -434,6 +439,11 @@ textarea {
   padding: 20px;
 }
 
+.attrib a {
+  color: var(--red);
+  font-weight: bold;
+}
+
 .hr-dark {
   color: var(--grey);
   width: 100%;
@@ -444,6 +454,7 @@ textarea {
   color: var(--grey);
   width: 15%;
   margin-block: 30px;
+  margin-inline: auto;
 }
 
 .hr-short-light {
@@ -474,7 +485,7 @@ th {
 
 .title {
   font-weight: bold;
-  text-align: center;
+  text-align: right;
   margin: 8px;
 }
 
