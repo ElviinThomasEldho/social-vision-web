@@ -2,163 +2,163 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/tainee.css' %}">
+<link rel="stylesheet" href="{% static 'css/tainee.css' %}">
 {% endblock %}
 
 {% block content %}
-    <section class="hero">
-        <h1 class="hero-heading">Trainee</h1>
-    </section>
+<section class="hero">
+    <h1 class="hero-heading">Trainee</h1>
+</section>
 
-    <section>
-        <h2 class="section-heading">Trainee Details</h2>
-        {% if not tr.status %}
-        <a href="{% url 'editTrainee' %}" class="btn">Edit Details</a>
-        {% endif %}
-        <hr class="hr-short">
-        <br>
-        {% if tr %}
-        <h3><img class="icon" src="{% static 'images/icons/user.svg' %}" alt="" height="20px"> Personal Details</h3>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="title">First Name</td>
-                    <td class="text">{{ tr.firstName }}</td>
-                    <td class="title">Date of Birth</td>
-                    <td class="text">{{ tr.dateOfBirth }}</td>
-                </tr>
-                <tr>
-                    <td class="title">Last Name</td>
-                    <td class="text">{{ tr.lastName }}</td>
-                    <td class="title">Age</td>
-                    <td class="text">{{ tr.Age }}</td>
-                </tr>
-                <tr>
-                    <td class="title">Father's Name</td>
-                    <td class="text">{{ tr.fatherName }}</td>
-                    <td class="title">Occupation</td>
-                    <td class="text">{{ tr.occupation }}</td>
-                </tr>
-                <tr>
-                    <td class="title">Mother's Name</td>
-                    <td class="text">{{ tr.motherName }}</td>
-                    <td class="title">Education</td>
-                    <td class="text">{{ tr.education }}</td>
-                </tr>
-                <tr></tr>
-                <tr>
-                    <td class="title">Gender</td>
-                    <td class="text">{{ tr.gender }}</td>
-                    <td class="title">Category</td>
-                    <td class="text">{{ tr.category }}</td>
-                </tr>
-                <tr>
-                    <td class="title">Martial Status</td>
-                    <td class="text">{{ tr.martialStatus }}</td>
-                    <td class="title">Religion</td>
-                    <td class="text">{{ tr.religion }}</td>
-                </tr>
-            </tbody>
-        </table>
+<section>
+    <h2 class="section-heading">Trainee Details</h2>
+    {% if not tr.status %}
+    <a href="{% url 'editTrainee' %}" class="btn">Edit Details</a>
+    {% endif %}
+    <hr class="hr-short">
+    <br>
+    {% if tr %}
+    <h3><img class="icon" src="{% static 'images/icons/user.svg' %}" alt="" height="20px"> Personal Details</h3>
+    <table>
+        <tbody>
+            <tr>
+                <td class="title">First Name</td>
+                <td class="text">{{ tr.firstName }}</td>
+                <td class="title">Date of Birth</td>
+                <td class="text">{{ tr.dateOfBirth }}</td>
+            </tr>
+            <tr>
+                <td class="title">Last Name</td>
+                <td class="text">{{ tr.lastName }}</td>
+                <td class="title">Age</td>
+                <td class="text">{{ tr.Age }}</td>
+            </tr>
+            <tr>
+                <td class="title">Father's Name</td>
+                <td class="text">{{ tr.fatherName }}</td>
+                <td class="title">Occupation</td>
+                <td class="text">{{ tr.occupation }}</td>
+            </tr>
+            <tr>
+                <td class="title">Mother's Name</td>
+                <td class="text">{{ tr.motherName }}</td>
+                <td class="title">Education</td>
+                <td class="text">{{ tr.education }}</td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td class="title">Gender</td>
+                <td class="text">{{ tr.gender }}</td>
+                <td class="title">Category</td>
+                <td class="text">{{ tr.category }}</td>
+            </tr>
+            <tr>
+                <td class="title">Martial Status</td>
+                <td class="text">{{ tr.martialStatus }}</td>
+                <td class="title">Religion</td>
+                <td class="text">{{ tr.religion }}</td>
+            </tr>
+        </tbody>
+    </table>
 
-        <hr class="hr-short">
-        <h3><img class="icon" src="{% static 'images/icons/phone-call.svg' %}" alt="" height="20px"> Contact Details</h3>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="title">Contact Number</td>
-                    <td class="text">{{ tr.mobileNumber }}</td>
-                    <td class="title">Email Address</td>
-                    <td class="text">{{ tr.emailID }}</td>
-                </tr>
-                <tr>
-                    <td class="title">Emergency Contact Number</td>
-                    <td class="text">{{ tr.emergencyContact }}</td>
-                </tr>
-            </tbody>
-        </table>
+    <hr class="hr-short">
+    <h3><img class="icon" src="{% static 'images/icons/phone-call.svg' %}" alt="" height="20px"> Contact Details</h3>
+    <table>
+        <tbody>
+            <tr>
+                <td class="title">Contact Number</td>
+                <td class="text">{{ tr.mobileNumber }}</td>
+                <td class="title">Email Address</td>
+                <td class="text">{{ tr.emailID }}</td>
+            </tr>
+            <tr>
+                <td class="title">Emergency Contact Number</td>
+                <td class="text">{{ tr.emergencyContact }}</td>
+            </tr>
+        </tbody>
+    </table>
 
-        <hr class="hr-short">
-        <h3><img class="icon" src="{% static 'images/icons/home.svg' %}" alt="" height="20px"> Residence Details</h3>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="title">Address</td>
-                    <td class="text">{{ tr.address }}</td>
-                    <td class="title">Locality</td>
-                    <td class="text">{{ tr.locality }}</td>
-                </tr>
-                <tr>
-                    <td class="title">District</td>
-                    <td class="text">{{ tr.district }}</td>
-                    <td class="title">State</td>
-                    <td class="text">{{ tr.state }}</td>
-                </tr>
-                <tr>
-                    <td class="title">Pincode</td>
-                    <td class="text">{{ tr.pincode }}</td>
-                    <td class="title">Area</td>
-                    <td class="text">{{ tr.area }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <br>
+    <hr class="hr-short">
+    <h3><img class="icon" src="{% static 'images/icons/home.svg' %}" alt="" height="20px"> Residence Details</h3>
+    <table>
+        <tbody>
+            <tr>
+                <td class="title">Address</td>
+                <td class="text">{{ tr.address }}</td>
+                <td class="title">Locality</td>
+                <td class="text">{{ tr.locality }}</td>
+            </tr>
+            <tr>
+                <td class="title">District</td>
+                <td class="text">{{ tr.district }}</td>
+                <td class="title">State</td>
+                <td class="text">{{ tr.state }}</td>
+            </tr>
+            <tr>
+                <td class="title">Pincode</td>
+                <td class="text">{{ tr.pincode }}</td>
+                <td class="title">Area</td>
+                <td class="text">{{ tr.area }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
 
 
-        {% else %}
-        <p class="section-text">Register as Trainee to view Trainee Details</p>
-        <a href="{% url 'regTrainee' %}" class="btn btn-outline-red">Register as Trainee</a>
-        {% endif %}
+    {% else %}
+    <p class="section-text">Register as Trainee to view Trainee Details</p>
+    <a href="{% url 'regTrainee' %}" class="btn btn-outline-red">Register as Trainee</a>
+    {% endif %}
 
-        <hr class="hr-dark">
-        <h2 class="section-heading">Courses</h2>
-        <hr class="hr-short">
-        <p>You can apply for new courses only after current course ends</p>
-        <div class="courses">
-            <div style="text-align: center;">
-                <h3>Ongoing Course</h3>
+    <hr class="hr-dark">
+    <h2 class="section-heading">Courses</h2>
+    <hr class="hr-short">
+    <div class="courses">
+        <div style="text-align: center;">
+            <h3>Enrolled Courses</h3>
+            {% if enrollments %}
+            <div class="enrolled-courses">
+                {% for enrollment in enrollments %}
                 <div class="course-card">
-                    <h4 class="card-title">{{ currentCourse.name }}</h4>
+                    <h4 class="card-title">{{ enrollment.course.name }}</h4>
+                    <p class="card-text"><strong>Start Date</strong><br> {{ enrollment.startDate }}</p>
+                    <p class="card-text"><strong>End Date</strong><br> {{ enrollment.endDate }}</p>
                 </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>You have not enrolled for any course</p>
 
-                <h3>Completed Courses</h3>
-                <div class="enrolled-courses">
-                    {% for course in enrolled %}
-                    <div class="course-card">
-                        <h4 class="card-title">{{ course.name }}</h4>
-                    </div>
-                    {% endfor %}    
-                </div>    
-
-            </div>         
-            <div style="text-align: center;">
-                <h3>Available Courses</h3>
-                <div class="available-courses">   
-                    {% for course in courses %}
-                    <div class="course-card">
-                        <h4 class="card-title">{{ course.name }} | {{ course.duration }} Months</h4>
-                        {% if canEnroll %}
-                        <a class="enroll-btn" href="{% url 'enroll' course.id %}">Enroll</a>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
+            {% endif %}
+        </div>
+        <div style="text-align: center;">
+            <h3>Available Courses</h3>
+            <div class="available-courses">
+                {% for course in courses %}
+                <div class="course-card">
+                    <h4 class="card-title">{{ course.name }} | {{ course.duration }} Months</h4>
+                    <a class="enroll-btn" href="{% url 'enroll' course.id %}">Enroll</a>
                 </div>
+                {% endfor %}
             </div>
         </div>
+    </div>
 
-        <hr class="hr-dark">
-        
-        <h2 class="section-heading">Trainee Documents</h2>
-        <hr class="hr-short">
+    <hr class="hr-dark">
 
-        <a class="btn btn-success" href="{% url 'printTrainee' %}"><img class="icon" src="{% static 'images/icons/google-forms.svg' %}" alt="" height="20px">  Download PDF</a>
+    <h2 class="section-heading">Trainee Documents</h2>
+    <hr class="hr-short">
 
-        {% if tr.status %}
-        <a class="btn btn-success" href="{% url 'printTraineeID' %}"><img class="icon" src="{% static 'images/icons/driver-license.svg' %}" alt="" height="20px"> Download ID Card</a>
-        {% else %}
-        <p>You can download your ID Card after your account has been activated</p>
-        {% endif %}
+    <a class="btn btn-success" href="{% url 'printTrainee' %}"><img class="icon"
+            src="{% static 'images/icons/google-forms.svg' %}" alt="" height="20px"> Download PDF</a>
+
+    {% if tr.status %}
+    <a class="btn btn-success" href="{% url 'printTraineeID' %}"><img class="icon"
+            src="{% static 'images/icons/driver-license.svg' %}" alt="" height="20px"> Download ID Card</a>
+    {% else %}
+    <p>You can download your ID Card after your account has been activated</p>
+    {% endif %}
 
 
-    </section>
+</section>
 {% endblock %}

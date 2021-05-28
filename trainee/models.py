@@ -144,8 +144,15 @@ class Trainee(models.Model):
 
     status = models.BooleanField('Status', null=True, default=False)
 
-    currentCourse = models.IntegerField(null=True)
-    course = models.ManyToManyField(Course)
+    def __str__(self):
+        return (self.uniqueID + " | " + self.firstName + " " + self.lastName + " | " + str(self.validUpto.date()))
+
+
+class Enrollment(models.Model):
+    trainee = models.ForeignKey(Trainee, null=True, on_delete=models.SET_NULL)
+    course = models.ForeignKey(Course, null=True, on_delete=models.SET_NULL)
+    startDate = models.DateField('Start Date', null=True)
+    endDate = models.DateField('End Date', null=True)
 
     def __str__(self):
-        return (self.uniqueID + " | " + self.firstName + ' ' + self.lastName + ' | ' + str(self.validUpto.date()))
+        return (self.trainee.uniqueID + " | " + self.course.name)

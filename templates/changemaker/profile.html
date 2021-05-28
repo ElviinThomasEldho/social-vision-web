@@ -2,97 +2,177 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-    <link rel="stylesheet" href="{% static 'css/donate.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/donate.css' %}">
 {% endblock %}
 
 {% block content %}
-    <section class="hero">
-        <h1 class="hero-heading">My Contributions</h1>
-    </section>
+<section class="hero">
+    <h1 class="hero-heading">My Contributions</h1>
+</section>
 
-    <section>
-        <div class="row">
-            <div class="col center">
-                <h2>Personal Details</h2>
-                <hr class="hr-short">
-                <div class="row">
-                    <div class="col" style="text-align: right;">
-                        <p style="font-weight: bold;">Full Name</p>
-                        <p style="font-weight: bold;">Mobile Number</p>
-                        <p style="font-weight: bold;">Age</p>
-                        <p style="font-weight: bold;">Email Address</p>
-                    </div>
-                    <div class="col" style="text-align: left;">
-                        <p>{{ changemaker.firstName }} {{ changemaker.lastName }}</p>
-                        <p>{{ changemaker.mobileNumber }}</p>
-                        <p>{{ changemaker.age }}</p>
-                        <p>{{ changemaker.emailID }}</p>
-                    </div>
+<section>
+    <div class="row">
+        <div class="col center">
+            <h2>Personal Details</h2>
+            <hr class="hr-short">
+            <div class="row">
+                <div class="col">
+                    <p class="title">Full Name</p>
+                </div>
+                <div class="col">
+                    <p>{{ changemaker.firstName }} {{ changemaker.lastName }}</p>
                 </div>
             </div>
-            <div class="col">
-                <div class="col center">
-                    <h2><img class="icon" src="{% static 'images/icons/heart.svg' %}" alt="" height="40px"> Donate Now </h2>
-                    <hr class="hr-short">
-                    <p>Giving is an art of Heart. Join us and let us together wipe the tares of the wounded and less privileged</p>
-                    <a href="{% url 'donateForm' %}" class="btn">Donate Now</a>
+
+            <div class="row">
+                <div class="col">
+                    <p class="title">Mobile Number</p>
+                </div>
+                <div class="col">
+                    <p>{{ changemaker.mobileNumber }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="title">Age</p>
+                </div>
+                <div class="col">
+                    <p>{{ changemaker.age }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="title">Email Address</p>
+                </div>
+                <div class="col">
+                    <p>{{ changemaker.emailID }}</p>
                 </div>
             </div>
         </div>
+        <div class="col center">
+            <h2>Instant
+                Donations </h2>
+            <hr class="hr-short">
+            <p>Giving is an art of Heart. Join us and let us together wipe the tares of the wounded and less
+                privileged</p>
+            <a href="{% url 'donateForm' %}" class="btn">Donate Now</a>
+        </div>
+        <div class="col center">
+            <h2>Monthly Donations</h2>
+            <hr class="hr-short">
+            <p>You can enroll for Monthly Donations. You can pay for future in advance.</p>
+            <a href="{% url 'donateMonthlyForm' %}" class="btn">Enable Monthly Donations</a>
+        </div>
+    </div>
+</section>
+<section>
+    <hr class="hr-dark">
+    <h2><img class="icon" src="{% static 'images/icons/heart.svg' %}" alt="" height="40px"> Instant Donation Tracker
+    </h2>
+    <hr class="hr-short">
+    {% if donations %}
+    <table>
+        <thead>
+            <th>Donation ID</th>
+            <th>Date of Donation</th>
+            <th>Purpose</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Certificate</th>
+            <th>Reciept</th>
+        </thead>
+        <tbody>
+            {% for dn in donations %}
+            <tr>
+                <td>{{ dn.uniqueID }}</td>
+                <td>{{ dn.dateCreated.date }}</td>
+                <td>{{ dn.purpose }}</td>
+                <td>{{ dn.amount }}</td>
+                <td>{{ dn.status }}</td>
+                <td>
+                    <a class="btn btn-outline-red" href="{% url 'printDonCertif' dn.uniqueID %}"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-download" viewBox="0 0 16 16">
+                            <path
+                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                            <path
+                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                        </svg> Download</a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-red" href="{% url 'printDonReceipt' dn.uniqueID %}"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-download" viewBox="0 0 16 16">
+                            <path
+                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                            <path
+                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                        </svg> Download</a>
+                </td>
 
+            </tr>
+            {% endfor %}
 
-        <hr class="hr-dark">
-        <h2><img class="icon" src="{% static 'images/icons/heart.svg' %}" alt="" height="40px"> Donation Tracker </h2>
-        <hr class="hr-short">
-        {% if donations %}
-        <table>
-            <thead>
-                <th>Donation ID</th>
-                <th>Date of Donation</th>
-                <th>Purpose</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Certificate</th>
-                <th>Reciept</th>
-            </thead>
-            <tbody>
-                {% for dn in donations %}
-                <tr>
-                    <td>{{ dn.uniqueID }}</td>
-                    <td>{{ dn.dateCreated }}</td>
-                    <td>{{ dn.purpose }}</td>
-                    <td>{{ dn.amount }}</td>
-                    <td>{{ dn.status }}</td>
-                    <td>
-                        <a class="btn btn-outline-red" href="{% url 'printDonCertif' dn.uniqueID %}"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-download" viewBox="0 0 16 16">
-                                <path
-                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                <path
-                                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                            </svg>  Download</a>
-                    </td>
-                    <td>
-                        <a class="btn btn-outline-red" href="{% url 'printDonReceipt' dn.uniqueID %}"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-download" viewBox="0 0 16 16">
-                                <path
-                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                <path
-                                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                            </svg>  Download</a>
-                    </td>
+        </tbody>
+    </table>
+    {% else %}
+    <p>You have not made any donations to show</p>
+    <a href="{% url 'donateForm' %}" class="btn btn-outline-red">Donate</a>
+    {% endif %}
 
-                </tr>
-                {% endfor %}
+    <h2><img class="icon" src="{% static 'images/icons/heart.svg' %}" alt="" height="40px"> Monthly Donation Tracker
+    </h2>
+    <hr class="hr-short">
+    {% if monthly %}
+    <table>
+        <thead>
+            <th>Donation ID</th>
+            <th>Date of Donation</th>
+            <th>Purpose</th>
+            <th>Month</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Certificate</th>
+            <th>Reciept</th>
+        </thead>
+        <tbody>
+            {% for mn in monthly %}
+            <tr>
+                <td>{{ mn.uniqueID }}</td>
+                <td>{{ mn.dateCreated.date }}</td>
+                <td>{{ mn.purpose }}</td>
+                <td>{{ mn.month }}</td>
+                <td>{{ mn.amount }}</td>
+                <td>{{ mn.status }}</td>
+                <td>
+                    <a class="btn btn-outline-red" href="{% url 'printMonthlyDonCertif' mn.uniqueID %}"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-download" viewBox="0 0 16 16">
+                            <path
+                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                            <path
+                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                        </svg> Download</a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-red" href="{% url 'printMonthlyDonReceipt' mn.uniqueID %}"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-download" viewBox="0 0 16 16">
+                            <path
+                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                            <path
+                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                        </svg> Download</a>
+                </td>
 
-            </tbody>
-        </table>
-        {% else %}
-        <p>You have not made any donations to show</p>
-        <a href="{% url 'donateForm' %}" class="btn">Donate</a>
-        {% endif %}
-    </section>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>You have not made any monthly donations to show</p>
+    <a href="{% url 'donateMonthlyForm' %}" class="btn btn-outline-red">Donate</a>
+    {% endif %}
+</section>
 {% endblock %}

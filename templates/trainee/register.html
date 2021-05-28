@@ -16,46 +16,53 @@
 
         <h2><img class="icon" src="{% static 'images/icons/user.svg' %}" alt="" height="40px"> Personal Information</h2>
 
+        {{form.user}}<br>
         <div class="row">
             <div class="col">
-                {{form.user}}<br>
-                <label>{{form.firstName.label}}</label>
-                {{form.firstName}}<br>
-                <label>{{form.lastName.label}}</label>
-                {{form.lastName}}<br>
-                <label>{{form.age.label}}</label>
-                {{form.age}}<br>
+                <div class="row">
+                    <div class="col title">{{form.fatherName.label}}</div>
+                    <div class="col">{{form.fatherName}}</div>
+                </div>
+                <div class="row">
+                    <div class="col title">{{form.motherName.label}}</div>
+                    <div class="col">{{form.motherName}}</div>
+                </div>
+                <div class="row">
+                    <div class="col title">{{form.dateOfBirth.label}}</div>
+                    <div class="col">{{form.dateOfBirth}}</div>
+                </div>
+                <div class="row">
+                    <div class="col title">{{form.bloodGroup.label}}</div>
+                    <div class="col">{{form.bloodGroup}}</div>
+                </div>
+                <div class="row">
+                    <div class="col title">{{form.gender.label}}</div>
+                    <div class="col">{{form.gender}}</div>
+                </div>
             </div>
             <div class="col">
-                <label>{{form.fatherName.label}}</label>
-                {{form.fatherName}}<br>
-                <label>{{form.motherName.label}}</label>
-                {{form.motherName}}<br>
-                <label>{{form.dateOfBirth.label}}</label>
-                {{form.dateOfBirth}}<br>
+                <div class="row">
+                    <div class="col title">{{form.martialStatus.label}}</div>
+                    <div class="col">{{form.martialStatus}}</div>
+                </div>
+                <div class="row">
+                    <div class="col title">{{form.category.label}}</div>
+                    <div class="col">{{form.category}}</div>
+                </div>
+                <div class="row">
+                    <div class="col title">{{form.religion.label}}</div>
+                    <div class="col">{{form.religion}}</div>
+                </div>
+                <div class="row">
+                    <div class="col title">{{form.occupation.label}}</div>
+                    <div class="col">{{form.occupation}}</div>
+                </div>
+                <div class="row">
+                    <div class="col title">{{form.education.label}}</div>
+                    <div class="col">{{form.education}}</div>
+                </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col">
-                <label>{{form.martialStatus.label}}</label>
-                {{form.martialStatus}}<br>
-                <label>{{form.category.label}}</label>
-                {{form.category}}<br>
-                <label>{{form.gender.label}}</label>
-                {{form.gender}}<br>
-            </div>
-            <div class="col">
-                <label>{{form.religion.label}}</label>
-                {{form.religion}}<br>
-                <label>{{form.occupation.label}}</label>
-                {{form.occupation}}<br>
-                <label>{{form.education.label}}</label>
-                {{form.education}}<br>
-            </div>
-        </div>
-        <label>{{form.bloodGroup.label}}</label>
-        {{form.bloodGroup}}<br>
 
         <hr class="hr-dark">
 
@@ -65,15 +72,13 @@
             <div class="col">
                 <label>{{form.mobileNumber.label}}</label>
                 {{form.mobileNumber}}<br>
-                <label>{{form.emailID.label}}</label>
-                {{form.emailID}}<br>
             </div>
             <div class="col">
                 <label>{{form.emergencyContact.label}}</label>
                 {{form.emergencyContact}}<br>
             </div>
         </div>
-        
+
         <hr class="hr-dark">
 
         <h2><img class="icon" src="{% static 'images/icons/home.svg' %}" alt="" height="40px"> Address</h2>
@@ -96,7 +101,7 @@
                 {{form.pincode}}<br>
             </div>
         </div>
-        
+
         <hr class="hr-dark">
 
         <h2>Images</h2>

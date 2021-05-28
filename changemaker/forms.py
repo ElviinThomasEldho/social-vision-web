@@ -45,3 +45,16 @@ class DonationForm(ModelForm):
             'amount': forms.TextInput(),
             'purpose': forms.Select(),
         }
+
+
+class MonthlyDonationForm(ModelForm):
+    class Meta:
+        model = MonthlyDonation
+        exclude = ['uniqueID', 'status']
+
+        widgets = {
+            'user': forms.HiddenInput(),
+            'month': forms.Select(),
+            'amount': forms.TextInput(),
+            'purpose': forms.Select(),
+        }

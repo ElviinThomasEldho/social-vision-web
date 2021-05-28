@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+
+    <title>Committed for a Social Change</title>
+</head>
+
+<body>
+
+    {% include 'main/navbar.html' %}
+
+    <section class="hero">
+        <h1 class="hero-heading">Donate</h1>
+    </section>
+
+    <section>
+        <h2><img class="icon" src="{% static 'images/icons/heart.svg' %}" alt="" height="40px"> Donation Form</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            {{ form.user }}
+            <label for="purpose">Purpose</label>
+            {{ form.purpose }}
+            <label for="month">Month</label>
+            {{ form.month }}
+            <label for="amount">Donation Amount</label>
+            {{ form.amount }}
+
+            <button class="btn btn-success" type="submit" name="Continue">Continue</button>
+        </form>
+    </section>
+
+
+    {% include 'main/footer.html' %}
+
+</body>
+
+</html>

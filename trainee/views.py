@@ -44,10 +44,11 @@ def link_callback(uri, rel):
 
     # make sure that file exists
     if not os.path.isfile(path):
-            raise Exception(
-                'media URI must start with %s or %s' % (sUrl, mUrl)
-            )
+        raise Exception(
+            'media URI must start with %s or %s' % (sUrl, mUrl)
+        )
     return path
+
 
 @authenticated_user
 @allowed_users(allowed_roles=['trainee'])
@@ -55,26 +56,19 @@ def profile(request):
     user = request.user
 
     tr = Trainee.objects.get(user=user)
-    courses = Course.objects.all()
-    enrolled = tr.course.all()
-    courses = set(courses).difference(enrolled)
-    currentCourse = Course.objects.get(id=tr.currentCourse)
-
-    if (datetime.date.today() - tr.validUpto.date()) > datetime.timedelta(seconds=0):
-        canEnroll = True
-    else:
-        canEnroll = False
+    courses = Course.objects.all
+    enrollments = Enrollment.objects.order_by(
+        'startDate').filter(trainee=tr).reverse()
 
     context = {
-        'user':user,
-        'courses':courses,
-        'enrolled':enrolled,
-        'canEnroll':canEnroll,
-        'currentCourse':currentCourse,
-        'tr':tr,
+        'user': user,
+        'courses': courses,
+        'enrollments': enrollments,
+        'tr': tr,
     }
 
     return render(request, 'trainee/profile.html', context)
+
 
 @authenticated_user
 def register(request):
@@ -84,8 +78,19 @@ def register(request):
     if request.method == 'POST':
         form = TraineeForm(request.POST, request.FILES)
         if form.is_valid():
-            trainee = form.save()   
-            add_group = Group.objects.get(name='trainee') 
+            form.save()
+
+            trainee = Trainee.objects.get(user=request.user)
+            trainee.firstName = user.first_name
+            trainee.lastName = user.last_name
+            trainee.emailID = user.email
+
+            today = date.today()
+            trainee.age = today.year - trainee.dateOfBirth.year - \
+                ((today.month, today.day) <
+                 (trainee.dateOfBirth.month, trainee.dateOfBirth.day))
+            trainee.save()
+            add_group = Group.objects.get(name='trainee')
             add_group.user_set.add(request.user)
             return redirect('/trainee/edit/')
 
@@ -94,6 +99,7 @@ def register(request):
     }
 
     return render(request, 'trainee/register.html', context)
+
 
 @authenticated_user
 @allowed_users(allowed_roles=['trainee'])
@@ -116,6 +122,7 @@ def edit(request):
 
     return render(request, 'trainee/edit.html', context)
 
+
 @authenticated_user
 @allowed_users(allowed_roles=['trainee'])
 def printForm(request):
@@ -134,10 +141,11 @@ def printForm(request):
     template = get_template(template_path)
     html = template.render(context)
     pisa_status = pisa.CreatePDF(
-       html, dest=response, link_callback=link_callback)
+        html, dest=response, link_callback=link_callback)
     if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
 
 @authenticated_user
 @allowed_users(allowed_roles=['trainee'])
@@ -158,22 +166,24 @@ def printID(request):
     template = get_template(template_path)
     html = template.render(context)
     pisa_status = pisa.CreatePDF(
-       html, dest=response, link_callback=link_callback)
+        html, dest=response, link_callback=link_callback)
     if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
 
 def getTrainees():
     users = Trainee.objects.all()
     return users
 
-def activate(request,id):
+
+def activate(request, id):
     trainee = Trainee.objects.get(uniqueID=id)
     trainee.status = True
     trainee.save()
-    
+
     name = trainee.firstName + ' ' + trainee.lastName
-    email =trainee.emailID
+    email = trainee.emailID
     query = "Hi " + name + ", We are happy to inform you that your Trainee Account has been activated. You can now download you ID Card from the Trainee Profile Page"
 
     subject = 'Query from ' + name
@@ -187,32 +197,52 @@ def activate(request,id):
     }
 
     return redirect('/admin-panel/')
-    
-def deactivate(request,id):
+
+
+def deactivate(request, id):
     trainee = Trainee.objects.get(uniqueID=id)
     trainee.status = False
     trainee.save()
 
     return redirect('/admin-panel/')
 
+
 def enroll(request, id):
     user = request.user
     trainee = Trainee.objects.get(user=user)
     course = Course.objects.get(id=id)
-    
-    trainee.course.add(course)
 
-    validUpto = datetime.date.today()
-    duration = course.duration
-    if (validUpto.month + duration) > 12:
-        trainee.validUpto = validUpto.replace(month = validUpto.month + duration - 12, year = validUpto.year + 1)
-    else: 
-        trainee.validUpto = validUpto.replace(month = validUpto.month + duration)
+    if Enrollment.objects.filter(trainee=trainee, course=course):
 
-    trainee.currentCourse = course.id
+        pass
 
-    trainee.save()
+    else:
 
-    print(trainee.validUpto)
+        endDate = datetime.date.today()
+        duration = course.duration
+        if (endDate.month + duration) > 12:
+            endDate = endDate.replace(month=endDate.month + duration -
+                                      12, year=endDate.year + 1)
 
-    return redirect('/trainee/view/')
+        else:
+            endDate = endDate.replace(month=endDate.month + duration)
+
+        enrollment = Enrollment.objects.create(
+            trainee=trainee,
+            course=course,
+            startDate=datetime.date.today(),
+            endDate=endDate,
+        )
+
+        validUpto = datetime.date.today()
+        duration = course.duration
+        if (validUpto.month + duration) > 12:
+            trainee.validUpto = validUpto.replace(
+                month=validUpto.month + duration - 12, year=validUpto.year + 1)
+        else:
+            trainee.validUpto = validUpto.replace(
+                month=validUpto.month + duration)
+
+        trainee.save()
+
+        return redirect('/trainee/view/')

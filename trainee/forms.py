@@ -11,19 +11,16 @@ class DateInput(forms.DateInput):
 class TraineeForm(ModelForm):
     class Meta:
         model = Trainee
-        exclude = ['uniqueID', 'dateCreated', 'status',
-                   'course', 'validUpto', 'currentCourse']
+        exclude = ['uniqueID', 'firstName', 'lastName', 'emailID', 'age', 'dateCreated', 'status',
+                   'course', 'validUpto', 'enrolledCourses']
 
         widgets = {
             'user': forms.HiddenInput(),
             'purpose': forms.Select(),
-            'firstname': forms.TextInput(),
-            'lastName': forms.TextInput(),
             'fatherName': forms.TextInput(),
             'motherName': forms.TextInput(),
 
             'dateOfBirth': DateInput(),
-            'age': forms.NumberInput(),
             'bloodGroup': forms.Select(),
 
             'martialStatus': forms.Select(),
@@ -32,7 +29,6 @@ class TraineeForm(ModelForm):
             'religion': forms.Select(),
 
             'mobileNumber': forms.TextInput(),
-            'emailID': forms.EmailInput(),
             'emergencyContact': forms.TextInput(),
 
             'occupation': forms.Select(),

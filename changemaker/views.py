@@ -85,18 +85,23 @@ def register(request):
 def profile(request):
     user = request.user
     changemaker = ChangeMaker.objects.get(user=user)
-    try:
+
+    if user.donation_set.all():
         donations = user.donation_set.all()
-        context = {
-            'user': user,
-            'changemaker': changemaker,
-            'donations': donations,
-        }
-    except ObjectDoesNotExist as o:
-        context = {
-            'user': user,
-            'changemaker': changemaker,
-        }
+    else:
+        donations = False
+
+    if user.monthlydonation_set.all():
+        monthly = user.monthlydonation_set.all()
+    else:
+        monthly = False
+
+    context = {
+        'user': user,
+        'changemaker': changemaker,
+        'donations': donations,
+        'monthly': monthly,
+    }
 
     return render(request, 'changemaker/profile.html', context)
 
@@ -182,6 +187,97 @@ def printReceipt(request, id):
     template_path = 'changemaker/receipt.html'
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="Donation-Receipt.pdf'
+    template = get_template(template_path)
+    html = template.render(context)
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
+
+@authenticated_user
+@allowed_users(allowed_roles=['changemaker'])
+def monthlyDonationForm(request):
+    user = request.user
+    form = MonthlyDonationForm(initial={'user': request.user})
+
+    if request.method == 'POST':
+        form = MonthlyDonationForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            uniqueID = MonthlyDonation.objects.latest(
+                'dateCreated').uniqueID
+            return redirect('/change-maker/monthly/pay/' + str(uniqueID) + '/')
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'changemaker/monthlyForm.html', context)
+
+
+@authenticated_user
+@allowed_users(allowed_roles=['changemaker'])
+def paymentMonthly(request, id):
+    donation = MonthlyDonation.objects.get(uniqueID=id).amount
+    uniqueID = MonthlyDonation.objects.get(uniqueID=id).uniqueID
+
+    context = {
+        'donation': donation,
+        'id': uniqueID,
+    }
+
+    return render(request, 'changemaker/monthlyPayment.html', context)
+
+
+@authenticated_user
+@allowed_users(allowed_roles=['changemaker'])
+def paymentMonthlySuccess(request, id):
+    donation = MonthlyDonation.objects.get(uniqueID=id)
+    donation.status = "Completed"
+    donation.save()
+
+    return redirect('/change-maker/view/')
+
+
+@authenticated_user
+@allowed_users(allowed_roles=['changemaker'])
+def printMonthlyCertificate(request, id):
+    user = request.user
+    dn = MonthlyDonation.objects.get(uniqueID=id)
+
+    context = {
+        'dn': dn,
+        'user': user,
+    }
+
+    template_path = 'changemaker/monthlyCertificate.html'
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="Monthly-Donation-Certificate.pdf'
+    template = get_template(template_path)
+    html = template.render(context)
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
+
+@authenticated_user
+@allowed_users(allowed_roles=['changemaker'])
+def printMonthlyReceipt(request, id):
+    user = request.user
+    dn = MonthlyDonation.objects.get(uniqueID=id)
+
+    context = {
+        'dn': dn,
+        'user': user,
+    }
+
+    template_path = 'changemaker/monthlyReceipt.html'
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="Monthly-Donation-Receipt.pdf'
     template = get_template(template_path)
     html = template.render(context)
     pisa_status = pisa.CreatePDF(
