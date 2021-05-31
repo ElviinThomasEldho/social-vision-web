@@ -86,22 +86,30 @@ def profile(request):
     user = request.user
     changemaker = ChangeMaker.objects.get(user=user)
 
-    if user.donation_set.all():
-        donations = user.donation_set.all()
-    else:
-        donations = False
+    donations = Donation.objects.filter(isMonthly=False)
+    monthly = Donation.objects.filter(isMonthly=True)
 
-    if user.monthlydonation_set.all():
-        monthly = user.monthlydonation_set.all()
-    else:
-        monthly = False
+    if changemaker.isMonthly:
+        today = datetime.date.today()
+        if today == today.replace(day=changemaker.goldenDate):
+            isToday = True
+        else:
+            isToday = False
 
-    context = {
-        'user': user,
-        'changemaker': changemaker,
-        'donations': donations,
-        'monthly': monthly,
-    }
+        context = {
+            'user': user,
+            'changemaker': changemaker,
+            'donations': donations,
+            'monthly': monthly,
+            'isToday': isToday,
+        }
+    else:
+        context = {
+            'user': user,
+            'changemaker': changemaker,
+            'donations': donations,
+            'monthly': monthly,
+        }
 
     return render(request, 'changemaker/profile.html', context)
 
@@ -198,17 +206,20 @@ def printReceipt(request, id):
 
 @authenticated_user
 @allowed_users(allowed_roles=['changemaker'])
-def monthlyDonationForm(request):
-    user = request.user
-    form = MonthlyDonationForm(initial={'user': request.user})
+def enableMonthlyForm(request):
+    changemaker = ChangeMaker.objects.get(user=request.user)
+    form = monthlyDonationForm(instance=changemaker)
 
     if request.method == 'POST':
-        form = MonthlyDonationForm(request.POST, request.FILES)
+        form = monthlyDonationForm(request.POST, instance=changemaker)
         if form.is_valid():
             form.save()
-            uniqueID = MonthlyDonation.objects.latest(
-                'dateCreated').uniqueID
-            return redirect('/change-maker/monthly/pay/' + str(uniqueID) + '/')
+
+            changemaker = ChangeMaker.objects.get(user=request.user)
+            changemaker.isMonthly = True
+            changemaker.save()
+
+            return redirect('/change-maker/view/')
 
     context = {
         'form': form,
@@ -219,13 +230,29 @@ def monthlyDonationForm(request):
 
 @authenticated_user
 @allowed_users(allowed_roles=['changemaker'])
-def paymentMonthly(request, id):
-    donation = MonthlyDonation.objects.get(uniqueID=id).amount
-    uniqueID = MonthlyDonation.objects.get(uniqueID=id).uniqueID
+def disableMonthlyForm(request):
+    changemaker = ChangeMaker.objects.get(user=request.user)
+    changemaker.isMonthly = False
+    changemaker.save()
+
+    return redirect('/change-maker/view/')
+
+
+@authenticated_user
+@allowed_users(allowed_roles=['changemaker'])
+def paymentMonthly(request):
+    user = request.user
+    changemaker = ChangeMaker.objects.get(user=user)
+
+    donation = Donation.objects.create(
+        user=user,
+        amount=changemaker.monthlyAmount,
+        purpose=changemaker.monthlyPurpose,
+        isMonthly=True,
+    )
 
     context = {
         'donation': donation,
-        'id': uniqueID,
     }
 
     return render(request, 'changemaker/monthlyPayment.html', context)
@@ -234,7 +261,7 @@ def paymentMonthly(request, id):
 @authenticated_user
 @allowed_users(allowed_roles=['changemaker'])
 def paymentMonthlySuccess(request, id):
-    donation = MonthlyDonation.objects.get(uniqueID=id)
+    donation = Donation.objects.get(uniqueID=id)
     donation.status = "Completed"
     donation.save()
 
@@ -245,7 +272,7 @@ def paymentMonthlySuccess(request, id):
 @allowed_users(allowed_roles=['changemaker'])
 def printMonthlyCertificate(request, id):
     user = request.user
-    dn = MonthlyDonation.objects.get(uniqueID=id)
+    dn = Donation.objects.get(uniqueID=id)
 
     context = {
         'dn': dn,
@@ -268,7 +295,7 @@ def printMonthlyCertificate(request, id):
 @allowed_users(allowed_roles=['changemaker'])
 def printMonthlyReceipt(request, id):
     user = request.user
-    dn = MonthlyDonation.objects.get(uniqueID=id)
+    dn = Donation.objects.get(uniqueID=id)
 
     context = {
         'dn': dn,

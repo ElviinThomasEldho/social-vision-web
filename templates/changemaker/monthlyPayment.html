@@ -32,7 +32,7 @@
         },
 
         createOrder: function (data, actions) {
-          donation = parseFloat("{{ donation }}") * 0.014
+          donation = parseFloat("{{ donation.amount }}") * 0.014
           return actions.order.create({
             purchase_units: [{ "amount": { "currency_code": "USD", "value": donation.toFixed(2) } }]
           });
@@ -40,7 +40,7 @@
 
         onApprove: function (data, actions) {
           return actions.order.capture().then(function (details) {
-            url = "{% url 'donateMonthlySuccess' id %}"
+            url = "{% url 'donateMonthlySuccess' donation.uniqueID %}"
             return window.location.replace(url)
           });
         },

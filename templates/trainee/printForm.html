@@ -95,7 +95,17 @@
                     <h2>Trainee Form</h2>
                     <h3>{{ tr.uniqueID }}</h3>
                     <h3>{{ tr.dateCreated }}</h3>
-                    <h4>Purpose : {{ tr.purpose }}</h4>
+                    <h4>Courses : <br>
+                        {% if enrollments %}
+                        <ul>
+                            {% for enrollment in enrollments %}
+                            <li class="text">{{ enrollment.course.name }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="text">No Enrollments</p>
+                        {% endif %}
+                    </h4>
                 </td>
             </tr>
         </tbody>

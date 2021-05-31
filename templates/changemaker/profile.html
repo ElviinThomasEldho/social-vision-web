@@ -61,8 +61,16 @@
         <div class="col center">
             <h2>Monthly Donations</h2>
             <hr class="hr-short">
+            {% if changemaker.isMonthly %}
+            <p>Your Golden Date is {{ changemaker.goldenDate }}<sup>th</sup> of every month</p>
+            {% if isToday %}
+            <a href="{% url 'donateMonthlyPay' %}" class="btn">Pay Monthly Donations</a>
+            {% endif %}
+            <a href="{% url 'disableMonthlyForm' %}" class="btn">Disable Monthly Donations</a>
+            {% else %}
             <p>You can enroll for Monthly Donations. You can pay for future in advance.</p>
-            <a href="{% url 'donateMonthlyForm' %}" class="btn">Enable Monthly Donations</a>
+            <a href="{% url 'enableMonthlyForm' %}" class="btn">Enable Monthly Donations</a>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -172,7 +180,7 @@
     </table>
     {% else %}
     <p>You have not made any monthly donations to show</p>
-    <a href="{% url 'donateMonthlyForm' %}" class="btn btn-outline-red">Donate</a>
+    <a href="{% url 'donateMonthlyPay' %}" class="btn btn-outline-red">Donate</a>
     {% endif %}
 </section>
 {% endblock %}

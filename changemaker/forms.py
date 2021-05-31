@@ -1,3 +1,4 @@
+from django.db.models import fields
 from django.forms import ModelForm, Textarea
 from .models import *
 from django import forms
@@ -11,7 +12,7 @@ class ChangeMakerForm(ModelForm):
     class Meta:
         model = ChangeMaker
         exclude = ['uniqueID', 'firstName', 'lastName',
-                   'dateCreated', 'age', 'emailID']
+                   'dateCreated', 'age', 'emailID', 'isMonthly', 'monthlyAmount', 'monthlyPurpose', 'goldenDate']
 
         widgets = {
             'user': forms.HiddenInput(),
@@ -47,14 +48,14 @@ class DonationForm(ModelForm):
         }
 
 
-class MonthlyDonationForm(ModelForm):
+class monthlyDonationForm(ModelForm):
     class Meta:
-        model = MonthlyDonation
-        exclude = ['uniqueID', 'status']
+        model = ChangeMaker
+        fields = ['monthlyAmount', 'monthlyPurpose',
+                  'goldenDate']
 
         widgets = {
-            'user': forms.HiddenInput(),
-            'month': forms.Select(),
-            'amount': forms.TextInput(),
-            'purpose': forms.Select(),
+            'monthlyAmount': forms.TextInput(),
+            'monthlyPurpose': forms.Select(),
+            'goldenDate': forms.TextInput(),
         }

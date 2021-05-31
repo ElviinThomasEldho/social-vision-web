@@ -28,7 +28,7 @@
                 </tr>
             </tbody>
         </table>
-
+        <a href="{% url 'reset_password' %}" style="color:black; margin: 10px;">Forgot Password?</a>
         {% for message in messages %}
         <p>{{message}}</p><br>
         {% endfor %}

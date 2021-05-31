@@ -64,7 +64,6 @@
             font-size: 12px;
             text-align: left;
         }
-
     </style>
 
     <title>Committed for a Social Change</title>
@@ -94,13 +93,22 @@
                         <p class="title">Mobile Number : </p>
                         <p class="text">{{ tr.mobileNumber }}</p>
                         <p class="title">Enrolled Course : </p>
-                        <p class="text">{{ course }}</p>
+                        {% if enrollments %}
+                        <ul>
+                            {% for enrollment in enrollments %}
+                            <li class="text">{{ enrollment.course.name }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="text">No Enrollments</p>
+                        {% endif %}
                     </td>
                     <td>
                         <p class="title">Father's Name : </p>
                         <p class="text">{{ tr.fatherName }}</p>
                         <p class="title">Address : </p>
-                        <p class="text">{{ tr.address }}, {{ tr.area }}, {{ tr.locality }}, {{ tr.district }}, {{ tr.state }}, {{ tr.pincode }}</p>
+                        <p class="text">{{ tr.address }}, {{ tr.area }}, {{ tr.locality }}, {{ tr.district }},
+                            {{tr.state }}, {{ tr.pincode }}</p>
                         <p class="title">Valid Upto : </p>
                         <p class="text">{{ tr.validUpto.date }}</p>
                     </td>

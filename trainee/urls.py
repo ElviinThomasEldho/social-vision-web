@@ -14,6 +14,7 @@ urlpatterns = [
     path('activate/<str:id>/', views.activate, name='activateTrainee'),
     path('deactivate/<str:id>/', views.deactivate, name='deactivateTrainee'),
     path('enroll/<str:id>/', views.enroll, name='enroll'),
-] 
+    path('unenroll/<str:id>/', views.unenroll, name='unenroll'),
+]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

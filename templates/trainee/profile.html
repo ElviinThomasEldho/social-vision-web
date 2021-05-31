@@ -123,6 +123,7 @@
                     <h4 class="card-title">{{ enrollment.course.name }}</h4>
                     <p class="card-text"><strong>Start Date</strong><br> {{ enrollment.startDate }}</p>
                     <p class="card-text"><strong>End Date</strong><br> {{ enrollment.endDate }}</p>
+                    <a class="enroll-btn" href="{% url 'unenroll' enrollment.id %}">Unenroll</a>
                 </div>
                 {% endfor %}
             </div>

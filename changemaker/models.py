@@ -22,6 +22,16 @@ class ChangeMaker(models.Model):
         ('Driving License', 'Driving License'),
     )
 
+    PURPOSE = (
+        ('Donation', 'Donation'),
+        ('Education', 'Education'),
+        ('Differently Abled', 'Differently Abled'),
+        ('Medical Aid', 'Medical Aid'),
+        ('Ration Support', 'Ration Support'),
+        ('Women Empowerment', 'Women Empowerment'),
+        ('Skill Developement', 'Skill Developement'),
+    )
+
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     uniqueID = models.CharField('Unique ID', primary_key=True, default=uuid.uuid4(
     ).hex[:5].upper(), max_length=50, editable=False)
@@ -47,6 +57,17 @@ class ChangeMaker(models.Model):
     district = models.CharField('District', max_length=255, null=True)
     state = models.CharField('State', max_length=255, null=True)
     pincode = models.CharField('Pincode', max_length=255, null=True)
+
+    # Monthly Donations
+    isMonthly = models.BooleanField(
+        'Is Monthly', null=True, default=False)
+    monthlyAmount = models.IntegerField('Monthly Donation Amount', null=True)
+    monthlyPurpose = models.CharField(
+        'Purpose of Donation', max_length=25, choices=PURPOSE, null=True)
+    goldenDate = models.IntegerField(
+        'Golden Date of Giving', null=True)
+    autoDebiting = models.BooleanField(
+        'Auto-Debiting', null=True, default=False)
 
     documentType = models.CharField(
         'Document Type', max_length=255, choices=DOCUMENT_TYPE, null=True)
@@ -85,56 +106,10 @@ class Donation(models.Model):
     status = models.CharField(
         'Donation Status', max_length=255, choices=STATUS, null=True, default="Pending")
 
-    dateCreated = models.DateTimeField(null=True, auto_now_add=True)
-
-    def __str__(self):
-        return (self.uniqueID + " | " + self.user.username + " | " + self.purpose)
-
-
-class MonthlyDonation(models.Model):
-
-    PURPOSE = (
-        ('Donation', 'Donation'),
-        ('Education', 'Education'),
-        ('Differently Abled', 'Differently Abled'),
-        ('Medical Aid', 'Medical Aid'),
-        ('Ration Support', 'Ration Support'),
-        ('Women Empowerment', 'Women Empowerment'),
-        ('Skill Developement', 'Skill Developement'),
-    )
-
-    STATUS = (
-        ('Pending', 'Pending'),
-        ('Completed', 'Completed'),
-    )
-
-    MONTH = (
-        ('January', 'January'),
-        ('February', 'February'),
-        ('March', 'March'),
-        ('April', 'April'),
-        ('May', 'May'),
-        ('June', 'June'),
-        ('July', 'July'),
-        ('August', 'August'),
-        ('September', 'September'),
-        ('October', 'October'),
-        ('November', 'November'),
-        ('December', 'December'),
-    )
-
-    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    uniqueID = models.CharField('studentID', primary_key=True, default=uuid.uuid4(
-    ).hex[:5].upper(), max_length=50, editable=False)
-    amount = models.IntegerField('Donation Amount', null=True)
-    month = models.CharField(
-        'Month', max_length=255, choices=MONTH, null=True)
-    purpose = models.CharField(
-        'Purpose', max_length=255, choices=PURPOSE, null=True)
-    status = models.CharField(
-        'Donation Status', max_length=255, choices=STATUS, null=True, default="Pending")
+    isMonthly = models.BooleanField(
+        'Monthly Donation', null=True, default=False)
 
     dateCreated = models.DateTimeField(null=True, auto_now_add=True)
 
     def __str__(self):
-        return (self.uniqueID + " | " + self.user.username + " | " + self.purpose)
+        return (self.user.username + " | " + self.purpose)

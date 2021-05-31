@@ -12,8 +12,9 @@ urlpatterns = [
     path('certificate/<str:id>/', views.printCertificate, name='printDonCertif'),
     path('receipt/<str:id>/', views.printReceipt, name='printDonReceipt'),
 
-    path('monthly-create/', views.monthlyDonationForm, name='donateMonthlyForm'),
-    path('monthly-pay/<str:id>/', views.paymentMonthly, name='donateMonthlyPay'),
+    path('monthly-enable/', views.enableMonthlyForm, name='enableMonthlyForm'),
+    path('monthly-disable/', views.disableMonthlyForm, name='disableMonthlyForm'),
+    path('monthly-pay/', views.paymentMonthly, name='donateMonthlyPay'),
     path('monthly-success/<str:id>/', views.paymentMonthlySuccess,
          name='donateMonthlySuccess'),
     path('monthly-certificate/<str:id>/',

@@ -1,3 +1,4 @@
+from django.db.models.expressions import OrderBy
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
@@ -130,9 +131,11 @@ def printForm(request):
     user = request.user
     tr = Trainee.objects.get(user=user)
     form = TraineeForm(instance=tr)
+    enrollments = Enrollment.objects.filter(trainee=tr)
 
     context = {
         'tr': tr,
+        'enrollments': enrollments,
     }
 
     template_path = 'trainee/printForm.html'
@@ -153,11 +156,11 @@ def printID(request):
 
     user = request.user
     tr = Trainee.objects.get(user=user)
-    course = Course.objects.get(id=tr.currentCourse).name
+    enrollments = Enrollment.objects.filter(trainee=tr)
 
     context = {
         'tr': tr,
-        'course': course,
+        'enrollments': enrollments,
     }
 
     template_path = 'trainee/printID.html'
@@ -213,9 +216,7 @@ def enroll(request, id):
     course = Course.objects.get(id=id)
 
     if Enrollment.objects.filter(trainee=trainee, course=course):
-
         pass
-
     else:
 
         endDate = datetime.date.today()
@@ -234,15 +235,26 @@ def enroll(request, id):
             endDate=endDate,
         )
 
-        validUpto = datetime.date.today()
-        duration = course.duration
-        if (validUpto.month + duration) > 12:
-            trainee.validUpto = validUpto.replace(
-                month=validUpto.month + duration - 12, year=validUpto.year + 1)
-        else:
-            trainee.validUpto = validUpto.replace(
-                month=validUpto.month + duration)
+        lastCourse = Enrollment.objects.filter(
+            trainee=trainee).order_by('endDate').last()
 
-        trainee.save()
+        validUpto = lastCourse.endDate
 
         return redirect('/trainee/view/')
+
+
+def unenroll(request, id):
+    trainee = Trainee.objects.get(user=request.user)
+
+    Enrollment.objects.get(id=id).delete()
+
+    try:
+        lastCourse = Enrollment.objects.filter(
+            trainee=trainee).order_by('endDate').last()
+        validUpto = lastCourse.endDate
+    except AttributeError:
+        validUpto = datetime.date.today()
+
+    trainee.save()
+
+    return redirect('/trainee/view/')

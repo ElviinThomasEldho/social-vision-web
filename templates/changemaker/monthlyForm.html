@@ -35,12 +35,18 @@
             {% csrf_token %}
 
             {{ form.user }}
-            <label for="purpose">Purpose</label>
-            {{ form.purpose }}
-            <label for="month">Month</label>
-            {{ form.month }}
-            <label for="amount">Donation Amount</label>
-            {{ form.amount }}
+            <div class="row">
+                <div class="col">{{ form.monthlyPurpose.label }}</div>
+                <div class="col">{{ form.monthlyPurpose }}</div>
+            </div>
+            <div class="row">
+                <div class="col">{{ form.monthlyAmount.label }}</div>
+                <div class="col">{{ form.monthlyAmount }}</div>
+            </div>
+            <div class="row">
+                <div class="col">{{ form.goldenDate.label }}</div>
+                <div class="col">{{ form.goldenDate }}</div>
+            </div>
 
             <button class="btn btn-success" type="submit" name="Continue">Continue</button>
         </form>
