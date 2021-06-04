@@ -1,0 +1,38 @@
+.grid {
+  max-width: 80%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.impact-card {
+  min-width: 30%;
+  /* min-height: 200px; */
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  margin: 10px;
+}
+
+@media screen and (min-width: 650px) {
+  .grid {
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+}
+
+.card-image {
+  width: 20em;
+  /* max-width:33.33%; */
+}
+
+.help-image {
+  width: 25em;
+}
+
+.contact-text {
+  max-width: 20%;
+}

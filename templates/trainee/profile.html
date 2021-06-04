@@ -120,10 +120,13 @@
             <div class="enrolled-courses">
                 {% for enrollment in enrollments %}
                 <div class="course-card">
-                    <h4 class="card-title">{{ enrollment.course.name }}</h4>
+                    <div class="course-desc">
+                        <h4 class="card-title">{{ enrollment.course.name }}</h4>
+                        <p>{{ enrollment.course.department }} | {{enrollment.course.duration }} Months</p>
+                    </div>
                     <p class="card-text"><strong>Start Date</strong><br> {{ enrollment.startDate }}</p>
                     <p class="card-text"><strong>End Date</strong><br> {{ enrollment.endDate }}</p>
-                    <a class="enroll-btn" href="{% url 'unenroll' enrollment.id %}">Unenroll</a>
+                    <!-- <a class="btn" href="{% url 'unenroll' enrollment.id %}">Unenroll</a> -->
                 </div>
                 {% endfor %}
             </div>
@@ -137,8 +140,14 @@
             <div class="available-courses">
                 {% for course in courses %}
                 <div class="course-card">
-                    <h4 class="card-title">{{ course.name }} | {{ course.duration }} Months</h4>
-                    <a class="enroll-btn" href="{% url 'enroll' course.id %}">Enroll</a>
+                    <div class="course-desc">
+                        <h4>{{ course.name }}</h4>
+                        <p>{{ course.department }} | {{course.duration }} Months</p>
+                    </div>
+                    <button onclick="
+                        resp = confirm('Do you want to confirm your enrollment into {{ course.name }}?');
+                        if (resp === true) return window.location.replace('/trainee/enroll/' + {{ course.id }} + '/')"
+                        ; class="btn">Enroll</button>
                 </div>
                 {% endfor %}
             </div>

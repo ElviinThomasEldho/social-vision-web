@@ -106,7 +106,6 @@ def register(request):
 @allowed_users(allowed_roles=['trainee'])
 def edit(request):
     user = request.user
-
     tr = Trainee.objects.get(user=user)
     form = TraineeForm(instance=tr)
 
@@ -114,7 +113,7 @@ def edit(request):
         form = TraineeForm(request.POST, request.FILES, instance=tr)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('trainee')
 
     context = {
         'tr': tr,
@@ -216,9 +215,8 @@ def enroll(request, id):
     course = Course.objects.get(id=id)
 
     if Enrollment.objects.filter(trainee=trainee, course=course):
-        pass
+        return redirect('trainee')
     else:
-
         endDate = datetime.date.today()
         duration = course.duration
         if (endDate.month + duration) > 12:
