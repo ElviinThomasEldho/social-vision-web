@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -11,53 +11,53 @@
 </section>
 
 <section class="profile-section">
-        <div class="col" style="text-align: center;">
-            <h2 class="section-heading">User Details</h2>
-            <hr class="hr-short">
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
-                            <h4>Username</h4>
-                        </td>
-                        <td>
-                            <p>{{ user.username }}</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h4>Email Address</h4>
-                        </td>
-                        <td>
-                            <p>{{ user.email }}</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="column text-center">
-            <hr class="hr-short">
-            <div class="row">
-                <div class="col center">
-                    {% if isChangeMaker %}
-                    <h2>View As</h2>
-                    <a href="{% url 'donate' %}" class="col btn btn-outline-red"><img class="icon" src="{% static 'images/icons/heart.svg' %}" alt="" height="18px"> Change Maker</a>
-                    {% else %}
-                    <h2>Register As</h2>
-                    <a href="{% url 'regChangeMaker' %}" class="col btn btn-outline-red"><img class="icon" src="{% static 'images/icons/heart.svg' %}" alt="" height="18px"> Change Maker</a>
-                    {% endif %}
-                </div>
-                <div class="col center">
-                    {% if isTrainee %}
-                    <h2>View As</h2>
-                    <a href="{% url 'trainee' %}" class="cols btn btn-outline-red"><img class="icon" src="{% static 'images/icons/approved.svg' %}" alt="" height="20px"> Trainee</a>
-                    {% else %}
-                    <h2>Register As</h2>
-                    <a href="{% url 'regTrainee' %}" class="cols btn btn-outline-red"><img class="icon" src="{% static 'images/icons/approved.svg' %}" alt="" height="20px"> Trainee</a>
-                    {% endif %}
-                </div>
+    <div class="col" style="text-align: center;">
+        <h2 class="section-heading">User Details</h2>
+        <hr class="hr-short">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <h4>Username</h4>
+                    </td>
+                    <td>
+                        <p>{{ user.username }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4>Email Address</h4>
+                    </td>
+                    <td>
+                        <p>{{ user.email }}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="column text-center">
+        <hr class="hr-short">
+        <div class="row">
+            <div class="col center">
+                {% if isChangeMaker %}
+                <h2>View As</h2>
+                <a href="{% url 'donate' %}" class="col btn btn-outline-red">Change Maker</a>
+                {% else %}
+                <h2>Register As</h2>
+                <a href="{% url 'regChangeMaker' %}" class="col btn btn-outline-red">Change Maker</a>
+                {% endif %}
+            </div>
+            <div class="col center">
+                {% if isTrainee %}
+                <h2>View As</h2>
+                <a href="{% url 'trainee' %}" class="cols btn btn-outline-red">Trainee</a>
+                {% else %}
+                <h2>Register As</h2>
+                <a href="{% url 'regTrainee' %}" class="cols btn btn-outline-red">Trainee</a>
+                {% endif %}
             </div>
         </div>
+    </div>
     </div>
 </section>
 {% endblock %}

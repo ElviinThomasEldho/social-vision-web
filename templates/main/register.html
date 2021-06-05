@@ -2,62 +2,62 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
 {% endblock %}
 
 {% block content %}
-    <section class="hero">
-        <h1 class="hero-heading">
-            Register
-        </h1>
-    </section>
+<section class="hero">
+    <h1 class="hero-heading">
+        Register
+    </h1>
+</section>
 
-    <section>
-        <form method="POST" action="" class="col text-center">
-            {% csrf_token %}
-            <h2 class="section-heading">Register</h2>
-            <p>Want to help our cause! Register below</p>
-            <hr class="hr-short">
+<section>
+    <form method="POST" action="" class="col text-center">
+        {% csrf_token %}
+        <h2 class="section-heading">Register</h2>
+        <p>Want to help our cause! Register below</p>
+        <hr class="hr-short">
 
-            <div class="row">
-                <div class="col">
-                    <label>{{form.username.label}}</label><br>
-                    {{form.username}}
-                </div>
-                <div class="col">   
-                    <label>{{form.email.label}}</label><br>
-                    {{form.email}}        
-                </div>
+        <div class="row">
+            <div class="col">
+                <label>{{form.username.label}}</label><br>
+                {{form.username}}
             </div>
-
-            <div class="row">
-                <div class="col">         
-                    <label>{{form.first_name.label}}</label><br>
-                    {{form.first_name}}
-                </div>
-                <div class="col">
-                    <label>{{form.last_name.label}}</label><br>
-                    {{form.last_name}}
-                </div>
+            <div class="col">
+                <label>{{form.email.label}}</label><br>
+                {{form.email}}
             </div>
-            <div class="row">
-                <div class="col">
-                    <label>{{form.password1.label}}</label><br>
-                    {{form.password1}}
-                </div>
-                <div class="col">
-                    <label>Confirm Password</label><br>
-                    {{form.password2}}
-                </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label>{{form.first_name.label}}</label><br>
+                {{form.first_name}}
             </div>
-            
-            {{ form.errors }}
+            <div class="col">
+                <label>{{form.last_name.label}}</label><br>
+                {{form.last_name}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>{{form.password1.label}}</label><br>
+                {{form.password1}}
+            </div>
+            <div class="col">
+                <label>Confirm Password</label><br>
+                {{form.password2}}
+            </div>
+        </div>
 
-            {% for message in messages %}
-            <p>{{message}}</p><br>
-            {% endfor %}
+        {{ form.errors }}
 
-            <button class="btn btn-success" type="submit" name="Submit">Register</button>
-        </form>
-    </section>
+        {% for message in messages %}
+        <p>{{message}}</p><br>
+        {% endfor %}
+
+        <button class="btn btn-success" type="submit" name="Submit">Register</button>
+    </form>
+</section>
 {% endblock %}

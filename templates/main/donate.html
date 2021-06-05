@@ -13,7 +13,6 @@
 
 <section>
     <form action="" method="POST" class="col">
-        <img class="icon" src="{% static 'images/icons/help.svg' %}" alt="" height="50px">
         <h2 class="section-heading">Instant Donation</h2>
         <p>If you want to donate now, enter the donation amount and pay</p>
         <label for="donation">Donation Amount</label>
@@ -59,5 +58,5 @@
             initPayPalButton();
         </script>
 </section>
-        {% include 'main/contact.html' %}
-        {% endblock %}
+{% include 'main/contact.html' %}
+{% endblock %}
