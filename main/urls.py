@@ -29,6 +29,7 @@ urlpatterns = [
 
     path('profile/', views.profile, name='profile'),
     path('finance/', views.finance, name='finance'),
+    path('newsletter/', views.newsletter, name='newsletter'),
 
     path('admin-panel/', views.panel, name='panel'),
 ]

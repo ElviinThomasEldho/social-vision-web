@@ -1,8 +1,9 @@
-{%  load static %}
+{% load static %}
 
 <footer class="row center">
     <div class="col">
-        <h3 class="footer-heading"><img class="icon" src="{% static 'images/icons/communicate.svg' %}" alt="" height="50px"> Contact Us</h3>
+        <h3 class="footer-heading"><img class="icon" src="{% static 'images/icons/communicate.svg' %}" alt=""
+                height="50px"> Contact Us</h3>
     </div>
     <div class="col contact-text">
         <h4 class="footer-subheading">Visit us at</h4>
@@ -12,6 +13,10 @@
         <p class="footer-text">
             info@socialvisionindia.org<br>
             director@socialvisionindia.org
+        </p>
+        <h4 class="footer-subheading">Newsletter</h4>
+        <p class="footer-text">
+            <a href="{% url 'newsletter' %}" class="btn btn-white">Subscribe</a>
         </p>
     </div>
     <div class="col">

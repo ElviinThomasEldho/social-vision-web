@@ -66,7 +66,11 @@
             {% if isToday %}
             <a href="{% url 'donateMonthlyPay' %}" class="btn">Pay Monthly Donations</a>
             {% endif %}
-            <a href="{% url 'disableMonthlyForm' %}" class="btn">Disable Monthly Donations</a>
+            <button
+                onclick="if (confirm(`Are you sure you want to disable Monthly donations?`)) {return window.location.replace('/change-maker/monthly-disable/')};"
+                href="{% url 'disableMonthlyForm' %}" class="btn">Disable
+                Monthly
+                Donations</button>
             {% else %}
             <p>A small monthly contribution from you can be a strong pillor of Social Vision Services. Join and be a
                 pillor of change making.</p>
@@ -130,6 +134,8 @@
     <a href="{% url 'donateForm' %}" class="btn btn-outline-red">Donate</a>
     {% endif %}
 
+    <hr class="hr-dark">
+
     <h2><img class="icon" src="{% static 'images/icons/heart.svg' %}" alt="" height="40px"> Monthly Donation Tracker
     </h2>
     <hr class="hr-short">
@@ -181,7 +187,6 @@
     </table>
     {% else %}
     <p>You have not made any monthly donations to show</p>
-    <a href="{% url 'donateMonthlyPay' %}" class="btn btn-outline-red">Donate</a>
     {% endif %}
 </section>
 {% endblock %}

@@ -271,3 +271,8 @@ def panel(request):
     }
 
     return render(request, 'main/panel.html', context)
+
+
+def newsletter(request):
+
+    return render(request, 'main/newsletter.html')
