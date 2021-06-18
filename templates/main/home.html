@@ -66,6 +66,21 @@
   </div>
 </section>
 
+<section>
+  <h1 class="section-heading">SUPPORTERS</h1>
+  <div class="supporter-display">
+    <img src="{% static 'images/partners/supporter1.png' %}" alt="Supporter Image" class="supporter">
+    <img src="{% static 'images/partners/supporter2.png' %}" alt="Supporter Image" class="supporter">
+    <img src="{% static 'images/partners/supporter3.png' %}" alt="Supporter Image" class="supporter">
+    <img src="{% static 'images/partners/supporter4.png' %}" alt="Supporter Image" class="supporter">
+    <img src="{% static 'images/partners/supporter5.png' %}" alt="Supporter Image" class="supporter">
+    <img src="{% static 'images/partners/supporter6.jpeg' %}" alt="Supporter Image" class="supporter">
+    <img src="{% static 'images/partners/supporter7.png' %}" alt="Supporter Image" class="supporter">
+    <img src="{% static 'images/partners/supporter8.png' %}" alt="Supporter Image" class="supporter">
+    <img src="{% static 'images/partners/supporter9.png' %}" alt="Supporter Image" class="supporter">
+  </div>
+</section>
+
 <section class="donate section-dark">
   <h1 class="section-heading">Provide a Helping Hand</h1>
   <p class="section-text">
@@ -79,13 +94,21 @@
   <h1 class="section-heading">Creating Impact</h1>
 
   <div class="grid">
-    {% for impact in impacts %}
     <div class="impact-card">
-      <img src="{{ impact.image1.url }}" alt="Impact" class="card-image" />
-      <h3 class="card-heading">{{ impact.name }}</h3>
+      <img src="{% static 'images/impact-1.jpg' %}" alt="Impact" class="card-image" />
+      <h3 class="card-heading">Educate and Empower</h3>
       <a class="btn" href="{% url 'impact' %}">Read More</a>
     </div>
-    {% endfor %}
+    <div class="impact-card">
+      <img src="{% static 'images/impact-2.jpg' %}" alt="Impact" class="card-image" />
+      <h3 class="card-heading">Skill Development</h3>
+      <a class="btn" href="{% url 'impact' %}">Read More</a>
+    </div>
+    <div class="impact-card">
+      <img src="{% static 'images/impact-4.jpg' %}" alt="Impact" class="card-image" />
+      <h3 class="card-heading">Charity Mall</h3>
+      <a class="btn" href="{% url 'impact' %}">Read More</a>
+    </div>
   </div>
 </section>
 
@@ -99,7 +122,7 @@
         for everyone with no bars and boundaries of financial status. Please
         show your humanity by supporting and donating.
       </p>
-      <button class="btn btn-outline">VOLUNTE ER</button>
+      <button class="btn btn-outline">VOLUNTEER</button>
     </div>
     <div class="col">
       <img src="{% static 'images/helpus-image.jpg' %}" alt="Help Image" class="help-image" />

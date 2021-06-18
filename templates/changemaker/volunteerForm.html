@@ -1,0 +1,48 @@
+{% extends 'main/main.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1 class="hero-heading">Register as Full-Time Volunteer</h1>
+</section>
+
+<section>
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col title">{{ form.education.label }}</div>
+            <div class="col">{{ form.education }}</div>
+        </div>
+        <div class="row">
+            <div class="col title">{{ form.specialization.label }}</div>
+            <div class="col">{{ form.specialization }}</div>
+        </div>
+        <div class="row">
+            <div class="col title">{{ form.skills.label }}</div>
+            <div class="col">{{ form.skills }}</div>
+        </div>
+        <div class="row">
+            <div class="col title">{{ form.interests.label }}</div>
+            <div class="col">{{ form.interests }}</div>
+        </div>
+        <div class="row">
+            <div class="col title">{{ form.duration.label }}</div>
+            <div class="col">{{ form.duration }}</div>
+        </div>
+        <div class="row">
+            <div class="col title">{{ form.hours.label }}</div>
+            <div class="col">{{ form.hours }}</div>
+        </div>
+
+        {{form.errors}}
+        <br>
+        <button class="btn btn-success" type="submit" name="Register">Register</button>
+    </form>
+</section>
+{% endblock %}

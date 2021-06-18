@@ -69,6 +69,9 @@ class ChangeMaker(models.Model):
     autoDebiting = models.BooleanField(
         'Auto-Debiting', null=True, default=False)
 
+    isVolunteer = models.BooleanField(
+        'Is Volunteer', null=True, default=False)
+
     documentType = models.CharField(
         'Document Type', max_length=255, choices=DOCUMENT_TYPE, null=True)
     documentNumber = models.CharField(
@@ -113,3 +116,59 @@ class Donation(models.Model):
 
     def __str__(self):
         return (self.user.username + " | " + self.purpose)
+
+class Skill(models.Model):
+
+    name = models.CharField('Skill', max_length=25, null=True)
+
+    def __str__(self):
+        return (self.name)
+        
+class Interest(models.Model):
+
+    name = models.CharField('Interest', max_length=25, null=True)
+
+    def __str__(self):
+        return (self.name)
+
+class Volunteer(models.Model):
+    EDUCATION = (
+        ('Nil', 'Nil'),
+        ('5th Grade', '5th Grade'),
+        ('6th Grade', '6th Grade'),
+        ('7th Grade', '7th Grade'),
+        ('8th Grade', '8th Grade'),
+        ('9th Grade', '9th Grade'),
+        ('10th Grade', '10th Grade'),
+        ('11th Grade', '11th Grade'),
+        ('12th Grade', '12th Grade'),
+        ('Graduate', 'Graduate'),
+        ('Post Graduate', 'Post Graduate'),
+    )
+
+    DURATION = (
+        ('1 Year','1 Year'),
+        ('5 Year','5 Year'),
+        ('10 Year','10 Year'),
+        ('Lifetime','Lifetime'),
+    )
+
+    INTEREST = (
+        ('Helping Children','Helping Children'),
+        ('Helping Youth','Helping Youth'),
+        ('Helping Organization in Technical Work','Helping Organization in Technical Work'),
+        ('Helping in Communication Work','Helping in Communication Work'),
+        ('Overall help','Overall help'),
+        ('Helping Divyang','Helping Divyang'),
+    )
+
+    changemaker = models.ForeignKey(ChangeMaker, null=True, on_delete=models.SET_NULL)
+    education = models.CharField('Education',max_length=25, null=True, choices=EDUCATION)
+    specialization = models.CharField('Specialization',null=True, max_length=250)
+    skills = models.ManyToManyField(Skill)
+    interests = models.ManyToManyField(Interest)
+    duration = models.CharField('Duration',max_length=25, choices=DURATION, null=True)
+    hours = models.IntegerField('Volunteering Hours', null=True)
+
+    def __str__(self):
+        return (self.changemaker.firstName + ' ' + self.changemaker.lastName)

@@ -1,5 +1,5 @@
 from django.db.models import fields
-from django.forms import ModelForm, Textarea
+from django.forms import ModelForm, Textarea, widgets
 from .models import *
 from django import forms
 
@@ -58,4 +58,18 @@ class monthlyDonationForm(ModelForm):
             'monthlyAmount': forms.TextInput(),
             'monthlyPurpose': forms.Select(),
             'goldenDate': forms.TextInput(),
+        }
+
+class volunteerForm(ModelForm):
+    class Meta:
+        model = Volunteer
+        exclude = ['changemaker']
+
+        widgets = {
+            'education':forms.Select(),
+            'specialization':forms.TextInput(),
+            'skills':forms.SelectMultiple(),
+            'interests':forms.SelectMultiple(),
+            'duration':forms.Select(),
+            'hours':forms.NumberInput(),
         }

@@ -188,5 +188,16 @@
     {% else %}
     <p>You have not made any monthly donations to show</p>
     {% endif %}
+
+
+    <hr class="hr-dark">
+
+    <h2>Want to be a Full-Time Volunteer?</h2>
+    <hr class="hr-short">
+    {% if isVolunteer == "true" %}
+    <p>You are registered as a Full-Time Volunteer</p>
+    {% else %}
+    <a class="btn" href="{% url 'registerVolunteer' %}">Apply Now</a>
+    {% endif %}
 </section>
 {% endblock %}

@@ -9,24 +9,158 @@
   <h1 class="hero-heading">Creating Impact</h1>
 </section>
 
-<section>
-
-  <div class="impacts">
-    {% for impact in impacts %}
-    <div class="impact center">
-      <h2 class="section-heading">{{ impact.name }}</h2>
-      <hr class="hr-short">
-      <p>{{ impact.desc }}</p>
-      <div class="row">
-        <img src="{{ impact.image1.url }}" alt="Impact Photo 1" class="impact-photo">
-        <img src="{{ impact.image2.url }}" alt="Impact Photo 2" class="impact-photo">
-        <img src="{{ impact.image3.url }}" alt="Impact Photo 3" class="impact-photo">
-        <img src="{{ impact.image4.url }}" alt="Impact Photo 4" class="impact-photo">
-      </div>
-    </div>
-    {% endfor %}
+<section class="impact center">
+  <img src="{% static 'images/impact-1.jpg' %}" alt="Impact Photo" class="impact-photo">
+  <h2 class="section-heading">Educate and Empower</h2>
+  <hr class="hr-short">
+  <p class="impact-text">Education and Empowerment Programme" is to build a learning space for children who miss
+    out on education
+    opportunities due to various social, economic and family reasons. We are running two branches of the project
+    i.e. the full time course for non-schooling and drop-out students and the part-time support course for
+    school
+    goers <strong>under RTE act</strong> . The aim is to help children grow as responsible and educated good
+    citizens of the society.
+    We have more than 300 children enrolled in this project. Their curriculum includes subject wise learning
+    assistance, weekly activity days and sessions on various social aspects. Life Skill training to empower them
+    and
+    activity oriented learning is the strength of the programme. <strong>We are trying to do our bit towards
+      Sustainable Development Goal 4, 5 & 13</strong>
+  </p>
+  </div>
 </section>
-</div>
+
+<section class="impact center">
+  <img src="{% static 'images/impact-2.jpg' %}" alt="Impact Photo" class="impact-photo">
+  <h2 class="section-heading">Skill Development</h2>
+  <hr class="hr-short">
+
+  <div class="impact-text" style="text-align: left;">
+    <h3>Computer</h3>
+    <p>Having basic knowledge of computers is very important in today's time. Computer training provides a
+      foundation
+      on which students can build new skills on the working platform. This course is dedicated to help and educate
+      users on computer-related topics specially for people who do not have easy access and an afforadable
+      environment. The course is divided into 4 levels: Fundamental, Basic, Intermediate and Advanced. We offer 18+
+      differnt certified courses.</p>
+    <hr class="hr-dark">
+    <h3>Tailoring</h3>
+    <p>We are trying to do our bit towards Sustainable Development Goal 4 Tailoring course is one of the first
+      projects of Social Vision for women from rural areas who never had the privilege of education or got the
+      opportunity to work due to various social and personal reasons, but have a keen desire to earn for themselves
+      and become financially independent. This free course is for three months and later when they complete the
+      course, they're hired as tailors. Their task is to stitch masks and cloth bags of different designs and shapes
+      which forms the cloth bag production unit. They are paid based on the number of masks and bags they stitch.
+      Wevare happy to inform that this training has helped more than 700 women in the last three years.</p>
+    <hr class="hr-dark">
+    <h3>Soft Skill Training</h3>
+    <p>"The art of Communication is the language of leadership".Training children, teenagers and women in
+      development of their skills to help them improve their own future is another attribute of Social Vision. Among
+      the youth in this area, juvenile, drug addiction and other unethical cases are common. Women dealing with
+      various physical, psychological and emotional backlash is another supreme concern. The aim of this project is
+      to help such people, to widen their horizons of existence. By helping them grow in their communication builds
+      self confidence and other qualities, for a better future.</p>
+    <hr class="hr-dark">
+    <h3>Recycling</h3>
+    <p>Under SDG GOal -13 Save Planet, recycling the used clothes and other materias into the new useful items makes
+      the people aware of one of the methods of saving environment. Training unemployed women community to make best
+      out of waste also becomes an income generation programme for them. Social Vision does this to empower a group
+      of 100+ women to generate income from the waste articles. We collect all used materials from Delhi/ NCR and
+      after distributing the best we train the women to recycle the waste.</p>
+    <hr class="hr-dark">
+    <h3>Beautician</h3>
+    <p>Working towards SDG Goal 5- 'Gender Equality' we are providing training to the unemployed women with beauty
+      culture course giving them a way of self employment oportunity. 100s of ttrainees are trained and we are happy
+      that many are generating income out of it.</p>
+    <hr class="hr-dark">
+    <h3>English </h3>
+    <p>It is said that if you want to master English, get involved and practice as much as possible. English
+      Language Training is a course for all those who have a desire to work on their English proficiency. We provide
+      Online and offline classes to the children of all age groups to grow & better themselves with good language
+      skills. The course structure includes reading ,writing speaking and listening skills based on CBSE format.
+      Vocabulary and grammar buliding exercises are also taken up. with qualified trainers providing an opportunity
+      to the youngsters.</p>
+    <hr class="hr-dark">
+    <h3>Retail</h3>
+    <p>One of the grouwing industry with emplyennt is retail and social vision trains the underprivilaged children a
+      retail course free of cost , helping them to find the emplyment in the leading companies. 2 months training
+      both class room and virtual is provided to strengthen them with retail & soft skills which form the essential
+      content of the programme. The placement partners help us to place the trained candidate in retail outlets.</p>
+    <hr class="hr-dark">
+    <h3>Driving</h3>
+    <p>In continuation to achieve SDG-4, the underprivilaged neither have their own car to learn driving nor the
+      drivng schools give them enough classes to be skilled in driving. Social Vision Skill development includes
+      free driving classes for the underprivilaged to learn driving skills to get employment in the private sectors.
+    </p>
+    <hr class="hr-dark">
+  </div>
+
+  </div>
+  </div>
+</section>
+
+<section class="impact center">
+
+  <img src="{% static 'images/impact-4.jpg' %}" alt="Impact Photo" class="impact-photo">
+  <h2 class="section-heading">Charity Mall</h2>
+  <hr class="hr-short">
+  <div style="text-align: left;">
+    <p class="impact-text"> <strong>"Noone has ever become poor by giving."</strong>Social Vision Charity Mall is
+      the
+      concept created
+      in 2019 for creating a platform to promote reuse of of recycled goods. During the last two years we have
+      supported 5000+ families with various products for their daily use. This project has been of tremendous for
+      people living in nearby localities specially daily wage workers, rikshaw-pullers, farmers and drivers to find
+      their daily use articles.
+
+      We collect the old materials form Housing Societies, Schools, Institutions, companies etc in Delhi/ NCR for
+      recycling. The campaign van reaches the doorsteps for the collection and bring it to the Charity Mall for the
+      people in need to take and use.
+
+      The remaining and damaged materials are converted into cloth bags and other utility items in our “Cutting,
+      Tailoring and Recycle Training Centre” where number of underprivileged women are trained and generate income
+      from these waste articles.</p>
+    <div class="impact-text" style="text-align: left;">
+      <hr class="hr-dark">
+      <h3>Scrap For Charity</h3>
+      <p>Your Scrap can change the life of an underprivilaged. Do not hesitate to call us. We will pick up your
+        surplus and distribute them to the needy.</p>
+      <hr class="hr-dark">
+      <h3>Reuse Bank</h3>
+      <p>Charity Mall is the place of exchange with a moto " No act of kindness, no matter how small is ever
+        wasted".
+        Reusing the old things and not dumping them around is the best Service to the enviornment and at the same
+        time
+        Charity too. Do not hesitate to give. Many people around us in want of small things too. Let us use each and
+        every resourses to its optimum utility to save our natural resourses for the coming generations.</p>
+      <hr class="hr-dark">
+      <h3>Book Bank & Library</h3>
+      <p> " Books are uniquely portable magic."The books you are not in need can build the life of underprivilaged
+        children and families. Social Vision Book Bank and Library support the underprivilaged chldren and youth
+        with
+        the used books and stationeries for their studies. Never discard your books after use, there are many who
+        can
+        get benefitted out of them. Our Volunteers are just a call away to collect them from your doorstep and make
+        them available for the needy.</p>
+      <hr class="hr-dark">
+      <h3>Recycle</h3>
+      <p>“When you put the whole picture together, recycling is the right thing to do.” Social Vision Recycle
+        programme has multiple benefits like making best out of waste, providing income generation for the
+        underprivilaged women group to name a few. 40+ products are available with Social Vision for resale at
+        nominal
+        price.</p>
+      <hr class="hr-dark">
+      <h3>Upcycle & Reuse</h3>
+      <p>Many used materials we collect are slightly damaged and one can create something new out of it. Such things
+        are repaired and upcycled for people's use. We never say 'no' even to the damagedor used materials because
+        we
+        see something new in every thing.</p>
+      <hr class="hr-dark">
+    </div>
+  </div>
+
+  </div>
+  </div>
+</section>
 
 
 {% include 'main/contact.html' %}

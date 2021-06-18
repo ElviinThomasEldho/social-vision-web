@@ -21,4 +21,6 @@ urlpatterns = [
          views.printMonthlyCertificate, name='printMonthlyDonCertif'),
     path('monthly-receipt/<str:id>/', views.printMonthlyReceipt,
          name='printMonthlyDonReceipt'),
+
+    path('volunteer-form/', views.registerVolunteer, name='registerVolunteer'),     
 ]

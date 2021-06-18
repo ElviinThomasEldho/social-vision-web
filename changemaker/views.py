@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from .models import *
 from .forms import *
 from django.core.exceptions import ObjectDoesNotExist
@@ -89,6 +89,13 @@ def profile(request):
     donations = Donation.objects.filter(isMonthly=False)
     monthly = Donation.objects.filter(isMonthly=True)
 
+    print(changemaker.isVolunteer)
+
+    if changemaker.isVolunteer:
+        isVolunteer = 'true'
+    else:
+        isVolunteer = 'false'
+
     if changemaker.isMonthly:
         today = datetime.date.today()
         if today == today.replace(day=changemaker.goldenDate):
@@ -102,6 +109,7 @@ def profile(request):
             'donations': donations,
             'monthly': monthly,
             'isToday': isToday,
+            'isVolunteer' : isVolunteer,
         }
     else:
         context = {
@@ -109,6 +117,7 @@ def profile(request):
             'changemaker': changemaker,
             'donations': donations,
             'monthly': monthly,
+            'isVolunteer' : isVolunteer,
         }
 
     return render(request, 'changemaker/profile.html', context)
@@ -313,6 +322,28 @@ def printMonthlyReceipt(request, id):
         return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
 
+def registerVolunteer(request):
+    changemaker = ChangeMaker.objects.get(user=request.user)
+    form = volunteerForm()
+
+    if request.method == 'POST':
+        form = volunteerForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            changemaker.isVolunteer = True
+
+            volunteer = Volunteer.objects.last()
+            volunteer.changemaker = changemaker
+            volunteer.save()
+
+            return redirect('/change-maker/view/')
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'changemaker/volunteerForm.html',context)
 
 def getChangeMakers():
     changemakers = ChangeMaker.objects.all()

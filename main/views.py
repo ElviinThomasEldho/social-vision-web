@@ -29,17 +29,17 @@ def home(request):
 
         send_mail(subject, message, email, ['contact.socialvision@gmail.com'])
 
-        impacts = Impact.objects.all()
+        # impacts = Impact.objects.all()
 
         context = {
             'name': name,
-            'impacts': impacts,
+            # 'impacts': impacts,
         }
     else:
-        impacts = Impact.objects.all()
+        # impacts = Impact.objects.all()
 
         context = {
-            'impacts': impacts,
+            # 'impacts': impacts,
         }
 
     return render(request, 'main/home.html', context)
@@ -89,10 +89,10 @@ def covid(request):
 
 def impact(request):
 
-    impacts = Impact.objects.all()
+    # impacts = Impact.objects.all()
 
     context = {
-        'impacts': impacts,
+        # 'impacts': impacts,
     }
 
     return render(request, 'main/impact.html', context)

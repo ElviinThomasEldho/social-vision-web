@@ -10,6 +10,10 @@
   margin: 0px;
 }
 
+.hidden {
+  display: none !important;
+}
+
 h1,
 h2,
 h3,
@@ -306,6 +310,10 @@ nav a {
     text-align: right;
     order: 2;
   }
+
+  .contact-text {
+    max-width: 50%;
+  }
 }
 
 @media all and (min-width: 960px) {
@@ -568,7 +576,6 @@ th {
   padding: 20px;
 }
 
-
 .impacts {
   display: flex;
   width: 100%;
@@ -594,6 +601,10 @@ th {
   box-shadow: black 0px 10px 20px;
 }
 
+.impact-text {
+  padding: 10px 50px 30px 50px;
+}
+
 .photo-grid {
   display: flex;
   flex-flow: row nowrap;
@@ -601,9 +612,13 @@ th {
   width: 100%;
 }
 
+.impact-photo-col {
+  padding: 30px;
+}
+
 .impact-photo {
-  height: 15em;
-  margin: 5px;
+  height: 25em;
+  margin: 20px;
 }
 
 .events {
@@ -689,4 +704,15 @@ th {
 
 .contact-text {
   max-width: 20%;
+}
+
+.supporter-display {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.supporter {
+  height: 6em;
+  margin: 10px;
 }
