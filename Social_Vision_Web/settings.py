@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'qwwbcq@xc*td8)va0h&tvblldl0ks8cdp_mn$q31@tyj+zl36-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 if DEBUG == "False" :
     DATABASE_URL = os.environ['DATABASE_URL']
