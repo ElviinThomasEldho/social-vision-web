@@ -64,7 +64,7 @@ class ChangeMaker(models.Model):
     monthlyAmount = models.IntegerField('Monthly Donation Amount', null=True)
     monthlyPurpose = models.CharField(
         'Purpose of Donation', max_length=25, choices=PURPOSE, null=True)
-    goldenDate = models.IntegerField(
+    goldenDay = models.IntegerField(
         'Golden Date of Giving', null=True)
     autoDebiting = models.BooleanField(
         'Auto-Debiting', null=True, default=False)

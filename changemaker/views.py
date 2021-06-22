@@ -98,7 +98,7 @@ def profile(request):
 
     if changemaker.isMonthly:
         today = datetime.date.today()
-        if today == today.replace(day=changemaker.goldenDate):
+        if today == today.replace(day=changemaker.goldenDay):
             isToday = True
         else:
             isToday = False

@@ -12,7 +12,7 @@ class ChangeMakerForm(ModelForm):
     class Meta:
         model = ChangeMaker
         exclude = ['uniqueID', 'firstName', 'lastName',
-                   'dateCreated', 'age', 'emailID', 'isMonthly', 'monthlyAmount', 'monthlyPurpose', 'goldenDate']
+                   'dateCreated', 'age', 'emailID', 'isMonthly', 'monthlyAmount', 'monthlyPurpose', 'goldenDay']
 
         widgets = {
             'user': forms.HiddenInput(),
@@ -52,12 +52,12 @@ class monthlyDonationForm(ModelForm):
     class Meta:
         model = ChangeMaker
         fields = ['monthlyAmount', 'monthlyPurpose',
-                  'goldenDate']
+                  'goldenDay']
 
         widgets = {
             'monthlyAmount': forms.TextInput(),
             'monthlyPurpose': forms.Select(),
-            'goldenDate': forms.TextInput(),
+            'goldenDay': forms.TextInput(),
         }
 
 class volunteerForm(ModelForm):
