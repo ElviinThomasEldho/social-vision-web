@@ -14,9 +14,6 @@ import os
 from pathlib import Path
 import psycopg2
 
-DATABASE_URL = os.environ['DATABASE_URL']
-
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +27,11 @@ SECRET_KEY = 'qwwbcq@xc*td8)va0h&tvblldl0ks8cdp_mn$q31@tyj+zl36-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+
+if DEBUG == "False" :
+    DATABASE_URL = os.environ['DATABASE_URL']
+
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 ALLOWED_HOSTS = ['social-vision.herokuapp.com', '127.0.0.1']
 
