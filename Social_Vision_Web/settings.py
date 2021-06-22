@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 from pathlib import Path
+import psycopg2
+
+DATABASE_URL = os.environ['DATABASE_URL']
+
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'qwwbcq@xc*td8)va0h&tvblldl0ks8cdp_mn$q31@tyj+zl36-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['social-vision.herokuapp.com', '127.0.0.1']
 
@@ -83,12 +88,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'SocialVision_DB',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'Twinkle2503*',
-        # 'HOST': 'localhost',
-        # 'PORT': '5432'
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': 'de34d2tfcipjsl',
+        #'USER': 'ydgutsldvqcmzp',
+        #'PASSWORD': '0bf1f78a98a4e773352756ae6131a4d7378fe826a106db7c7b25d90299b1748c',
+        #'HOST': 'ec2-54-220-35-19.eu-west-1.compute.amazonaws.com',
+        #'PORT': '5432'
     }
 }
 
@@ -146,3 +151,6 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "contact.socialvision@gmail.com"
 EMAIL_HOST_PASSWORD = "cmofvxknsyzxrnte"
+
+import dj_database_url
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
