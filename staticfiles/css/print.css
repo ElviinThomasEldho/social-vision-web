@@ -1,0 +1,65 @@
+:root {
+    --red: #dd1118;
+    --grey: #1d1d1d;
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+}
+
+body {
+    padding: 0px;
+    margin: 40px;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Bebas Neue', cursive;
+    font-weight: normal;
+    margin: 10px 0px 0px 0px;
+}
+
+h1 {
+    font-size: 41px;
+    color: var(--red);
+}
+
+h2 {
+    font-size: 96px;
+}
+
+h3 {
+    font-size: 48px;
+    color: var(--red)
+}
+
+
+
+.col {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    align-content: space-around;
+    text-align: right;
+    width: 100%;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+th {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 0px 100px 0px 0px;
+}
+
+td {
+    font-size: 24px;
+    padding: 0px 300px 0px 0px;
+}
