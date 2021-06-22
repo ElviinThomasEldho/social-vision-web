@@ -81,14 +81,14 @@ WSGI_APPLICATION = 'Social_Vision_Web.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'de34d2tfcipjsl',
-        'USER': 'ydgutsldvqcmzp',
-        'PASSWORD': '0bf1f78a98a4e773352756ae6131a4d7378fe826a106db7c7b25d90299b1748c',
-        'HOST': 'ec2-54-220-35-19.eu-west-1.compute.amazonaws.com',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': 'de34d2tfcipjsl',
+        #'USER': 'ydgutsldvqcmzp',
+        #'PASSWORD': '0bf1f78a98a4e773352756ae6131a4d7378fe826a106db7c7b25d90299b1748c',
+        #'HOST': 'ec2-54-220-35-19.eu-west-1.compute.amazonaws.com',
+        #'PORT': '5432'
     }
 }
 
